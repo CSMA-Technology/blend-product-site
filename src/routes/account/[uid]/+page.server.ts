@@ -47,7 +47,6 @@ export const actions = {
         const data = await request.formData();
         console.log(`Fetching Stripe customer ID for user ${uid}`);
         const stripeCustomerIdRef = db.ref(`/users/${uid}/private/stripeCustomerId`);
-        const stripeCustomerId = (await stripeCustomerIdRef.once('value')).val();
         let customer = await getStripeCustomerWithSubscriptions(uid);
         if (!customer || customer.deleted) {
             console.log(`No Stripe customer exists for user ${uid}, creating one`);
