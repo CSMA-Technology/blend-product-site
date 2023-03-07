@@ -42,7 +42,4 @@
     .btn:hover {
         background: rgba(255, 255, 255, 0.30);
     }
-    button {
-        max-width: 100px;
-    }
 </style>
