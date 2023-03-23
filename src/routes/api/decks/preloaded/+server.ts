@@ -1,5 +1,4 @@
 import { readPath } from '$lib/server/firebaseUtils';
-import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const GET = (async () => {

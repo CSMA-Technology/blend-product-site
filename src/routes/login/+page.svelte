@@ -41,8 +41,7 @@
                         fetch('/login/customToken', { method: 'POST', body: JSON.stringify({ idToken: authResult.user.accessToken })})
                             .then(async (response) => {
                                 const token = (await response.json()).customToken;
-                                console.log(token);
-                                // window.location.replace(redirectBuilder(authResult.user, token));
+                                window.location.replace(redirectBuilder(authResult.user, token));
                             });
                     } else {
                         goto(redirectBuilder(authResult.user), { replaceState: true })

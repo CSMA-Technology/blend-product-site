@@ -1,17 +1,15 @@
-import { error } from '@sveltejs/kit';
+import { authenticate, getUserData } from '$lib/server/firebaseUtils';
+import { getBlendProSubscription, getStripeCustomerWithSubscriptions } from '$lib/server/subscriptionUtils';
 import type { RequestHandler } from './$types';
 
-export const GET = (({ url }) => {
-  const min = Number(url.searchParams.get('min') ?? '0');
-  const max = Number(url.searchParams.get('max') ?? '1');
- 
-  const d = max - min;
- 
-  if (isNaN(d) || d < 0) {
-    throw error(400, 'min and max must be numbers, and min must be less than max');
-  }
- 
-  const random = min + Math.random() * d;
- 
-  return new Response(String(random));
+export const GET = (async (event) => {
+    const { uid } = await authenticate(event);
+    const [stripeCustomer, firebaseUserData] = await Promise.all([getStripeCustomerWithSubscriptions(uid), getUserData(uid)])
+    const subscriptionData = stripeCustomer && !stripeCustomer.deleted && getBlendProSubscription(stripeCustomer);
+    const userData = {
+        ...firebaseUserData,
+        isSubscibedToBlendPro: !!subscriptionData,
+        subscriptionPeriodEnd: subscriptionData ? subscriptionData.current_period_end : 0
+    }
+    return new Response(JSON.stringify(userData, null, 2));
 }) satisfies RequestHandler;
