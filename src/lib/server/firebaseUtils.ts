@@ -26,8 +26,12 @@ export const authenticate = async (event: RequestEvent) => {
 
 export const getUserData = (uid: string) => auth.getUser(uid);
 
-export const readPath = async (path: string, authenticated = true) => {
+export const readPath = async (path: string) => {
     const ref = db.ref(path);
     const data = await ref.get();
     return data.val();
 }
+
+export const writePath = async (path: string, data: any) => db.ref(path).set(data);
+
+export const deletePath = async (path: string) => db.ref(path).remove();
