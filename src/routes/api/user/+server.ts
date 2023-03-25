@@ -8,8 +8,12 @@ export const GET = (async (event) => {
     const subscriptionData = stripeCustomer && !stripeCustomer.deleted && getBlendProSubscription(stripeCustomer);
     const userData = {
         ...firebaseUserData,
-        isSubscibedToBlendPro: !!subscriptionData,
+        isSubscribedToBlendPro: !!subscriptionData,
         subscriptionPeriodEnd: subscriptionData ? subscriptionData.current_period_end : 0
     }
     return new Response(JSON.stringify(userData, null, 2), { headers: [[ 'Access-Control-Allow-Origin', '*' ]]});
+}) satisfies RequestHandler;
+
+export const OPTIONS = (() => {
+    return new Response(null, { headers: [[ 'Access-Control-Allow-Origin', "*" ], [ 'Access-Control-Allow-Headers', '*' ]]});
 }) satisfies RequestHandler;

@@ -48,3 +48,7 @@ export const DELETE = (async (event) => {
     await deletePath(path);
     return json(existingDeck, { headers: [ ['Access-Control-Allow-Origin', "*"] ]});
 }) satisfies RequestHandler;
+
+export const OPTIONS = (() => {
+    return new Response(null, { headers: [[ 'Access-Control-Allow-Origin', "*" ], [ 'Access-Control-Allow-Headers', '*' ]]});
+}) satisfies RequestHandler;
