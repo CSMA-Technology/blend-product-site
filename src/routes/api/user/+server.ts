@@ -11,5 +11,5 @@ export const GET = (async (event) => {
         isSubscibedToBlendPro: !!subscriptionData,
         subscriptionPeriodEnd: subscriptionData ? subscriptionData.current_period_end : 0
     }
-    return new Response(JSON.stringify(userData, null, 2));
+    return new Response(JSON.stringify(userData, null, 2), { headers: [[ 'Access-Control-Allow-Origin', '*' ]]});
 }) satisfies RequestHandler;

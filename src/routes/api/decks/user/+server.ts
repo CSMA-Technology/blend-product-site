@@ -6,5 +6,5 @@ export const GET = (async (event) => {
     const { uid } = await authenticate(event);
     const decks = await readPath(`/decks/user/${uid}`) || {};
     const deckArray = Object.entries(decks).map(([key, val]) => val);
-    return json(deckArray);
+    return json(deckArray, { headers: [ ['Access-Control-Allow-Origin', "*"] ]});
 }) satisfies RequestHandler;
