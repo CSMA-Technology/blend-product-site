@@ -25,7 +25,7 @@
         <li>
           <a href="mailto:blend-support@csma.technology">Contact Support</a>
         </li>
-        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/info/privacy-policy">Privacy Policy</a></li>
       </ul>
     </div>
     <div class="footer-section">
