@@ -9,7 +9,7 @@
     the basics of the app.
   </p>
   <div>
-    <iframe
+    <iframe class="youtube-video"
       width="560"
       height="315"
       src="https://www.youtube.com/embed/cEoXlABrulE"
@@ -21,3 +21,12 @@
   </div>
   <p>Make sure to subscribe to our YouTube channel for more tutorials coming soon!</p>
 </div>
+
+<style>
+  @media (max-width: 480px) {
+    .youtube-video {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>
