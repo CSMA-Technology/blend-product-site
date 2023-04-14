@@ -27,6 +27,9 @@
       <li>
         <a id="pricing" href="/pricing">pricing</a>
       </li>
+      <li>
+        <a id="tutorials" href="/tutorials">tutorials</a>
+      </li>
       {#if !isLoggedIn}
         <li>
           <a id="login" href="/login">login</a>
@@ -105,6 +108,10 @@
 
   a#pricing:hover {
     color: #84e3de;
+  }
+
+  a#tutorials:hover {
+    color: #fa9a9a;
   }
 
   a#login:hover {
