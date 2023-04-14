@@ -142,7 +142,7 @@
     .nav-links {
       flex-direction: column;
       z-index: 100;
-      background-color: #f9f7f3;
+      background-color: white;
       margin-top: 66px;
       width: 100%;
       position: absolute;
