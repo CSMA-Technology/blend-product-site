@@ -50,10 +50,9 @@ export const actions = {
                     quantity: 1,
                 },
             ],
-            subscription_data: {
-                // trial_period_days: 30,
-                trial_period_days: 0
-            },
+            // subscription_data: {
+            //     trial_period_days: 0
+            // },
             mode: 'subscription',
             success_url: `${origin}/account/${uid}?subscription_checkout_status=success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: `${origin}/account/${uid}?subscription_checkout_status=cancel`,
