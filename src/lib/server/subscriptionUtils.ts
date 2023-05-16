@@ -31,12 +31,13 @@ export const getStripeCustomerWithSubscriptions = async (uid: string) => {
 export const getAllCustomerSubscriptions = async (uid: string) => {
     const stripeCustomerId: string | null = (await db.ref(`/users/${uid}/private/stripeCustomerId`).once('value')).val();
     if (stripeCustomerId === null)
-        return stripeCustomerId;
-    return await stripe.subscriptions.list({
+        return [];
+    const subscriptions = await stripe.subscriptions.list({
         customer: stripeCustomerId,
         expand: ['data.items'],
         status: 'all'
     });
+    return subscriptions.data;
 }
 
 export const getBlendProSubscription = (customer: Stripe.Customer) => customer.subscriptions?.data.find((subscription) => subscription.items.data.find(({plan: { product, active }}) => active && product === STRIPE_BLEND_PRO_PRODUCT_CODE));
@@ -46,5 +47,5 @@ export const getCustomerPortalSession = (customer: Stripe.Customer, returnUrl: s
     return_url: returnUrl
 });
 
-export const hasCustomerSubscribedBefore = (subscriptions: Stripe.Response<Stripe.ApiList<Stripe.Subscription>>, productCode: string) =>
-  subscriptions.data.some((subscription) => subscription.items.data.some((item) => item.price.product === productCode));
+export const hasCustomerSubscribedBefore = (subscriptions: Stripe.Subscription[], productCode: string) =>
+  subscriptions.some((subscription) => subscription.items.data.some((item) => item.price.product === productCode));

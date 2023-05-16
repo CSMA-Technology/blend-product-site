@@ -31,6 +31,7 @@ export const actions = {
             getAllCustomerSubscriptions(uid),
         ]);
 
+        let subscriptionData;
         if (!customer || customer.deleted) {
             console.log(`No Stripe customer exists for user ${uid}, creating one`);
             customer = await stripeClient.customers.create({
@@ -45,11 +46,10 @@ export const actions = {
                 console.error(`User ${uid} is already subscribed to Blend Pro, aborting`);
                 throw error(400, "Customer is already subscribed to Blend Pro!");
             }
+            subscriptionData = !hasCustomerSubscribedBefore(allSubscriptions, PRODUCT_CODE) ? {trial_period_days: 30} : {};
+            console.log(`Customer is ${subscriptionData.trial_period_days ? '' : 'not '}eligible for a free trial.`)
         }
         console.log("Creating Stripe session");
-
-        const subscriptionData = !allSubscriptions || !hasCustomerSubscribedBefore(allSubscriptions, PRODUCT_CODE) ? {trial_period_days: 30} : {};
-        console.log(`Customer is ${subscriptionData.trial_period_days ? '' : 'not '}eligible for a free trial.`)
         
         const session = await stripeClient.checkout.sessions.create({
             customer: customer.id,
