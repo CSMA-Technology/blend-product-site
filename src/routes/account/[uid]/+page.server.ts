@@ -46,7 +46,9 @@ export const actions = {
                 console.error(`User ${uid} is already subscribed to Blend Pro, aborting`);
                 throw error(400, "Customer is already subscribed to Blend Pro!");
             }
-            subscriptionData = !hasCustomerSubscribedBefore(allSubscriptions, PRODUCT_CODE) ? {trial_period_days: 30} : {};
+            if (!hasCustomerSubscribedBefore(allSubscriptions, PRODUCT_CODE)) {
+              subscriptionData = {trial_period_days: 30};
+            }
             console.log(`Customer is ${subscriptionData.trial_period_days ? '' : 'not '}eligible for a free trial.`)
         }
         console.log("Creating Stripe session");
