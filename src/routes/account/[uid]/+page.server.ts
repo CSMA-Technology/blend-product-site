@@ -31,7 +31,7 @@ export const actions = {
             getAllCustomerSubscriptions(uid),
         ]);
 
-        let subscriptionData;
+        let subscriptionData = {};
         if (!customer || customer.deleted) {
             console.log(`No Stripe customer exists for user ${uid}, creating one`);
             customer = await stripeClient.customers.create({
