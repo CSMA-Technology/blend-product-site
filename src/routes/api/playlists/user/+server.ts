@@ -5,10 +5,9 @@ import type { RequestHandler } from './$types';
 export const GET = (async (event) => {
     const { uid } = await authenticate(event);
     const playlists = await readPath(`/playlists/user/${uid}`) || {};
-    const playlistArray = Object.entries(playlists).map(([key, val]) => val);
-    return json(playlistArray, { headers: [ ['Access-Control-Allow-Origin', "*"] ]});
+    return json(Object.values(playlists), { headers: [ ['Access-Control-Allow-Origin', "*"] ]});
 }) satisfies RequestHandler;
 
 export const OPTIONS = (() => {
-    return new Response(null, { headers: [[ 'Access-Control-Allow-Origin', "*" ], [ 'Access-Control-Allow-Headers', '*' ]]});
+    return new Response(null, { headers: [[ 'Access-Control-Allow-Origin', "*" ], [ 'Access-Control-Allow-Headers', '*' ], ['Access-Control-Allow-Methods', 'GET']]});
 }) satisfies RequestHandler;
