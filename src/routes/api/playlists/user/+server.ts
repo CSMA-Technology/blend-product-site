@@ -5,7 +5,8 @@ import type { RequestHandler } from './$types';
 export const GET = (async (event) => {
     const { uid } = await authenticate(event);
     const playlists = await readPath(`/playlists/user/${uid}`) || {};
-    return json(Object.values(playlists), { headers: [ ['Access-Control-Allow-Origin', "*"] ]});
+    const modifiedPlaylists = Object.values(playlists).map(playlist => ({ ...playlist, words: playlist.words.map(word => Object.values(word).map(letters => (letters === false ? null : letters)))}));
+    return json(modifiedPlaylists, { headers: [ ['Access-Control-Allow-Origin', "*"] ]});
 }) satisfies RequestHandler;
 
 export const OPTIONS = (() => {
