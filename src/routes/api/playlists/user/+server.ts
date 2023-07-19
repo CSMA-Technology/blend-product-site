@@ -1,4 +1,4 @@
-import { authenticate, getUserData, readPath } from '$lib/server/firebaseUtils';
+import { authenticate, readPath } from '$lib/server/firebaseUtils';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
