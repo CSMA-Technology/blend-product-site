@@ -2,8 +2,20 @@
   import { user } from "$lib/firebase";
   import { enhance } from '$app/forms'
   import type { PageData } from "./$types";
-    import { goto } from "$app/navigation";
+  import { goto } from "$app/navigation";
+  import { onMount } from "svelte";
   export let data: PageData;
+
+  let isPro = false;
+
+  onMount( async () => {
+    const idToken = await $user?.getIdToken();
+    const userData = await fetch('/api/user', {
+      headers: { 'Authorization':`Bearer ${idToken}`}
+    });
+    isPro = (await userData.json()).isSubscribedToBlendPro;
+  });
+
 </script>
 
 <svelte:head>
@@ -11,7 +23,7 @@
 </svelte:head>
 
 <div class="content">
-  {#if data.isPro}
+  {#if isPro}
   <h1>Import Deck</h1>
     <form method="POST" use:enhance>
       <p>Would you like to add the deck <b><i>{`${data.deckName}`}</i></b> to your library?</p>

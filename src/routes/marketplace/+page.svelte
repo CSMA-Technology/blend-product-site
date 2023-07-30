@@ -17,7 +17,7 @@
     if (!$user && !willAttemptLogin())
       goto(`/login?successRedirect=${encodeURIComponent(location.pathname)}`);
     else if ($user)
-      goto(`/account/${$user.uid}/import/${id}`)
+      goto(`/marketplace/${id}`)
   }
 </script>
 
@@ -87,7 +87,7 @@
     background-color: white;
     border-radius: 0px 10px 10px 0px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-
+    color: #012A51;
   }
 
   .decks {

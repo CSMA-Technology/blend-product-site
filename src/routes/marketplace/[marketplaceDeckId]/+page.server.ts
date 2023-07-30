@@ -2,16 +2,15 @@ import { readPath, writePath } from "$lib/server/firebaseUtils";
 import { error, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 import { getStripeCustomerWithSubscriptions, isSubscribedToBlendPro } from "$lib/server/subscriptionUtils";
+import { user } from "$lib/firebase";
+import { get } from "svelte/store";
 
-export const load = (async ({params: { uid, marketplaceDeckId } }) => {
-  const customer = await getStripeCustomerWithSubscriptions(uid);
-  const isPro = isSubscribedToBlendPro(customer);
+export const load = (async ({params: { marketplaceDeckId } }) => {
   const marketplaceDeck = (await readPath(`/decks/marketplace/${marketplaceDeckId}`)) ?? {};
   if (!marketplaceDeck)
     throw error(404);
   return {
-    deckName: marketplaceDeck.deck.name,
-    isPro: isPro
+    deckName: marketplaceDeck.deck.name
   }
 }) satisfies PageServerLoad;
 
