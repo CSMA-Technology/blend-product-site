@@ -28,6 +28,9 @@
         <a id="pricing" href="/pricing">pricing</a>
       </li>
       <li>
+        <a id="marketplace" href="/marketplace">marketplace</a>
+      </li>
+      <li>
         <a id="tutorials" href="/tutorials">tutorials</a>
       </li>
       {#if !isLoggedIn}
@@ -121,6 +124,10 @@
 
   a#login:hover {
     color: #ffc076;
+  }
+
+  a#marketplace:hover {
+    color: #8EC9FF;
   }
 
   .hamburger-button {
