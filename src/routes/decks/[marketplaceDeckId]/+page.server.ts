@@ -1,13 +1,14 @@
+import marketplaceDecks from '$lib/data/marketplaceDecks';
 import { readPath, writePath } from "$lib/server/firebaseUtils";
 import { error, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 
 export const load = (async ({params: { marketplaceDeckId } }) => {
-  const deckName = (await readPath(`/decks/marketplace/${marketplaceDeckId}/deck/name`)) ?? {};
-  if (!deckName)
+  const deckMetadata = marketplaceDecks.find((deck) => deck.id === marketplaceDeckId);
+  if (!deckMetadata)
     throw error(404);
   return {
-    deckName
+    deckMetadata
   }
 }) satisfies PageServerLoad;
 

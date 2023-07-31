@@ -1,15 +1,5 @@
 <script lang="ts">
-  import combinedBlends from '$lib/assets/marketplace/combined-blends.png';
-
-  const premadeDecks = [
-    {
-      "name": "Combined Blends", 
-      "description" : "This deck is aimed at blah blah blah a description of what this deck was made for.",
-      "author": "Summer Kiesel",
-      "image": combinedBlends,
-      "id": "-NaT4aMfMtKhI7de8PQb"
-    }
-  ]
+  import marketplaceDecks from '$lib/data/marketplaceDecks';
 </script>
 
 <svelte:head>
@@ -25,7 +15,7 @@
   </section>
   
   <section class="decks">
-    {#each premadeDecks as deck}
+    {#each marketplaceDecks as deck}
     <div class="deck">
       <div class="side-by-side">
         <img src={deck.image} alt="sample"/>
@@ -43,6 +33,7 @@
 
 <style>
   main {
+    padding: 2rem;
     background: #8EC9FF;
   }
   .library-description {
