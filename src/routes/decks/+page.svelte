@@ -1,7 +1,5 @@
 <script lang="ts">
   import combinedBlends from '$lib/assets/marketplace/combined-blends.png';
-  import { goto } from "$app/navigation"; 
-  import { user, willAttemptLogin } from '$lib/firebase';
 
   const premadeDecks = [
     {
@@ -12,22 +10,15 @@
       "id": "-NaT4aMfMtKhI7de8PQb"
     }
   ]
-
-  const importMarketplaceDeck = (id: string) => {
-    if (!$user && !willAttemptLogin())
-      goto(`/login?successRedirect=${encodeURIComponent(location.pathname)}`);
-    else if ($user)
-      goto(`/marketplace/${id}`)
-  }
 </script>
 
 <svelte:head>
-  <title>Marketplace</title>
+  <title>Pro Decks</title>
 </svelte:head>
 
 <main>
   <section class="library-description">
-    <h1>Blend Pro Deck Marketplace</h1>
+    <h1>Blend Pro Deck Library</h1>
     <p>Pro Users have access to a library of premade decks provided by our Blend Team.</p>
     <p>You can import any of these decks into your own library.</p>
     <p>Something about how Summer is certified in OG and made these decks to help teachers pinpoint different phonics skills.</p>
@@ -42,7 +33,7 @@
           <h2>{deck.name}</h2>
           <p>{deck.description}</p>
           <p><i>Created by: {deck.author}</i></p>
-          <button on:click={ () => importMarketplaceDeck(deck.id) } class="btn">Import</button>
+          <a href="/decks/{deck.id}" class="btn">Import</a>
         </section>
       </div>
     </div>
@@ -98,9 +89,8 @@
   .btn {
     border-color: #012A51;
     border-width: 0.15rem;
-    font-size: 1rem;
-    font-weight: 700;
     color: #012A51;
+    margin: 0;
   }
 
   .btn:hover {

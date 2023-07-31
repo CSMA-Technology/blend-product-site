@@ -28,7 +28,7 @@
         <a id="pricing" href="/pricing">pricing</a>
       </li>
       <li>
-        <a id="marketplace" href="/marketplace">marketplace</a>
+        <a id="decks" href="/decks">decks</a>
       </li>
       <li>
         <a id="tutorials" href="/tutorials">tutorials</a>
@@ -126,7 +126,7 @@
     color: #ffc076;
   }
 
-  a#marketplace:hover {
+  a#decks:hover {
     color: #8EC9FF;
   }
 
