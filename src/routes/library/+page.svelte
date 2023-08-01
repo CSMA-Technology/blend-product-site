@@ -22,8 +22,8 @@
         <section class="description">
           <div class="title">{deck.name}</div>
           <p>{deck.description}</p>
-          <p><i>Created by: {deck.author}</i></p>
-          <a href="/decks/{deck.id}" class="btn">Import</a>
+          <!-- <p><i>Created by: {deck.author}</i></p> -->
+          <a href="/library/{deck.id}" class="btn">Import</a>
         </section>
       </div>
     </div>
@@ -36,6 +36,8 @@
     width: 60%;
     border-radius: 10px;
     border: 2px solid #012A51;
+    margin: 1rem 0;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
   main {
     padding: 2rem;
@@ -65,7 +67,7 @@
     width: 60%;
     flex-basis: 30rem;
     max-height: 30rem;
-    object-fit: cover; 
+    object-fit: contain; 
     border-radius: 10px;
   }
 
@@ -75,7 +77,7 @@
     justify-content: left;
     padding: 2rem;
     flex-basis: 10rem;
-    background: rgba(255, 255, 255, 0.40);
+    background: rgba(255, 255, 255, 0.50);
     border-radius: 10px;
     color: #012A51;
   }

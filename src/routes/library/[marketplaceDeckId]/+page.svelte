@@ -37,7 +37,7 @@
       <div class="deck">
         <div class="info">
           <div class="title">{data.deckMetadata.name}</div>
-          <p style="margin-top: 0;">Created by: {data.deckMetadata.author}</p>
+          <!-- <p style="margin-top: 0;">Created by: {data.deckMetadata.author}</p> -->
           <p>{data.deckMetadata.description}</p>
         </div>
         <img src={data.deckMetadata.image} alt="deck letters" />
@@ -62,11 +62,15 @@
         </p>
       {/if}
       </div>
+      <a href="/library">Back to Library</a>
     {/if}
   </div>
 </main>
 
 <style>
+  p {
+    margin-top: 0;
+  }
   .title {
     font-family: 'Contrail One';
     font-size: 1.8rem;

@@ -26,13 +26,10 @@
         <a id="home" href="/">home</a>
       </li>
       <li>
-        <a id="pro" href="/pro">pro</a>
+        <a id="features" href="/features">features</a>
       </li>
       <li>
-        <a id="pricing" href="/pricing">pricing</a>
-      </li>
-      <li>
-        <a id="decks" href="/decks">decks</a>
+        <a id="library" href="/library">library</a>
       </li>
       <li>
         <a id="tutorials" href="/tutorials">tutorials</a>
@@ -118,7 +115,7 @@
     color: #f1b4fb;
   }
 
-  a#pricing:hover {
+  a#features:hover {
     color: #84e3de;
   }
 
@@ -130,7 +127,7 @@
     color: #ffc076;
   }
 
-  a#decks:hover {
+  a#library:hover {
     color: #8EC9FF;
   }
 

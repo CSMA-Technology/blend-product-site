@@ -1,6 +1,6 @@
 <div class="btn-pro">
   <!-- TODO: this should point to the new Blend Pro feature page -->
-  <a href="/pricing">
+  <a href="/features">
     <div class="pro-badge">PRO</div>
   </a>
   <slot />

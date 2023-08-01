@@ -75,7 +75,7 @@
     <h1>Ready to get started?</h1>
     <p>See our pricing plans and try Blend now!</p>
     <div class="side-by-side">
-        <a class="btn" href="/pricing"><h2>pricing plans</h2></a>
+        <a class="btn" href="/features"><h2>pricing plans</h2></a>
         <a class="btn" href="https://app.blendreading.com" target="_blank" rel="noopener noreferrer"><h2>try the app</h2></a>
     </div>
    <div class="footnote">
