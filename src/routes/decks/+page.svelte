@@ -20,7 +20,7 @@
       <div class="side-by-side">
         <img src={deck.image} alt="sample"/>
         <section class="description">
-          <h2>{deck.name}</h2>
+          <div class="title">{deck.name}</div>
           <p>{deck.description}</p>
           <p><i>Created by: {deck.author}</i></p>
           <a href="/decks/{deck.id}" class="btn">Import</a>
@@ -32,6 +32,11 @@
 </main>
 
 <style>
+  .deck {
+    width: 60%;
+    border-radius: 10px;
+    border: 2px solid #012A51;
+  }
   main {
     padding: 2rem;
     background: #8EC9FF;
@@ -46,46 +51,56 @@
     margin-bottom: 0;
   }
 
-  h2 {
-    font-family: "Contrail One";
+  .title {
+    font-family: 'Contrail One';
+    font-size: 1.8rem;
   }
 
   .side-by-side {
     justify-content: center;
   }
+  
   .side-by-side img {
-    width: 40%;
-    flex-basis: 40rem;
-    max-height: 20rem;
+    flex-grow: 1;
+    width: 60%;
+    flex-basis: 30rem;
+    max-height: 30rem;
     object-fit: cover; 
-    border-radius: 10px 0px 0px 10px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
   }
 
   .description {
+    flex-grow: 1;
     width: 30%;
     justify-content: left;
     padding: 2rem;
-    background-color: white;
-    border-radius: 0px 10px 10px 0px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    flex-basis: 10rem;
+    background: rgba(255, 255, 255, 0.40);
+    border-radius: 10px;
     color: #012A51;
   }
 
   .decks {
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    align-items: center;
   }
   .btn {
     border-color: #012A51;
     border-width: 0.15rem;
     color: #012A51;
     margin: 0;
+    font-weight: 900;
   }
 
   .btn:hover {
     background-color: #012A51;
     color: white;
+  }
+  @media (max-width: 480px) {
+    .deck {
+      width: 100%;
+      font-size: 90%;
+    }
   }
 </style>

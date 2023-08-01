@@ -13,6 +13,7 @@
     <a class="branding" href="/">
       <h1>BLEND</h1>
     </a>
+    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
     <ul
       class={`nav-links ${isMenuopen ? "" : "hide-menu"}`}
       on:click={toggleMenu}
@@ -23,6 +24,9 @@
       </li>
       <li>
         <a id="home" href="/">home</a>
+      </li>
+      <li>
+        <a id="pro" href="/pro">pro</a>
       </li>
       <li>
         <a id="pricing" href="/pricing">pricing</a>

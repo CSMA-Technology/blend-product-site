@@ -34,9 +34,9 @@
     {#if isLoading}
       <h2 style="font-family: 'Contrail One'">Loading...</h2>
     {:else}
-      <div class="side-by-side">
+      <div class="deck">
         <div class="info">
-          <h1 style="margin-bottom: 0;">{data.deckMetadata.name}</h1>
+          <div class="title">{data.deckMetadata.name}</div>
           <p style="margin-top: 0;">Created by: {data.deckMetadata.author}</p>
           <p>{data.deckMetadata.description}</p>
         </div>
@@ -54,9 +54,9 @@
         <ProBadgeWrapper>
           <a href="/" class="btn disabled">Import</a>
         </ProBadgeWrapper>
-        <p>
+        <p class="subtitle">
           Importing from our Deck Library is available to Blend Pro users. You
-          can upgrade or try Blend Pro one month free on the <a href="/account"
+          can upgrade to Blend Pro or sign up for a free trial on the <a href="/account"
             >Account Management</a
           > page.
         </p>
@@ -67,7 +67,16 @@
 </main>
 
 <style>
-  .side-by-side {
+  .title {
+    font-family: 'Contrail One';
+    font-size: 1.8rem;
+  }
+  .deck {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    width: 100%;
     margin: 2rem;
     padding: 1rem;
     border-radius: 8px;
@@ -76,16 +85,16 @@
   a:hover {
     color: white;
   }
-  main {
-    /* padding: 2rem;
-    background: linear-gradient(53deg, #FFFAA0 11.98%, #F4BA9E 55.21%, #EEA7FA 100%); */
-  }
+
   img {
-    width: 90%;
+    width: 100%;
+    max-height: 35rem;
     border-radius: 10px;
+    object-fit: contain;
   }
   .content {
-    width: 50%;
+    width: 60%;
+
   }
   button {
     font-size: large;
@@ -99,5 +108,16 @@
     display: flex;
     flex-wrap: wrap-reverse;
     justify-content: center;
+  }
+  .subtitle {
+    margin: 0;
+    width: 80%;
+    color: white;
+  }
+  @media (max-width: 480px) {
+    .content {
+      width: 90%;
+      font-size: 90%;
+    }
   }
 </style>
