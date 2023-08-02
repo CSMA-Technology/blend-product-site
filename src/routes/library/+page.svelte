@@ -121,5 +121,8 @@
       width: 100%;
       font-size: 90%;
     }
+    .library-description {
+      width: 90%;
+    }
   }
 </style>

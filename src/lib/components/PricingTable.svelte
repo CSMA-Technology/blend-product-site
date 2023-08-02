@@ -214,8 +214,11 @@
   }
   @media (max-width: 480px) {
     .pricing-table {
-      font-size: 90%;
+      font-size: 80%;
       width: 90%;
+    }
+    td {
+      font-size: 1.5rem;
     }
     .site-licensing {
       font-size: 90%;
@@ -227,7 +230,10 @@
       width: 50%;
     }
     .column-header {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+    }
+    .column-header h6 {
+      font-size: 70%;
     }
   }
 </style>

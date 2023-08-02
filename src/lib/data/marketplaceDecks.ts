@@ -1,6 +1,7 @@
 import combinedBlends from '$lib/assets/marketplace/combined-blends.png';
 import doublingPractice from '$lib/assets/marketplace/doubling-practice.png';
 import weldedSounds from '$lib/assets/marketplace/welded-sounds.png';
+import latin from '$lib/assets/marketplace/latin.png';
 
 export type MarketplaceDeck = {
   name: string;
@@ -31,6 +32,13 @@ const marketplaceDecks: MarketplaceDeck[] = [
     "author": "Summer Kiesel",
     "image": weldedSounds,
     "id": "-Nami9-twBSGvYqDI1HW"
+  },
+  {
+    "name": "Latin Roots", 
+    "description" : "This deck contains 100 of the most common Latin roots and affixes for practicing morphology and fluency with multi-syllabic words. We recommend this deck for creating playlists or editing down to a smaller selection of morphemes to work on.",
+    "author": "Summer Kiesel",
+    "image": latin,
+    "id": "-NarqpewAp2p8H6inYXL"
   }
 ]
 
