@@ -32,7 +32,7 @@
 <main>
   <div class="content">
     {#if isLoading}
-      <h2 style="font-family: 'Contrail One'">Loading...</h2>
+      <h2 class="loading-label">Loading...</h2>
     {:else}
       <div class="deck">
         <div class="info">
@@ -68,6 +68,10 @@
 </main>
 
 <style>
+  .loading-label {
+    font-family: 'Contrail One';
+    margin-top: 2rem;
+  }
   p {
     margin-top: 0;
   }
@@ -98,7 +102,6 @@
   }
   .content {
     width: 60%;
-
   }
   button {
     font-size: large;

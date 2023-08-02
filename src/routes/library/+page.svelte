@@ -1,5 +1,6 @@
 <script lang="ts">
   import marketplaceDecks from '$lib/data/marketplaceDecks';
+  import ProBadge from '$lib/components/ProBadge.svelte';
 </script>
 
 <svelte:head>
@@ -8,10 +9,18 @@
 
 <main>
   <section class="library-description">
-    <h1>Blend Pro Deck Library</h1>
-    <p>Pro Users have access to a library of premade decks provided by our Blend Team.</p>
-    <p>You can import any of these decks into your own library.</p>
-    <p>Something about how Summer is certified in OG and made these decks to help teachers pinpoint different phonics skills.</p>
+    <div class="side-by-side heading">
+      <h1>Deck Library</h1>
+      <div class="badge"><ProBadge /></div>
+    </div>
+    <p>
+      Pro Users have access to a library of premade decks crafted by a professional reading specialist
+      experienced with blending drills.
+      These boards are thoughtfully designed to target certain phonics skills and bring more focus to your lessons.
+    </p>
+    <p>
+      Check out the boards in our library, and try them out by importing them into your own collection!
+    </p>
   </section>
   
   <section class="decks">
@@ -39,18 +48,26 @@
     margin: 1rem 0;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
+  .heading {
+    align-items: center;
+  }
   main {
     padding: 2rem;
     background: #8EC9FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .library-description {
+    text-align: center;
+    width: 60%;
     padding: 0 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
   h1 {
-    margin-bottom: 0;
+    margin: 0 0.5rem;
   }
 
   .title {
