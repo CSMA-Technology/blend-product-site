@@ -4,8 +4,8 @@ import blend2Overview from './blend-2_0-overview';
 import playlistsTutorial from './playlists-tutorial';
 
 export default [
-  gettingStarted,
   whatIsABlendingBoard,
+  gettingStarted,
   blend2Overview,
   playlistsTutorial,
 ]
