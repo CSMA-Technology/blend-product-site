@@ -39,4 +39,6 @@ const testConfig = {
 
 const config = PUBLIC_DEPLOY_CONTEXT === 'production' ? prodConfig : testConfig;
 
+export const databaseURL = PUBLIC_DEPLOY_CONTEXT === 'production' ? 'https://csma-blend-default-rtdb.firebaseio.com' : 'https://blend-test-96c76-default-rtdb.firebaseio.com';
+
 export default config;
