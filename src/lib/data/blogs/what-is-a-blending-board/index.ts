@@ -93,7 +93,7 @@ const post: Blog.BlogPost = {
       type: "text",
       content: 
       `<h2>Resources in this article</h2>
-      <ul>
+      <ul style="text-align: left">
         <li><a href="https://www.understood.org/en/articles/what-is-structured-literacy" target="_blank">Understood.org: What is structured literacy?</a></li>
         <li><a href="https://en.wikipedia.org/wiki/Orton-Gillingham" target="_blank">Wikipedia: The Orton-Gillingham Approach</a></li>
         <li><a href="https://www.nytimes.com/2023/04/16/us/science-of-reading-literacy-parents.html" target="_blank">NYT: 'Kids Can't Read': The Revolt That Is Taking On the Education Establishment</a></li>
