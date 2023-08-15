@@ -39,6 +39,8 @@
     ui.start('#firebaseui-auth-container', {
       callbacks: {
         signInSuccessWithAuthResult(authResult, redirectUrl) {
+          if (authResult.additionalUserInfo.isNewUser)
+            gtag('event', 'new_account');
           setWillAttempLogin(true);
           if (isAppRedirect) {
             fetch('/login/customToken', { method: 'POST', body: JSON.stringify({ idToken: authResult.user.accessToken })})
