@@ -67,8 +67,7 @@ export const actions = {
             ],
             subscription_data: subscriptionData,
             mode: 'subscription',
-            success_url: `${origin}/account/${uid}?subscription_checkout_status=success?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${origin}/account/${uid}?subscription_checkout_status=cancel`,
+            success_url: `${origin}/blendPro/success?subscription_checkout_status=success?session_id={CHECKOUT_SESSION_ID}`
             // Enable the below if we need to collect sales tax in the future
             // automatic_tax: { enabled: true },
             // customer_update: { address: 'auto' }

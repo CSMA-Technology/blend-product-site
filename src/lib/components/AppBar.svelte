@@ -6,9 +6,6 @@
   const toggleMenu = () => {
     isMenuopen = false;
   };
-  const handleClickApp = () => {
-    gtag('event', 'open_app');
-  }
 </script>
 
 <div>
