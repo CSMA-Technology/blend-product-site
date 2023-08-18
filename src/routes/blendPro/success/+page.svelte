@@ -1,3 +1,11 @@
+<script lang="ts">
+    import { onMount } from "svelte";
+
+  onMount( () => {
+    gtag('event', 'upgrade_pro_success');
+  });
+</script>
+
 <svelte:head>
   <title>Thank You</title>
 </svelte:head>
