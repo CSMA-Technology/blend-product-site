@@ -2,18 +2,18 @@ import type { Actions, PageServerLoad } from "./$types";
 import { error, redirect } from "@sveltejs/kit";
 import { stripeClient, firebaseDb, getStripeCustomerWithSubscriptions, getBlendProSubscription, getAllCustomerSubscriptions, hasCustomerSubscribedBefore, getCustomerPortalSession, PRICE_CODE, PRODUCT_CODE } from "$lib/server/subscriptionUtils";
 import type Stripe from "stripe";
-import { checkSessionAuth, readPath } from "$lib/server/firebaseUtils";
+import { checkSessionAuth, readPath, writePath } from "$lib/server/firebaseUtils";
 
 export const load = (async ({ params: { uid }, cookies }) => {
     await checkSessionAuth(cookies, { loginRedirect: 'account', authFunction: ({ uid: tokenUid }) => tokenUid === uid });
     const organizationPromise = (readPath(`/users/${uid}/protected/organizations`))
         .then((orgIds) => Promise.all(
             (orgIds || []).map(async (orgId: string) => {
-                const organization: Database.Organization = await readPath(`/organizations/${orgId}`);
+                const organization = await readPath<Database.Organization>(`/organizations/${orgId}`);
                 return {
                     id: orgId,
-                    name: organization.public.name,
-                    role: organization.private?.members[uid]?.role
+                    name: organization?.public.name,
+                    role: organization?.private?.members[uid]?.role
                 }
             })
         ));
@@ -100,5 +100,15 @@ export const actions = {
         }
         const session = await getCustomerPortalSession(customer, url.href.replace(url.search, ''))
         throw redirect(303, session.url);
-    }
+    },
+    leaveOrganization: async ({ request, params: { uid } }) => {
+        const data = await request.formData();
+        const orgId = data.get('orgId');
+        const organization = await readPath<Database.Organization>(`/organizations/${orgId}`);
+        if (!organization) throw error(404);
+        const user = await readPath<Database.User>(`/users/${uid}`);
+        await writePath(`/user/${uid}/protected/organizations`, user?.protected.organizations?.filter((id) => id !== orgId));
+        const orgMembers = organization.private?.members || {};
+        await writePath(`/organizations/${orgId}/private/members`, { ...orgMembers, [uid]: undefined });
+    },
 } satisfies Actions;

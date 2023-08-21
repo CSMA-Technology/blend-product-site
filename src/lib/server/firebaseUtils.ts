@@ -70,10 +70,10 @@ export const getUserData = (uid: string) => auth.getUser(uid);
 
 export const getUserFromEmail = (email: string) => auth.getUserByEmail(email);
 
-export const readPath = async (path: string, defaultValue: any = null) => {
+export const readPath = async <T = any>(path: string, defaultValue: T | null = null) => {
     const ref = db.ref(path);
     const data = await ref.get();
-    return data.val() ?? defaultValue;
+    return data.val() as T | null ?? defaultValue;
 }
 
 export const writePath = async (path: string, data: any) => db.ref(path).set(data);

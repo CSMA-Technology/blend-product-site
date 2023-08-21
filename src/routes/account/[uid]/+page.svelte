@@ -43,6 +43,15 @@
     await signOut();
     goto('/login');
   }
+
+  const leaveOrganization = async (orgId: string) => {
+    const body = new FormData();
+    body.append('orgId', orgId);
+    return fetch('?/leaveOrganization', {
+      method: 'POST',
+      body
+    })
+  }
 </script>
 
 <svelte:head>
@@ -69,7 +78,7 @@
             <li class="organization-item">
               {name}
               <span>
-                <button class="btn btn-small btn-red" style="margin-right: 0;">Leave</button>
+                <button class="btn btn-small btn-red" style="margin-right: 0;" on:click={() => leaveOrganization(id)}>Leave</button>
                 {#if role === 'admin'}
                   <a href={`/organization/${id}`} class="btn btn-small" style="margin-left: 0; margin-right: 0;">Manage</a>
                 {/if}
