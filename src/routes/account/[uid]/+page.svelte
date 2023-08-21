@@ -78,10 +78,10 @@
           {/each}
         </ul>
       </div>
+      {/if}
       <div class="detail">
         <button disabled={disableSignOut} on:click={onSignOutCLicked} class="btn">Sign Out</button>
       </div>
-    {/if}
   </section>
   <section class="info">
     <h2>Subscription Information</h2>

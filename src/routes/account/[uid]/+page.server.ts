@@ -6,9 +6,9 @@ import { checkSessionAuth, readPath } from "$lib/server/firebaseUtils";
 
 export const load = (async ({ params: { uid }, cookies }) => {
     await checkSessionAuth(cookies, { loginRedirect: 'account', authFunction: ({ uid: tokenUid }) => tokenUid === uid });
-    const organizationPromise = readPath(`/users/${uid}/protected/organizations`)
-        .then((orgIds = []) => Promise.all(
-            orgIds.map(async (orgId: string) => {
+    const organizationPromise = (readPath(`/users/${uid}/protected/organizations`))
+        .then((orgIds) => Promise.all(
+            (orgIds || []).map(async (orgId: string) => {
                 const organization: Database.Organization = await readPath(`/organizations/${orgId}`);
                 return {
                     id: orgId,
