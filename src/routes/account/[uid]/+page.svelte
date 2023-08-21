@@ -66,12 +66,12 @@
         <h3>Organizations</h3>
         <ul style="list-style: none;">
           {#each orgDetails as {id, name, role}}
-            <li>
+            <li class="organization-item">
+              {name}
               <span>
-                {name}
                 <button class="btn btn-small btn-red" style="margin-right: 0;">Leave</button>
                 {#if role === 'admin'}
-                  <a href={`/organization/${id}`} class="btn btn-small" style="margin-left: 0">Manage</a>
+                  <a href={`/organization/${id}`} class="btn btn-small" style="margin-left: 0; margin-right: 0;">Manage</a>
                 {/if}
               </span>
             </li>
@@ -79,9 +79,9 @@
         </ul>
       </div>
       {/if}
-      <div class="detail">
-        <button disabled={disableSignOut} on:click={onSignOutCLicked} class="btn">Sign Out</button>
-      </div>
+  <div class="detail">
+    <button disabled={disableSignOut} on:click={onSignOutCLicked} class="btn">Sign Out</button>
+  </div>
   </section>
   <section class="info">
     <h2>Subscription Information</h2>
@@ -162,5 +162,11 @@
   }
   .content {
     row-gap: 2rem;
+  }
+
+  .organization-item {
+    padding: 10px; 
+    border-bottom: solid 0.5px rgba(255, 255, 255, 0.5);
+    border-top: solid 0.5px rgba(255, 255, 255, 0.5);
   }
 </style>
