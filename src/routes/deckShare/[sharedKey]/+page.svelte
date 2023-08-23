@@ -15,7 +15,7 @@
     <p>Would you like to add it to your deck library?</p>
     <fieldset>
       <input type="hidden" name="uid" value={$user?.uid} />
-      <button formaction="?/decline" class="btn">No</button>
+      <button formaction="?/decline" type="submit" class="btn">No</button>
       <button formaction="?/accept" type="submit" class="btn btn-green">Yes</button>
     </fieldset>
   </form>
