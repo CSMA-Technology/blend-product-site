@@ -1,25 +1,29 @@
 import { checkSessionAuth, deletePath, readPath, writePath } from '$lib/server/firebaseUtils.js';
 import { error, redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types.js';
+import type { PageServerLoad, Actions } from './$types.js';
 import firebaseAdmin from 'firebase-admin';
 import firebaseAdminCredential, { databaseURL } from "$lib/server/firebaseAdminCredential";
+
 if (!firebaseAdmin.apps.length) {
-    firebaseAdmin.initializeApp({
-        credential: firebaseAdmin.credential.cert(firebaseAdminCredential),
-        databaseURL
-    });
+  firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert(firebaseAdminCredential),
+    databaseURL
+  });
 }
 
 export const load = (async ({ cookies, params: { inviteId }, url }) => {
-  const invite = await readPath(`/invites/organization/${inviteId}`);
-  const organizationName: Database.Organization.Public = await readPath(`/organizations/${invite.orgId}/public/name`);
-
-  if (!invite) throw error(404);
+  // If user is not logged in, redirect to login
   await checkSessionAuth(cookies, {
     loginRedirect: url.pathname,
   });
 
-  return { organizationName };
+  const invite = await readPath<Database.Invite>(`/invites/organization/${inviteId}`);
+  if (!invite) throw error(404);
+
+  const publicOrgDetails = await readPath<Database.Organization.Public>(`/organizations/${invite.orgId}/public`);
+  if (!publicOrgDetails) throw error(404);
+
+  return { organizationName: publicOrgDetails.name };
 }) satisfies PageServerLoad;
 
 export const actions: Actions = {
@@ -30,6 +34,9 @@ export const actions: Actions = {
 
     // Update the status of the pending invitee to member in the organization members
     await writePath(`/organizations/${invite.orgId}/private/members/${uid}/role`, "member");
+
+    // Delete the entry in the members array if it was a temporary ID
+    deletePath(`/organizations/${invite.orgId}/private/members/${inviteId}`);
 
     // Delete the invite entry
     deletePath(`/invites/organization/${inviteId}`);

@@ -11,10 +11,10 @@
 </svelte:head>
 
 <div class="content">
-  <h1>Join {data.organizationName}</h1>
+  <h1>Join {`${data.organizationName}` ?? 'unknown organization'}</h1>
   <form method="post" use:enhance>
     <p>You have been invited to join the organization for</p> 
-    <p style="font-weight: bold;">{data.organizationName}</p>
+    <p style="font-weight: bold;">{`${data.organizationName}` ?? 'unknown organization'}</p>
     <p>Would you like to join?</p>
     <div class="side-by-side">
       <fieldset>
@@ -27,6 +27,11 @@
 </div>
 
 <style>
+  button {
+    font-size: large;
+    font-weight: bold;
+    margin-top: 0;
+  }
   fieldset {
     margin-top: 1.5rem;
     border: none;
