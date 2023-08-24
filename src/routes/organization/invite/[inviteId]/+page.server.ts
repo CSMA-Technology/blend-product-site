@@ -29,21 +29,20 @@ export const load = (async ({ cookies, params: { inviteId }, url }) => {
 export const actions: Actions = {
   accept: async (event) => {
     const { params: { inviteId }, request } = event;
-    const invite = await readPath(`/invites/organization/${inviteId}`);
+    const invite = await readPath<Database.Invite>(`/invites/organization/${inviteId}`);
+    if (!invite) throw error(404);
     const uid = (await request.formData()).get('uid');
 
-    // Update the status of the pending invitee to member in the organization members
+    // Add the user as a member in the organization
     await writePath(`/organizations/${invite.orgId}/private/members/${uid}/role`, "member");
 
-    // Delete the entry in the members array if it was a temporary ID
-    deletePath(`/organizations/${invite.orgId}/private/members/${inviteId}`);
+    // Delete the invite under the organization
+    const thisOrgInvites = (await readPath<Database.Organization.Private['invites']>(`/organizations/${invite.orgId}/private/invites`) ?? []);
+    await writePath(`/organizations/${invite.orgId}/private/invites`, thisOrgInvites.filter((id) => id !== inviteId));
 
     // Update the user's entry with the organization
     const existingOrgs = (await readPath<Database.User.Protected['organizations']>(`/users/${uid}/protected/organizations`) ?? []);
-    if (!existingOrgs.includes(invite.orgId)) {
-      const modifiedOrgs = [...existingOrgs, `${invite.orgId}`]
-      await writePath(`/users/${uid}/protected/organizations`, modifiedOrgs);
-    }
+    await writePath(`/users/${uid}/protected/organizations`, Array.from((new Set(existingOrgs)).add(invite.orgId)));
 
     // Delete the invite entry
     deletePath(`/invites/organization/${inviteId}`);
@@ -51,21 +50,14 @@ export const actions: Actions = {
     throw redirect(303, '/organization/invite/accepted')
   },
   decline: async (event) => {
-    const { params: { inviteId }, request } = event;
-    const invite = await readPath(`/invites/organization/${inviteId}`);
-    const uid = (await request.formData()).get('uid');
+    const { params: { inviteId } } = event;
+    const invite = await readPath<Database.Invite>(`/invites/organization/${inviteId}`);
+    if (!invite) throw error(404);
 
-    const member = (await readPath(`organizations/${invite.orgId}/private/members/${uid}`) ?? {});
-    // Check if the member's status is pending
-    if (member.role === 'pending') {
-      // Delete the member from the organization
-      // IF the member's status was already 'member', do not delete them, as they may have declined a duplicate invite.
-      deletePath(`/organizations/${invite.orgId}/private/members/${uid}`);
-    }
+    // Delete the invite under the organization
+    const thisOrgInvites = (await readPath<Database.Organization.Private['invites']>(`/organizations/${invite.orgId}/private/invites`) ?? []);
+    await writePath(`/organizations/${invite.orgId}/private/invites`, thisOrgInvites.filter((id) => id !== inviteId));
     
-    // Delete the temporary entry if this was a new user
-    deletePath(`/organizations/${invite.orgId}/private/members/${inviteId}`);
-
     // Delete the invite entry
     deletePath(`/invites/organization/${inviteId}`);
 
