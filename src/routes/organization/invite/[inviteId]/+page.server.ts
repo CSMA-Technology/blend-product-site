@@ -18,7 +18,7 @@ export const load = (async ({ cookies, params: { inviteId }, url }) => {
   });
 
   const invite = await readPath<Database.Invite>(`/invites/organization/${inviteId}`);
-  if (!invite) throw error(404);
+  if (!invite) throw error(404, 'This link is expired or invalid.');
 
   const publicOrgDetails = await readPath<Database.Organization.Public>(`/organizations/${invite.orgId}/public`);
   if (!publicOrgDetails) throw error(404);
