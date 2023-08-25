@@ -1,21 +1,40 @@
 <script lang="ts">
   import { validate } from 'email-validator';
   import Modal from '../../../lib/components/Modal.svelte';
-  import type { ValidationRequestBody } from '../validateNewMembers/+server';
+  import type { ValidationRequestBody } from './invites/validation/+server';
+  import { invalidateAll } from '$app/navigation';
   export let showModal: boolean;
   export let organization: Database.Organization | null;
   export let orgId: string;
-  const members = organization?.private?.members || {};
+  const members = organization?.private.members || {};
 
   $: availableSeats = (organization?.locked.seats || 0) - Object.keys(members).length;
 
-  let newMembers: Database.Organization.NewMember[] = [];
-  let inputMember: Database.Organization.NewMember = { email: '' };
-  let validatingMembers = false;
+  let newMembers: Database.Invite.Validation[] = [];
+  let inputMember: Database.Invite.Validation = { email: '' };
+  let requestProcessing = false;
+
+  let error = '';
 
   const handleEmailInput = () => {
     parseEmails();
     validateMembers();
+  };
+
+  const handleSubmit = async () => {
+    requestProcessing = true;
+    const response = await fetch(`/organization/${orgId}/members`, {
+      method: 'POST',
+      body: JSON.stringify(newMembers),
+    });
+    if (response.ok) {
+      newMembers = [];
+      showModal = false;
+      invalidateAll();
+    } else {
+      error = 'Failed to invite new members. Please try again later.';
+    }
+    requestProcessing = false;
   };
 
   const parseEmails = () => {
@@ -45,23 +64,23 @@
   };
 
   const validateMembers = async () => {
-    validatingMembers = true;
-    const body: ValidationRequestBody = { newMembers, orgId };
-    const response = await fetch('validateNewMembers', {
+    requestProcessing = true;
+    const body: ValidationRequestBody = newMembers;
+    const response = await fetch(`/organization/${orgId}/members/validation`, {
       method: 'POST',
       body: JSON.stringify(body),
     });
     if (response.ok) {
       newMembers = await response.json();
     }
-    validatingMembers = false;
+    requestProcessing = false;
   };
 
-  const removeMember = (member: Database.Organization.NewMember) => {
+  const removeMember = (member: Database.Invite.Validation) => {
     newMembers = newMembers.filter((m) => m !== member);
   };
 
-  $: disableSubmit = validatingMembers || newMembers.length === 0 || !!newMembers.find(({ error, validated }) => error || !validated);
+  $: disableSubmit = requestProcessing || newMembers.length === 0 || !!newMembers.find(({ error, validated }) => error || !validated);
 </script>
 
 <Modal bind:showModal>
@@ -92,7 +111,7 @@
               multiple
               style="width: 100%;"
               placeholder="person1@example.com, person2@example.com..."
-              disabled={validatingMembers}
+              disabled={requestProcessing}
               bind:value={inputMember.email} />
             <button type="submit" class="btn btn-gray btn-small" style="margin: 0;">Add</button>
           </div>
@@ -107,8 +126,11 @@
     {#if newMembers.length > availableSeats}
       <p style="color: red">Too many invitations added. Please remove {newMembers.length - availableSeats}.</p>
     {/if}
+    {#if error}
+      <p style="color: red">{error}</p>
+    {/if}
     <div class="row flex-around flex-wrap">
-      <button class="btn btn-green" disabled={disableSubmit}>Submit</button>
+      <button class="btn btn-green" on:click={handleSubmit} disabled={disableSubmit}>Submit</button>
     </div>
   </div>
 </Modal>
