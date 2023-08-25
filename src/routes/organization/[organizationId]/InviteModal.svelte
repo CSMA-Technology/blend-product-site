@@ -23,7 +23,7 @@
 
   const handleSubmit = async () => {
     requestProcessing = true;
-    const response = await fetch(`/organization/${orgId}/members`, {
+    const response = await fetch(`/organization/${orgId}/invites`, {
       method: 'POST',
       body: JSON.stringify(newMembers),
     });
@@ -60,13 +60,12 @@
       newMembers = [...newMembers, ...newAdditions];
       inputMember = { email: '' };
     }
-    console.log(newMembers);
   };
 
   const validateMembers = async () => {
     requestProcessing = true;
     const body: ValidationRequestBody = newMembers;
-    const response = await fetch(`/organization/${orgId}/members/validation`, {
+    const response = await fetch(`/organization/${orgId}/invites/validation`, {
       method: 'POST',
       body: JSON.stringify(body),
     });

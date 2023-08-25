@@ -1,4 +1,4 @@
-import { auth, getOrganizationInviteDetials, getOrganizationMemberDetails, readPath } from '$lib/server/firebaseUtils';
+import { auth, getOrganizationInviteDetails, readPath } from '$lib/server/firebaseUtils';
 import { error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
@@ -8,7 +8,7 @@ export const POST: RequestHandler = async ({ request, params }) => {
   const newMembers: ValidationRequestBody = await request.json();
   const organization = await readPath<Database.Organization>(`/organizations/${organizationId}`);
   if (!organization) throw error(404, 'Organization not found');
-  const inviteDetails = await getOrganizationInviteDetials(organization);
+  const inviteDetails = await getOrganizationInviteDetails(organization);
   const validatedMembers = await Promise.all(
     newMembers.map(async (memberData) => {
       const { email, validated } = memberData;

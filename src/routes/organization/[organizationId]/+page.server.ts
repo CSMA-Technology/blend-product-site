@@ -1,4 +1,4 @@
-import { checkSessionAuth, getOrganizationInviteDetials, getOrganizationMemberDetails, readPath } from '$lib/server/firebaseUtils.js';
+import { checkSessionAuth, getOrganizationInviteDetails, getOrganizationMemberDetails, readPath } from '$lib/server/firebaseUtils.js';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';
 
@@ -12,6 +12,6 @@ export const load = (async ({ cookies, params: { organizationId }, url }) => {
   });
   return {
     memberDetails: JSON.stringify(await getOrganizationMemberDetails(organization)),
-    inviteDetails: JSON.stringify(await getOrganizationInviteDetials(organization)),
+    inviteDetails: JSON.stringify(await getOrganizationInviteDetails(organization)),
   };
 }) satisfies PageServerLoad;

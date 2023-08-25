@@ -57,7 +57,7 @@ export const getOrganizationMemberDetails = async (organization: Database.Organi
   })) as Database.Organization.MemberDetails[];
 };
 
-export const getOrganizationInviteDetials = async (organization: Database.Organization) => {
+export const getOrganizationInviteDetails = async (organization: Database.Organization) => {
   const { invites = [] } = organization.private ?? {};
   return (
     await Promise.all(

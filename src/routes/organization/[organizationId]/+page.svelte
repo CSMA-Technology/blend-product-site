@@ -51,7 +51,7 @@
       <tr>
         <th>Name</th>
         <th>Email</th>
-        <th>Status</th>
+        <th>Role</th>
         <th>Actions</th>
       </tr>
       {#each invites as { id, inviteeEmail, displayName } (id)}
