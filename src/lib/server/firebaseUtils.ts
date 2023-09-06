@@ -58,6 +58,7 @@ export const getUserOrganizations = async (uid: string) => {
 };
 
 export const getOrganizationDecks = async (organizationId: string) => readPath<Database.Decks.Organization>(`decks/organization/${organizationId}`);
+export const getOrganizationPlaylists = async (organizationId: string) => readPath<Database.Playlists.Organization>(`playlists/organization/${organizationId}`);
 
 export const getOrganizationMemberDetails = async (organization: Database.Organization) => {
   const { members = {} } = organization.private ?? {};
