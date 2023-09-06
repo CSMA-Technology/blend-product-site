@@ -6,7 +6,7 @@
   import type { PageData } from './$types';
 
   export let data: PageData;
-  const { isSubscribedToBlendPro, subscriptionPendingCancellation, subscriptionPeriodEnd, organizations } = data;
+  const { isSubscribedToBlendPro, subscriptionPendingCancellation, subscriptionPeriodEnd, organizations, hasOrganizationMembership } = data;
   // Remove query params because they are handled on the server and any relevant state should be passed as a prop
   window.history.replaceState({}, document.title, window.location.toString().replace(window.location.search, ''));
 
@@ -139,6 +139,14 @@
             </form>
           {/if}
         </div>
+      {:else if hasOrganizationMembership}
+        <p>Blend PRO - Group License</p>
+        <p>You have Blend PRO access through your organization membership(s).</p>
+        <br />
+        <p>
+          For questions about your access, please reach out to your organization admin 
+          or email us at <a href="mailto:blend-support@csma.technology">blend-support@csma.technology.</a>
+        </p>
       {:else}
         <p>Blend Basic</p>
         <form action="?/createSubscriptionOrder" method="POST">
