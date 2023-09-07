@@ -76,6 +76,7 @@ declare global {
       name: string;
       position: number;
       refId: number;
+      words: [][];
     }
     namespace Playlists {
       interface Organization {

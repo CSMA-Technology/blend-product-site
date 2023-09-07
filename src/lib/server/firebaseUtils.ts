@@ -57,6 +57,7 @@ export const getUserOrganizations = async (uid: string) => {
   ).filter((id): id is Exclude<string, null> => !!id);
 };
 
+export const getOrganizationInfo = async (organizationId: string) => readPath<Database.Organization.Public>(`organizations/${organizationId}/public`);
 export const getOrganizationDecks = async (organizationId: string) => readPath<Database.Decks.Organization>(`decks/organization/${organizationId}`);
 export const getOrganizationPlaylists = async (organizationId: string) => readPath<Database.Playlists.Organization>(`playlists/organization/${organizationId}`);
 
@@ -142,3 +143,10 @@ export const writePath = async (path: string, data: any) => db.ref(path).set(dat
 export const pushPath = async (path: string, data: any) => db.ref(path).push(data);
 
 export const deletePath = async (path: string) => db.ref(path).remove();
+
+export const modifyPlaylistsResponse = (playlists: Database.Playlist[]) => {
+  return Object.values(playlists).map((playlist) => ({
+    ...playlist,
+    words: playlist.words.map((word) => word.map((letter) => (letter === false ? null : letter))),
+  }));
+};

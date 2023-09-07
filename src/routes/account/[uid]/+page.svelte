@@ -118,7 +118,7 @@
     <div class="detail">
       <h3>Your Blend Plan</h3>
       {#if isSubscribedToBlendPro}
-        <p>Blend PRO</p>
+        <p>Blend Pro</p>
         <div class="detail">
           <h3>Billing</h3>
           {#if subscriptionPendingCancellation}
@@ -140,8 +140,8 @@
           {/if}
         </div>
       {:else if hasOrganizationMembership}
-        <p>Blend PRO - Group License</p>
-        <p>You have Blend PRO access through your organization membership(s).</p>
+        <p>Blend Pro - Group License</p>
+        <p>You have Blend Pro access through your organization membership(s).</p>
         <br />
         <p>
           For questions about your access, please reach out to your organization admin 

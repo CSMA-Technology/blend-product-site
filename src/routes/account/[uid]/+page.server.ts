@@ -33,17 +33,18 @@ export const load = (async ({ params: { uid }, cookies }) => {
     ),
   );
   const customer = await getStripeCustomerWithSubscriptions(uid);
+  const hasOrganizationMembership = await isOrganizationMember(uid);
 
   if (!customer || customer.deleted) {
     return {
       isSubscribedToBlendPro: false,
+      hasOrganizationMembership,
       subscriptionPeriodEnd: 0,
       subscriptionPendingCancellation: false,
       organizations: JSON.stringify(await organizationPromise),
     };
   }
   const subscription = getBlendProSubscription(customer);
-  const hasOrganizationMembership = await isOrganizationMember(uid);
   return {
     isSubscribedToBlendPro: !!subscription,
     hasOrganizationMembership,
