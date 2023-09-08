@@ -143,10 +143,3 @@ export const writePath = async (path: string, data: any) => db.ref(path).set(dat
 export const pushPath = async (path: string, data: any) => db.ref(path).push(data);
 
 export const deletePath = async (path: string) => db.ref(path).remove();
-
-export const modifyPlaylistsResponse = (playlists: Database.Playlist[]) => {
-  return Object.values(playlists).map((playlist) => ({
-    ...playlist,
-    words: playlist.words.map((word) => word.map((letter) => (letter === false ? null : letter))),
-  }));
-};

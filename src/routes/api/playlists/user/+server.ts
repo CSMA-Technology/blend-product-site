@@ -1,4 +1,4 @@
-import { authenticate, getOrganizationInfo, getOrganizationPlaylists, getUserOrganizations, modifyPlaylistsResponse, readPath } from '$lib/server/firebaseUtils';
+import { authenticate, getOrganizationInfo, getOrganizationPlaylists, getUserOrganizations, readPath } from '$lib/server/firebaseUtils';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
@@ -23,7 +23,10 @@ export const GET = (async (event) => {
     )
   ).flat();
 
-  const modifiedPlaylists = modifyPlaylistsResponse([...userPlaylistsArray, ...organizationPlaylistsArray]);
+  const modifiedPlaylists = ([...userPlaylistsArray, ...organizationPlaylistsArray]).map((playlist) => ({
+    ...playlist,
+    words: playlist.words.map((word) => word.map((letter) => (letter === false ? null : letter))),
+  }));
   return json(modifiedPlaylists, {
     headers: [['Access-Control-Allow-Origin', '*']],
   });
