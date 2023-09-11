@@ -86,7 +86,7 @@
         <div class="feature">Dedicated Support</div>
         <p>Want to learn more about these features? <br /> <a href="https://drive.google.com/file/d/1HQoOfhXIJPaVRFmd8GBM7DMjLgD_YfPx/view?usp=drive_link" target="_blank" rel="noopener noreferrer">Click here</a> for more information.</p>
         <p>
-          Save money by purchasing a group license for those with mulitiple users working together! We'll work with you on a plan that makes sense for
+          Save money by purchasing a group license! We'll work with you on a plan that makes sense for
           your organization.
         </p>
         <h4>
