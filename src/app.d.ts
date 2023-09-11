@@ -69,12 +69,12 @@ declare global {
     }
     interface OrganizationPlaylist {
       author?: string;
-      originalRefId?: number;
+      originalRefId?: string;
       playlist: Playlist;
     }
     interface OrganizationDeck {
       author?: string;
-      originalRefId?: number;
+      originalRefId?: string;
       deck: Deck;
     }
     namespace Decks {
