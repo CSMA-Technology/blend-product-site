@@ -15,7 +15,7 @@
     <img src={cards} alt="cards spelling BLEND" />
   </div>
   <div class="side-by-side">
-    <a class="btn" href="https://app.blendreading.com" target="_blank" rel="noopener noreferrer"><h2>start blending</h2></a>
+    <a class="btn start-blending" href="https://app.blendreading.com" target="_blank" rel="noopener noreferrer"><h2>start blending</h2></a>
     <a class="btn" href="/login"><h2>sign up</h2></a>
   </div>
 </section>
@@ -82,8 +82,8 @@
     <div class="side-by-side">
       <div class="description">
         <p>
-          Save time with our <b>Playlists</b> feature by creating word chains ahead of your lessons. Your time is precious, so why spend
-          all of it resetting a blending drill for your next session? You can assemble word chains and save them to use as many times as you want.
+          Save time with our <b>Playlists</b> feature by creating word chains ahead of your lessons. Assemble word chains with ease and use them in our sleek intferface
+          designed to minimize distractions. Craft playlists from scratch, or even export the history of a completed blending drill and seamlessly turn it into a playlist.
           Then, when you're ready for your drill, flip through the words with the click of a button!
         </p>
         <p>
@@ -94,6 +94,7 @@
         <h2>Key Features</h2>
         <ul>
           <li><b>Easily create prebuilt word chains</b> and eliminate duplicate work when preparing for your blending drills</li>
+          <li><b>Seamlessly export your word history</b> from a blending drill and save it as a playlist to reuse with any of your other students</li>
           <li><b>Save your playlists</b> and use them again and again with your students to stay consistent and reinforce concepts</li>
           <li><b>Effortlessly flip through your word chain</b> and track your progress with the simple playlist interface</li>
         </ul>
@@ -123,6 +124,21 @@
 </section>
 
 <style>
+  .btn {
+    border-width: 2px;
+  }
+  .start-blending {
+    /* color: black; */
+    background: none;
+    border-color: #7f71d2;
+    border-width: 2px;
+  }
+
+  .start-blending:hover {
+    color: white;
+    background-color: #7f71d2 !important;
+  }
+
   .feature-title h1 {
     text-align: center;
     margin-bottom: 0;
