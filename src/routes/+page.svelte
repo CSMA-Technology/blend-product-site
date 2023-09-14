@@ -82,21 +82,23 @@
     <div class="side-by-side">
       <div class="description">
         <p>
-          Save time with our <b>Playlists</b> feature by creating word chains ahead of your lessons. Assemble word chains with ease and use them in our sleek intferface
-          designed to minimize distractions. Craft playlists from scratch, or even export the history of a completed blending drill and seamlessly turn it into a playlist.
+          Save time with our <b>Playlists</b> feature by creating word chains ahead of your lessons and present them in our sleek interface designed to minimize distractions.
+        </p>
+        <p>
+          Craft playlists from scratch, integrate word lists from your school's structured literacy curriculum, or even export the history of a completed blending drill and seamlessly turn it into a playlist.
           Then, when you're ready for your drill, flip through the words with the click of a button!
         </p>
         <p>
-          Spend less time preparing and more time doing what you do best - inspiring and empowering your students.
+          With Playlists, you can reduce the prep work and devote more time to your kids, ensuring that they're equipped with vital literacy skills. 
         </p>
       </div>
       <div class="description">
         <h2>Key Features</h2>
         <ul>
-          <li><b>Easily create prebuilt word chains</b> and eliminate duplicate work when preparing for your blending drills</li>
-          <li><b>Seamlessly export your word history</b> from a blending drill and save it as a playlist to reuse with any of your other students</li>
-          <li><b>Save your playlists</b> and use them again and again with your students to stay consistent and reinforce concepts</li>
-          <li><b>Effortlessly flip through your word chain</b> and track your progress with the simple playlist interface</li>
+          <li><b>Create and save word chains ahead of time</b>, ensuring your structured literacy lessons run smoothly</li>
+          <li><b>Keep your lessons flowing just by clicking</b> forward - no more fumbling for the next grapheme card</li>
+          <li><b>Integrate word lists from your school's structured literacy curriculum</b> and save them to use year after year</li>
+          <li>Experience a visually uncluttered interface that minimizes distractions, so you can <b>focus on what matters most: empowering your students</b></li>
         </ul>
       </div>
     </div>
