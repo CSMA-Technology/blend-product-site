@@ -29,17 +29,19 @@
       <p><label class="form-label">What new features would you like to see?<textarea name="featureRequests" required></textarea></label></p>
       <fieldset class="radio">
         <legend class="form-label"><p>Can we publish your responses on our website?</p></legend>
-        <div>
-          <input type="radio" id="publishChoice1" name="publishable" value="yes" checked />
-          <label for="publishChoice1">Yes</label>
-        </div>
-        <div>
+        <label>
+          <input type="radio" name="publishable" value="yes" checked />
+          Yes
+        </label>
+        <label>
           <input type="radio" id="publishChoice2" name="publishable" value="anonymous" />
-          <label for="publishChoice2">Yes, but please keep me anonymous</label>
-        </div>
+          Yes, but please keep me anonymous
+        </label>
         <div>
-          <input type="radio" id="publishChoice3" name="publishable" value="no" />
-          <label for="publishChoice3">No</label>
+          <label>
+            <input type="radio" name="publishable" value="no" />
+            No
+          </label>
         </div>
       </fieldset>
       <p><button class="btn" type="submit">Submit</button></p>
