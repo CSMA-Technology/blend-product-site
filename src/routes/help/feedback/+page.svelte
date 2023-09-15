@@ -1,23 +1,29 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
-  import { user } from "$lib/firebase";
-
-  export let data: PageData;
+  import { browser } from '$app/environment';
+  import { enhance } from '$app/forms';
+  import AuthCheck from '$lib/components/AuthCheck.svelte';
+  import { user } from '$lib/firebase';
 </script>
 
 <svelte:head>
   <title>Feedback</title>
 </svelte:head>
 
+{#if browser}
+  <AuthCheck />
+{/if}
+
 <div class="content">
   <h1>We want your feedback!</h1>
   <div class="form-details">
     <p>We'd love to hear what you think about our app.</p>
     <p>Complete the form below to tell us about your experience with Blend and submit any ideas for new features!</p>
-    <form name="feedback" method="post" netlify-honeypot="bot-field" data-netlify="true" use:enhance>
+    <form name="feedback" method="post" action="/help/feedback/success" netlify-honeypot="bot-field" data-netlify="true">
       <input type="hidden" name="form-name" value="feedback" />
       <input type="hidden" name="subject" value="Feedback Submission from blendreading.com" />
       <input type="hidden" name="uid" value={$user?.uid} />
+      <input type="hidden" name="name" value={$user?.displayName} />
+      <input type="hidden" name="email" value={$user?.email} />
       <p><label class="form-label">What do you like about using Blend?<textarea name="positiveFeedback" required></textarea></label></p>
       <p><label class="form-label">What could make your experience better?<textarea name="improvementFeedback" required></textarea></label></p>
       <p><label class="form-label">What new features would you like to see?<textarea name="featureRequests" required></textarea></label></p>
@@ -36,7 +42,7 @@
           <label for="publishChoice3">No</label>
         </div>
       </div>
-      <p><button formaction="?/submit" class="btn" type="submit">Submit</button></p>
+      <p><button class="btn" type="submit">Submit</button></p>
     </form>
   </div>
 </div>
@@ -67,7 +73,6 @@
     margin: 1rem;
     width: 50%;
   }
-  input[type='text'],
   textarea {
     display: block;
     margin-bottom: 1rem;
