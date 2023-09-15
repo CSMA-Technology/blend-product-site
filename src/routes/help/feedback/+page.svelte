@@ -27,7 +27,7 @@
       <p><label class="form-label">What do you like about using Blend?<textarea name="positiveFeedback" required></textarea></label></p>
       <p><label class="form-label">What could make your experience better?<textarea name="improvementFeedback" required></textarea></label></p>
       <p><label class="form-label">What new features would you like to see?<textarea name="featureRequests" required></textarea></label></p>
-      <div class="radio">
+      <fieldset class="radio">
         <legend class="form-label"><p>Can we publish your responses on our website?</p></legend>
         <div>
           <input type="radio" id="publishChoice1" name="publishable" value="yes" checked />
@@ -41,7 +41,7 @@
           <input type="radio" id="publishChoice3" name="publishable" value="no" />
           <label for="publishChoice3">No</label>
         </div>
-      </div>
+      </fieldset>
       <p><button class="btn" type="submit">Submit</button></p>
     </form>
   </div>
@@ -97,5 +97,7 @@
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
+    border: none;
+    padding: 0;
   }
 </style>
