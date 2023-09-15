@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>Report an Issue</title>
+  <title>Submit Feedback</title>
 </svelte:head>
 <div class="content">
   <h1>Thank you for submitting your feedback!</h1>
