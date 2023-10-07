@@ -23,7 +23,7 @@
         <p>Developer</p>
       </div>
       <div class="person">
-        <img src={adrian} alt="Adrian Moya headshot" style="border-color: #012a51;" />
+        <img src={adrian} alt="Adrian Moya headshot" style="border-color: #cf524e;" />
         <a href="mailto:adrian@blendreading.com"><h3>Adrian Moya</h3></a>
         <p>Co-Founder</p>
         <p>Developer</p>
@@ -34,9 +34,11 @@
         It all started with two old friends catching up over lunch. Summer and Stephanie, who have been friends since 2004, 
         were talking about friends, family, and work. Summer, working as a reading specialist at her own tutoring business, 
         mentioned that she was frustrated with one of the tools she used in her phonics instruction. She explained the tool: a blending board. 
-        The physical version didn't work very well for her online sessions, and the virtual options out there didn't meet her needs. 
-        Stephanie, who had just started her own software company with her friend Adrian, felt inspired and excited to build a working solution
-        that could help her friend teach kids to read. Stephanie and Adrian had always been interested in the intersection of education and technology,
+        Physical boards didn't work very well for her online sessions, and the virtual options out there were clunky and missing basic features.
+      </p>
+      <p>
+        As luck would have it, Stephanie had just started a software company with Adrian, and felt inspired and excited to build a solution
+        that could help Summer teach kids to read. Stephanie and Adrian had always been interested in the intersection of education and technology,
         so it was a perfect partnership. 
       </p>
       <h1>Our Mission</h1>
