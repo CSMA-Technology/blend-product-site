@@ -4,6 +4,8 @@
   import Footer from '$lib/components/Footer.svelte';
   import { browser } from '$app/environment';
   import { PUBLIC_DEPLOY_CONTEXT } from '$env/static/public';
+  import { globalConfirmationModalProps } from '$lib/utils';
+  import ConfirmationModal from '$lib/components/ConfirmationModal.svelte';
 
   // Google Analytics
   if (browser) {
@@ -26,4 +28,5 @@
 <main>
   <slot />
 </main>
+<ConfirmationModal {...$globalConfirmationModalProps} />
 <Footer />

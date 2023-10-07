@@ -2,6 +2,7 @@
   import AuthCheck from '$lib/components/AuthCheck.svelte';
   import Modal from '$lib/components/Modal.svelte';
   import { createWritableStore, generatePushID } from '$lib/firebase';
+  import { confirmAction } from '$lib/utils';
   const organizations = createWritableStore<{ [id: string]: Database.Organization }>('/organizations');
   let showAddOrganizationModal = false;
   let newOrgName = '';
@@ -47,7 +48,10 @@
       {/each}
       <tr>
         <td colspan="2">
-          <button style="width: 100%; margin: 1rem 0 0 0" class="btn btn-green" on:click={() => (showAddOrganizationModal = true)}>Create</button>
+          <button
+            style="width: 100%; margin: 1rem 0 0 0"
+            class="btn btn-green"
+            on:click={() => confirmAction(() => (showAddOrganizationModal = true))}>Create</button>
         </td>
       </tr>
     </table>
