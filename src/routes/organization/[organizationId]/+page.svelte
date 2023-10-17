@@ -51,6 +51,7 @@
   };
 
   const handleDeckAdd = () => {
+    let maxPosition = Math.max(...Object.values($organizationDecks ?? {}).map(({ deck: { position } }) => position), -1);
     const newDecks = decksToAdd.reduce((acc, deckId) => {
       const newRefId = Math.floor(Math.random() * 4294967295);
       return {
@@ -62,7 +63,7 @@
             ...$userDecks![deckId],
             refId: newRefId,
             is_editable: false,
-            position: -1,
+            position: ++maxPosition,
           },
         },
       };
@@ -72,6 +73,7 @@
     showDeckAddModal = false;
   };
   const handlePlaylistAdd = () => {
+    let maxPosition = Math.max(...Object.values($organizationPlaylists!).map(({ playlist: { position } }) => position), -1);
     const newPlaylists = playlistsToAdd.reduce((acc, playlistId) => {
       const newRefId = Math.floor(Math.random() * 4294967295);
       return {
@@ -83,7 +85,7 @@
             ...$userPlaylists![playlistId],
             refId: newRefId,
             is_editable: false,
-            position: -1,
+            position: ++maxPosition,
           },
         },
       };

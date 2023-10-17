@@ -91,6 +91,9 @@ declare global {
       interface User {
         [deckId: string]: Deck;
       }
+      interface Preloaded {
+        [deckId: string]: Deck;
+      }
     }
     namespace Playlists {
       interface Organization {
