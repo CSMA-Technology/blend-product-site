@@ -108,7 +108,7 @@
   <thead>
     <tr>
       {#if draggableItems}
-        <th></th>
+        <th style="width: 0;"></th>
       {/if}
       {#if selectable}
         <th></th>

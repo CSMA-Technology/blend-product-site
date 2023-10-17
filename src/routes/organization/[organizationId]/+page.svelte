@@ -110,7 +110,7 @@
   };
 
   const demoteMember = (uid: string) => {
-    $organization!.private!.members![uid].role = '';
+    $organization!.private!.members![uid].role = 'member';
   };
 </script>
 

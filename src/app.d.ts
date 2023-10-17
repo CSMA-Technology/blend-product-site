@@ -123,7 +123,7 @@ declare global {
 
     namespace Organization {
       interface Member {
-        role: 'admin' | '';
+        role: 'admin' | 'member';
       }
       interface MemberDetails extends Member {
         displayName: string;
