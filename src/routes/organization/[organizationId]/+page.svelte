@@ -18,11 +18,6 @@
   $: userDecks = createWritableStore<Database.Decks.User>(`/decks/user/${$user?.uid}`);
   $: userPlaylists = createWritableStore<Database.Playlists.User>(`/playlists/user/${$user?.uid}`);
 
-  $: sortedUserPlaylists = Object.values($userPlaylists ?? {}).sort(compareCreatedTs);
-  $: sortedUserDecks = Object.values($userDecks ?? {}).sort(compareCreatedTs);
-  $: sortedOrganizationPlaylists = Object.values($organizationPlaylists ?? {}).sort((p1, p2) => compareCreatedTs(p1.playlist, p2.playlist));
-  $: sortedOrganizationDecks = Object.values($organizationDecks ?? {}).sort((d1, d2) => compareCreatedTs(d1.deck, d2.deck));
-
   const organization = createWritableStore<Database.Organization>(`/organizations/${organizationId}`);
   let decksToAdd: string[] = [];
   let playlistsToAdd: string[] = [];
@@ -41,6 +36,18 @@
     $organizationPlaylists = Object.keys($organizationPlaylists!)
       .filter((id) => id !== String(playlistId))
       .reduce((acc, id) => ({ ...acc, [id]: $organizationPlaylists![id] }), {});
+  };
+
+  const reorderOrganizationPlaylists = (itemIdsInOrder: string[]) => {
+    itemIdsInOrder.forEach((id, index) => {
+      $organizationPlaylists![id].playlist.position = index;
+    });
+  };
+
+  const reorderOrganizationDecks = (itemIdsInOrder: string[]) => {
+    itemIdsInOrder.forEach((id, index) => {
+      $organizationDecks![id].deck.position = index;
+    });
   };
 
   const handleDeckAdd = () => {
@@ -104,12 +111,6 @@
 
   const demoteMember = (uid: string) => {
     $organization!.private!.members![uid].role = '';
-  };
-
-  const compareCreatedTs = (item1: { created_ts: string }, item2: { created_ts: string }) => {
-    if (item1.created_ts === item2.created_ts) return 0;
-    if (item1.created_ts < item2.created_ts) return -1;
-    return 1;
   };
 </script>
 
@@ -175,9 +176,11 @@
     <section>
       <h2>Organization Decks</h2>
       <OrganizationItemTable
-        items={sortedOrganizationDecks}
+        items={$organizationDecks ?? {}}
         memberDetails={members}
-        itemActions={[{ name: 'Remove', class: 'btn btn-red btn-small', handler: ({ refId }) => removeDeck(refId) }]} />
+        itemActions={[{ name: 'Remove', class: 'btn btn-red btn-small', handler: ({ refId }) => removeDeck(refId) }]}
+        draggableItems
+        onItemReorder={reorderOrganizationDecks} />
       <button
         class="btn btn-green add-button"
         id="add-decks-button"
@@ -189,9 +192,9 @@
         <p style="margin-bottom: 0;">Choose from your personal decks below.</p>
         <p style="margin-top: 0;">A copy of the deck you select will be added to the organization.</p>
         <OrganizationItemTable
-          items={sortedUserDecks}
+          items={$userDecks ?? {}}
           memberDetails={members}
-          existingItems={sortedOrganizationDecks}
+          existingItems={$organizationDecks ?? {}}
           selectable
           bind:selectedItems={decksToAdd} />
         <div slot="footer" class="row" style="justify-content: center">
@@ -208,9 +211,11 @@
     <section>
       <h2>Organization Playlists</h2>
       <OrganizationItemTable
-        items={sortedOrganizationPlaylists}
+        items={$organizationPlaylists ?? {}}
         memberDetails={members}
-        itemActions={[{ name: 'Remove', class: 'btn btn-red btn-small', handler: ({ refId }) => removePlaylist(refId) }]} />
+        itemActions={[{ name: 'Remove', class: 'btn btn-red btn-small', handler: ({ refId }) => removePlaylist(refId) }]}
+        draggableItems
+        onItemReorder={reorderOrganizationPlaylists} />
       <button
         class="btn btn-green add-button"
         on:click={() => {
@@ -221,8 +226,8 @@
         <p style="margin-bottom: 0;">Choose from your personal playlists below.</p>
         <p style="margin-top: 0;">A copy of the playlist you select will be added to the organization.</p>
         <OrganizationItemTable
-          bind:items={sortedUserPlaylists}
-          existingItems={sortedOrganizationPlaylists}
+          items={$userPlaylists ?? {}}
+          existingItems={$organizationPlaylists ?? {}}
           bind:selectedItems={playlistsToAdd}
           selectable />
         <div slot="footer" class="row" style="justify-content: center">
