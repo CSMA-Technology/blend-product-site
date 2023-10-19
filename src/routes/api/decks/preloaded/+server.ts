@@ -8,7 +8,7 @@ export const GET = (async (request) => {
   const decks = (await readPath<Database.Decks.Preloaded>('/decks/preloaded')) || {};
   const deckArray = Object.entries(decks).map(([key, val]) => val);
   if (user) {
-    const positionOffset = Math.max(...deckArray.map(({ position }) => position)) + 2; // +2 because legacy position can be -1, and we want the new position to be strictly greater
+    const positionOffset = Math.max(...deckArray.map(({ position }) => position)) + 2; // +2 because legacy position can be -1, and we want the new position to be strictly greater TODO: refactor this once we get rid of the legacy magic numbers in positioning
     const organizationIds = await getUserOrganizations(user.uid);
     organizationDeckArray = (
       await Promise.all(
