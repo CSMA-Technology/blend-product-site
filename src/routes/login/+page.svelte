@@ -22,7 +22,12 @@
   switch (redirectParam) {
     case 'account':
     case '/':
-      redirectBuilder = (user: User) => `/account/${user.uid}`;
+      // redirectBuilder = (user: User) => `/account/${user.uid}`;
+      redirectBuilder = (user: User) => `/account`;
+      break;
+    case 'upgrade':
+      // redirectBuilder = (user: User) => `/account/${user.uid}?action=upgrade`;
+      redirectBuilder = (user: User) => `/account?action=upgrade`;
       break;
     case 'app':
       isAppRedirect = true;
@@ -46,7 +51,6 @@
       callbacks: {
         signInSuccessWithAuthResult(authResult, redirectUrl) {
           awaitingRedirect = true;
-          if (authResult.additionalUserInfo.isNewUser) gtag('event', 'new_account');
           setWillAttempLogin(true);
           fetch('/login/sessionCookie', { method: 'POST', body: JSON.stringify({ idToken: authResult.user.accessToken }) }).then(() => {
             if (isAppRedirect) {
@@ -57,7 +61,12 @@
                 },
               );
             } else {
-              goto(redirectBuilder(authResult.user), { replaceState: true });
+              if (authResult.additionalUserInfo.isNewUser) {
+                gtag('event', 'new_account');
+                goto(`${redirectBuilder(authResult.user)}?action=choosePlan`);
+              } else {
+                goto(redirectBuilder(authResult.user), { replaceState: true });
+              }
             }
           });
           return false;
