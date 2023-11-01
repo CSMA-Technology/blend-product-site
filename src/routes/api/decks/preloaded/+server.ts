@@ -20,7 +20,11 @@ export const GET = (async (request) => {
     ).flat();
   }
   return json([...deckArray, ...organizationDeckArray], {
-    headers: [['Access-Control-Allow-Origin', '*']],
+    headers: [
+      ['Access-Control-Allow-Origin', '*'],
+      ['Cache-Control', 'private, max-age=30, must-revalidate'],
+      ['Last-Modified', new Date().toUTCString()],
+    ],
   });
 }) satisfies RequestHandler;
 
