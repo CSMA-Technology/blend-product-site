@@ -14,7 +14,7 @@ let email = '';
 let name = '';
 let uid = '';
 
-export const load = (async ({  url, cookies }) => {
+export const load = (async ({ url, cookies }) => {
   const actionParam = url.searchParams.get('action') ?? '';
   uid = (await checkSessionAuth(cookies, {
     loginRedirect: `account?${url.searchParams}`,
@@ -24,7 +24,7 @@ export const load = (async ({  url, cookies }) => {
   const userData = await getUserData(uid);
   email = userData.email!;
   name = userData.displayName ?? 'Blend User';
-  const isGlobalAdmin = isUserGlobalAdmin(uid);
+  const isGlobalAdmin = isUserGlobalAdmin(uid); 
   const organizations = getUserOrganizations(uid).then((orgIds) => {
     return Promise.all(
       (orgIds || []).map(async (orgId: string) => {
@@ -46,6 +46,8 @@ export const load = (async ({  url, cookies }) => {
         const stripeSession = await createStripeSession(uid, email, name, url.origin);
         throw redirect(303, stripeSession.url!);
       }
+      case 'choosePlan':
+        throw redirect(303, '/account/plan');
       default: {
         break;
       }

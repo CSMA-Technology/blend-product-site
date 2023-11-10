@@ -22,11 +22,9 @@
   switch (redirectParam) {
     case 'account':
     case '/':
-      // redirectBuilder = (user: User) => `/account/${user.uid}`;
       redirectBuilder = (user: User) => `/account`;
       break;
     case 'upgrade':
-      // redirectBuilder = (user: User) => `/account/${user.uid}?action=upgrade`;
       redirectBuilder = (user: User) => `/account?action=upgrade`;
       break;
     case 'app':
@@ -63,7 +61,7 @@
             } else {
               if (authResult.additionalUserInfo.isNewUser) {
                 gtag('event', 'new_account');
-                goto(`${redirectBuilder(authResult.user)}?action=choosePlan`);
+                goto('/account?action=choosePlan');
               } else {
                 goto(redirectBuilder(authResult.user), { replaceState: true });
               }

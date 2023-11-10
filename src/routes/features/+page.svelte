@@ -53,6 +53,7 @@
           description="Keep track of your progress in a lesson and revisit words to reinforce challenging concepts"
           className="highlight" />
       </section>
+      <a class="btn" href="/login">Sign Up</a>
     </div>
     <div class="tier pro">
       <div class="section-title">
@@ -82,6 +83,7 @@
           description="Remotely share your custom decks with fellow Blend Pro users to collaborate on lesson planning"
           className="highlight pro" />
       </section>
+      <a class="btn" style="color: black; border-color: black;" href="/account?action=upgrade">Upgrade</a>
     </div>
   </div>
 </section>
