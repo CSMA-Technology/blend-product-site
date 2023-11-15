@@ -10,37 +10,31 @@ import {
 } from '$lib/server/subscriptionUtils';
 import { checkSessionAuth, getUserData, getUserOrganizations, isUserGlobalAdmin, readPath, writePath } from '$lib/server/firebaseUtils';
 
-let email = '';
-let name = '';
-let uid = '';
-
 export const load = (async ({ url, cookies }) => {
   const actionParam = url.searchParams.get('action') ?? '';
-  uid = (await checkSessionAuth(cookies, {
-    loginRedirect: `account?${url.searchParams}`,
-    // authFunction: ({ uid: tokenUid }) => tokenUid === uid,
+  const uid = (await checkSessionAuth(cookies, {
+    loginRedirect: `account${url.search}`,
   })).uid;
 
   const userData = await getUserData(uid);
-  email = userData.email!;
-  name = userData.displayName ?? 'Blend User';
+  const email = userData.email!;
+  const name = userData.displayName ?? 'Blend User';
   const isGlobalAdmin = isUserGlobalAdmin(uid); 
-  const organizations = getUserOrganizations(uid).then((orgIds) => {
-    return Promise.all(
-      (orgIds || []).map(async (orgId: string) => {
-        const organization = await readPath<Database.Organization>(`/organizations/${orgId}`);
-        return {  
-          id: orgId,
-          name: organization?.public.name,
-          role: (await isGlobalAdmin) ? 'admin' : organization?.private?.members?.[uid]?.role,
-        };
-      }),
-    );
-  });
+  const orgIds = await getUserOrganizations(uid);
+  const organizations = await Promise.all(
+    orgIds.map(async (orgId) => {
+      const organization = await readPath<Database.Organization>(`/organizations/${orgId}`);
+      return {
+        id: orgId, 
+        name: organization?.public.name,
+        role: (await isGlobalAdmin) ? 'admin' : organization?.private?.members?.[uid]?.role,
+      };
+    }),
+  );
   const customer = await getStripeCustomerWithSubscriptions(uid);
 
   // Redirect to Stripe Checkout if necessary
-  if(!isSubscribedToBlendPro(customer) && !(await isOrganizationMember(uid))) {
+  if (actionParam && !isSubscribedToBlendPro(customer) && !(await isOrganizationMember(uid))) {
     switch (actionParam) {
       case 'upgrade': {
         const stripeSession = await createStripeSession(uid, email, name, url.origin);
@@ -48,9 +42,6 @@ export const load = (async ({ url, cookies }) => {
       }
       case 'choosePlan':
         throw redirect(303, '/account/plan');
-      default: {
-        break;
-      }
     }
   }
 
@@ -76,12 +67,14 @@ export const load = (async ({ url, cookies }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-  createSubscriptionOrder: async ({ url: { origin } }) => {
-    console.log(origin);
-    const stripeSession = await createStripeSession(uid, email, name, origin);
+  createSubscriptionOrder: async ({ request, url: { origin } }) => {
+    const data = await request.formData();
+    const stripeSession = await createStripeSession(data.get('uid')! as string, data.get('email')! as string, data.get('name')! as string, origin);
     throw redirect(303, stripeSession.url!);
   },
-  redirectToCustomerPortal: async ({ url }) => {
+  redirectToCustomerPortal: async ({ request, url }) => {
+    const data = await request.formData();
+    const uid = data.get('uid')! as string;
     console.log(`Redirecting to customer billing portal for user ${uid}`);
     const customer = await getStripeCustomerWithSubscriptions(uid);
     if (!customer || customer.deleted) {
@@ -94,6 +87,7 @@ export const actions = {
   leaveOrganization: async ({ request }) => {
     const data = await request.formData();
     const orgId = data.get('orgId');
+    const uid = data.get('uid') as string;
     const organization = await readPath<Database.Organization>(`/organizations/${orgId}`);
     if (!organization) throw error(404);
     const user = await readPath<Database.User>(`/users/${uid}`);

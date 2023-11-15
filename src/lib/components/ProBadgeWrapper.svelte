@@ -3,7 +3,6 @@
 </script>
 
 <div class="btn-pro">
-  <!-- TODO: this should point to the new Blend Pro feature page -->
   <a href="/account?action=upgrade">
     <div class="badge"><ProBadge /></div>
   </a>

@@ -41,6 +41,7 @@
   const leaveOrganization = async (orgId: string) => {
     const body = new FormData();
     body.append('orgId', orgId);
+    body.append('uid', `${$user?.uid}`);
     await fetch('?/leaveOrganization', {
       method: 'POST',
       body,
@@ -127,6 +128,7 @@
             </p>
             <p>If you wish to reactivate your subscription, click the button below.</p>
             <form action="?/redirectToCustomerPortal" method="POST">
+              <input type="hidden" name="uid" value={$user?.uid} />
               <button id="checkout-and-portal-button" type="submit" class="btn">Manage Subscription</button>
             </form>
           {:else}
@@ -134,6 +136,7 @@
               Your next billing period starts on {new Date(subscriptionPeriodEnd * 1000).toLocaleDateString()}
             </p>
             <form action="?/redirectToCustomerPortal" method="POST">
+              <input type="hidden" name="uid" value={$user?.uid} />
               <button id="checkout-and-portal-button" type="submit" class="btn">Manage Subscription</button>
             </form>
           {/if}
@@ -149,6 +152,9 @@
       {:else}
         <p>Blend Basic</p>
         <form action="?/createSubscriptionOrder" method="POST">
+          <input type="hidden" name="email" value={$user?.email} />
+          <input type="hidden" name="name" value={$user?.displayName} />
+          <input type="hidden" name="uid" value={$user?.uid} />
           <button id="checkout-and-portal-button" type="submit" class="btn">Upgrade to Blend Pro</button>
         </form>
       {/if}

@@ -98,7 +98,7 @@ export const createStripeSession = async ( uid: string, email: string, name: str
 
     if (!hasCustomerSubscribedBefore(allSubscriptions, PRODUCT_CODE)) {
       subscriptionData = {
-        trial_period_days: 30,
+        trial_period_days: 7,
       };
     }
 

@@ -27,6 +27,7 @@
       <div class="section-title">
         <h2>Basic</h2>
         <p>Free</p>
+        <a class="btn" href="/login">Sign Up</a>
       </div>
       <p class="caption">
         Get started right away with our free offering that combines the familiar features of a traditional blending board with modern tools.
@@ -53,12 +54,12 @@
           description="Keep track of your progress in a lesson and revisit words to reinforce challenging concepts"
           className="highlight" />
       </section>
-      <a class="btn" href="/login">Sign Up</a>
     </div>
     <div class="tier pro">
       <div class="section-title">
         <h2>Pro</h2>
         <p>$3/month</p>
+        <a class="btn" style="color: black; border-color: black;" href="/account?action=upgrade">Upgrade</a>
       </div>
       <p class="caption">Elevate your phonics instruction with additional customization and tools to make lesson planning a breeze.</p>
       <section class="highlights">
@@ -83,7 +84,6 @@
           description="Remotely share your custom decks with fellow Blend Pro users to collaborate on lesson planning"
           className="highlight pro" />
       </section>
-      <a class="btn" style="color: black; border-color: black;" href="/account?action=upgrade">Upgrade</a>
     </div>
   </div>
 </section>
