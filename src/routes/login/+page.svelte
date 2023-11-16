@@ -15,6 +15,8 @@
   const PREVIEW_APP_URL = 'https://preview-app.blendreading.com';
 
   const redirectParam = $page.url.searchParams.get('successRedirect') || '/';
+  const upgradeRedirect = '/account?action=upgrade';
+  const choosePlanRedirect = '/account?action=choosePlan';
 
   type RedirectBuilderFunc = (user: User, token?: string) => string;
   let redirectBuilder: RedirectBuilderFunc;
@@ -25,7 +27,7 @@
       redirectBuilder = (user: User) => `/account`;
       break;
     case 'upgrade':
-      redirectBuilder = (user: User) => `/account?action=upgrade`;
+      redirectBuilder = (user: User) => upgradeRedirect;
       break;
     case 'app':
       isAppRedirect = true;
@@ -48,6 +50,7 @@
     ui.start('#firebaseui-auth-container', {
       callbacks: {
         signInSuccessWithAuthResult(authResult, redirectUrl) {
+          console.log(redirectBuilder(authResult.user));
           awaitingRedirect = true;
           setWillAttempLogin(true);
           fetch('/login/sessionCookie', { method: 'POST', body: JSON.stringify({ idToken: authResult.user.accessToken }) }).then(() => {
@@ -59,11 +62,13 @@
                 },
               );
             } else {
-              if (authResult.additionalUserInfo.isNewUser) {
+              // If this is a new user going through the normal new account flow, redirect to choose plan. 
+              // If they selected upgrade, take them straight to checkout
+              if (authResult.additionalUserInfo.isNewUser && redirectBuilder(authResult.user) !== upgradeRedirect) {
                 gtag('event', 'new_account');
-                goto('/account?action=choosePlan');
+                goto(choosePlanRedirect);
               } else {
-                goto(redirectBuilder(authResult.user), { replaceState: true });
+                goto(redirectBuilder(authResult.user));
               }
             }
           });

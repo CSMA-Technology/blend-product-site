@@ -13,7 +13,7 @@ import { checkSessionAuth, getUserData, getUserOrganizations, isUserGlobalAdmin,
 export const load = (async ({ url, cookies }) => {
   const actionParam = url.searchParams.get('action') ?? '';
   const uid = (await checkSessionAuth(cookies, {
-    loginRedirect: `account${url.search}`,
+    loginRedirect: `${actionParam}`,
   })).uid;
 
   const userData = await getUserData(uid);
