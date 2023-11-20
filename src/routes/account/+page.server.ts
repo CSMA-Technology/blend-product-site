@@ -8,24 +8,27 @@ import {
   isSubscribedToBlendPro,
   isOrganizationMember,
 } from '$lib/server/subscriptionUtils';
-import { checkSessionAuth, getUserData, getUserOrganizations, isUserGlobalAdmin, readPath, writePath } from '$lib/server/firebaseUtils';
+import { auth, checkSessionAuth, getUserData, getUserOrganizations, isUserGlobalAdmin, readPath, writePath } from '$lib/server/firebaseUtils';
 
 export const load = (async ({ url, cookies }) => {
-  const actionParam = url.searchParams.get('action') ?? '';
-  const uid = (await checkSessionAuth(cookies, {
-    loginRedirect: `${actionParam}`,
-  })).uid;
+  const uid = (
+    await checkSessionAuth(cookies, {
+      loginRedirect: `${url.searchParams ? `account&${url.searchParams.toString()}` : 'account'}`,
+    })
+  ).uid;
 
+  const actionParam = url.searchParams.get('action') ?? '';
+  const redirectParam = url.searchParams.get('successRedirect') ?? '';
   const userData = await getUserData(uid);
   const email = userData.email!;
   const name = userData.displayName ?? 'Blend User';
-  const isGlobalAdmin = isUserGlobalAdmin(uid); 
+  const isGlobalAdmin = isUserGlobalAdmin(uid);
   const orgIds = await getUserOrganizations(uid);
   const organizations = await Promise.all(
     orgIds.map(async (orgId) => {
       const organization = await readPath<Database.Organization>(`/organizations/${orgId}`);
       return {
-        id: orgId, 
+        id: orgId,
         name: organization?.public.name,
         role: (await isGlobalAdmin) ? 'admin' : organization?.private?.members?.[uid]?.role,
       };
@@ -37,11 +40,24 @@ export const load = (async ({ url, cookies }) => {
   if (actionParam && !isSubscribedToBlendPro(customer) && !(await isOrganizationMember(uid))) {
     switch (actionParam) {
       case 'upgrade': {
-        const stripeSession = await createStripeSession(uid, email, name, url.origin);
+        url.searchParams.delete('action');
+        let successUrl;
+        console.log('successurl=>', successUrl);
+        console.log('redirectParam=>', redirectParam);
+        if (redirectParam) {
+          const token = await auth.createCustomToken(uid);
+          const appUrl = redirectParam === 'previewApp' ? 'https://preview-app.blendreading.com' : 'https://app.blendreading.com';
+          console.log('appurl=>', appUrl);
+          successUrl = `${appUrl}?jumpScene=${encodeURIComponent(url.searchParams.get('jumpScene') || 'none')}${
+            token ? `&context=${encodeURIComponent(JSON.stringify({ token }))}` : ''
+          }`;
+        }
+        const stripeSession = await createStripeSession(uid, email, name, url.origin, successUrl);
         throw redirect(303, stripeSession.url!);
       }
       case 'choosePlan':
-        throw redirect(303, '/account/plan');
+        url.searchParams.delete('action');
+        throw redirect(303, `/account/plan?${url.searchParams.toString()}`);
     }
   }
 
@@ -63,7 +79,6 @@ export const load = (async ({ url, cookies }) => {
     subscriptionPendingCancellation: subscription?.cancel_at_period_end,
     organizations: JSON.stringify(await organizations),
   };
-
 }) satisfies PageServerLoad;
 
 export const actions = {

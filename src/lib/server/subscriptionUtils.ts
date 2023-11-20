@@ -71,7 +71,7 @@ export const getCustomerPortalSession = (customer: Stripe.Customer, returnUrl: s
 export const hasCustomerSubscribedBefore = (subscriptions: Stripe.Subscription[], productCode: string) =>
   subscriptions.some((subscription) => subscription.items.data.some((item) => item.price.product === productCode));
 
-export const createStripeSession = async ( uid: string, email: string, name: string, origin: string ) => {
+export const createStripeSession = async ( uid: string, email: string, name: string, origin: string, successUrl?: string ) => {
   console.log(`Fetching Stripe customer ID for user ${uid}`);
     const stripeCustomerIdRef = firebaseDb.ref(`/users/${uid}/private/stripeCustomerId`);
 
@@ -104,7 +104,6 @@ export const createStripeSession = async ( uid: string, email: string, name: str
 
     console.log(`Customer is ${subscriptionData.trial_period_days ? '' : 'not '}eligible for a free trial.`);
     console.log('Creating Stripe session');
-
     const session = await stripeClient.checkout.sessions.create({
       customer: customer.id,
       billing_address_collection: 'auto',
@@ -117,7 +116,7 @@ export const createStripeSession = async ( uid: string, email: string, name: str
       subscription_data: subscriptionData,
       allow_promotion_codes: true,
       mode: 'subscription',
-      success_url: `${origin}/blendPro/success?subscription_checkout_status=success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${successUrl || `${origin}/blendPro/success?subscription_checkout_status=success?session_id={CHECKOUT_SESSION_ID}`}`,
       cancel_url: `${origin}/account/?subscription_checkout_status=cancel`,
       // Enable the below if we need to collect sales tax in the future
       // automatic_tax: { enabled: true },

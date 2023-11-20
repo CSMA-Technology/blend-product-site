@@ -1,3 +1,30 @@
+<script lang="ts">
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { user } from '$lib/firebase';
+
+  const redirectParam = $page.url.searchParams.get('successRedirect');
+  const selectBasic = async () => {
+    if (redirectParam && redirectParam === ('app' || 'previewApp')) {
+      const idToken = await $user?.getIdToken();
+      fetch('/login/customToken', { method: 'POST', body: JSON.stringify({ idToken }) }).then(async (response) => {
+        const token = (await response.json()).customToken;
+        const appUrl = redirectParam === 'app' ? 'https://app.blendreading.com' : 'https://preview-app.blendreading.com';
+        const url = `${appUrl}?jumpScene=${encodeURIComponent($page.url.searchParams.get('jumpScene') || 'none')}${
+          token ? `&context=${encodeURIComponent(JSON.stringify({ token }))}` : ''
+        }`;
+        window.location.replace(url);
+      });
+    } else {
+      goto('/account');
+    }
+  };
+
+  const selectPro = () => {
+    goto(`/account${$page.url.search || '?'}&action=upgrade`);
+  };
+</script>
+
 <svelte:head>Choose Your Plan</svelte:head>
 
 <div class="content">
@@ -17,7 +44,7 @@
           <li>Word History</li>
         </ul>
         <p><br /></p>
-        <a class="btn basic" href='/account'>Choose Basic</a>
+        <button class="btn basic" on:click={selectBasic}><h3>Choose Basic</h3></button>
       </div>
     </div>
     <div class="plan">
@@ -34,7 +61,7 @@
           <li>Deck Sharing</li>
         </ul>
         <p>Get 7 days free when you try Pro!</p>
-        <a class="btn pro" href='/account?action=upgrade'>Choose Pro</a>
+        <button class="btn pro" on:click={selectPro}><h3>Choose Pro</h3></button>
       </div>
     </div>
   </div>
@@ -44,6 +71,8 @@
   .features {
     padding: 1rem;
     border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
   }
   .side-by-side {
     width: 70%;
@@ -65,7 +94,7 @@
 
   .basic {
     color: white;
-    background-color: #3B2E86 !important;
+    background-color: #3b2e86 !important;
     border: none;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
@@ -83,8 +112,8 @@
 
   ul {
     list-style-type: none;
-    padding: 0px;
-    margin-bottom: 2rem;
+    padding: 0;
+    margin: 0;
   }
 
   li {
@@ -95,5 +124,4 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     padding: 0.8rem;
   }
-
 </style>
