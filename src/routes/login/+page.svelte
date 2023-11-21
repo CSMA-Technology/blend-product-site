@@ -28,7 +28,7 @@
       break;
     case 'app':
       if (actionParam) {
-        redirectBuilder = () => `/account?action=${actionParam}&successRedirect=app&jumpScene${$page.url.searchParams.get('jumpScene') || 'none'}`;
+        redirectBuilder = () => `/account?action=${actionParam}&successRedirect=app&jumpScene=${$page.url.searchParams.get('jumpScene') || 'none'}`;
       } else {
         isAppRedirect = true;
         redirectBuilder = (user, token) =>
@@ -39,7 +39,7 @@
       break;
     case 'previewApp':
       if (actionParam) {
-        redirectBuilder = () => `/account?action=${actionParam}&successRedirect=previewApp&jumpScene${$page.url.searchParams.get('jumpScene') || 'none'}`;
+        redirectBuilder = () => `/account?action=${actionParam}&successRedirect=previewApp&jumpScene=${$page.url.searchParams.get('jumpScene') || 'none'}`;
       } else {
         isAppRedirect = true;
         redirectBuilder = (user, token) =>

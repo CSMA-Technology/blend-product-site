@@ -42,12 +42,9 @@ export const load = (async ({ url, cookies }) => {
       case 'upgrade': {
         url.searchParams.delete('action');
         let successUrl;
-        console.log('successurl=>', successUrl);
-        console.log('redirectParam=>', redirectParam);
         if (redirectParam) {
           const token = await auth.createCustomToken(uid);
           const appUrl = redirectParam === 'previewApp' ? 'https://preview-app.blendreading.com' : 'https://app.blendreading.com';
-          console.log('appurl=>', appUrl);
           successUrl = `${appUrl}?jumpScene=${encodeURIComponent(url.searchParams.get('jumpScene') || 'none')}${
             token ? `&context=${encodeURIComponent(JSON.stringify({ token }))}` : ''
           }`;
