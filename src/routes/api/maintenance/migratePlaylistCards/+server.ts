@@ -19,44 +19,27 @@ export const POST: RequestHandler = async (event) => {
 
   const allDecks = { ...preloadedDecks, ...userDecks, ...organizationDecks };
 
-  const { organization: orgPlaylists, user: userPlaylists } = (await db.ref('playlists').get()).val();
+  const { user: userPlaylists } = (await db.ref('playlists').get()).val();
   const findDeck = (deckId: string) => allDecks[deckId] ?? null;
-  Object.entries(orgPlaylists).forEach(([organizationId, playlists]) => {
-    Object.entries(playlists).forEach(([playlistId, playlistData]) => {
-      const {
-        playlist: { linked_deck_id },
-      } = playlistData;
-      const deck = findDeck(linked_deck_id);
-      if (!deck) {
-        console.log(`org:${organizationId}:${playlistId} -> ${linked_deck_id} ❌`);
-      } else {
-        const { cards } = deck;
-        if (!cards) {
-          console.error(deck);
-        }
-        db.ref(`playlists/organization/${organizationId}/${playlistId}/playlist/cards`)
-          .set(cards ?? [])
-          .then(() => {
-            console.log(`org:${organizationId}:${playlistId} -> ${linked_deck_id} ✅`);
-          });
-      }
-    });
-  });
-  Object.entries(userPlaylists).forEach(([userId, playlists]) => {
-    Object.entries(playlists).forEach(([playlistId, playlistData]) => {
+  const promises = Object.entries(userPlaylists).flatMap(([userId, playlists]) =>
+    Object.entries(playlists).map(([playlistId, playlistData]) => {
       const { linked_deck_id } = playlistData;
       const deck = findDeck(linked_deck_id);
       if (!deck) {
         console.log(`user:${userId}:${playlistId} -> ${linked_deck_id} ❌`);
+        return Promise.resolve();
       } else {
         const { cards } = deck;
-        db.ref(`playlists/user/${userId}/${playlistId}/cards`)
+        return db
+          .ref(`playlists/user/${userId}/${playlistId}/cards`)
           .set(cards ?? [])
           .then(() => {
             console.log(`user:${userId}:${playlistId} -> ${linked_deck_id} ✅`);
           });
       }
-    });
-  });
+    }),
+  );
+
+  await Promise.all(promises);
   return new Response();
 };
