@@ -1,5 +1,10 @@
 import { authenticate, getOrganizationInfo, getOrganizationMemberDetails, getUserData, getUserOrganizations } from '$lib/server/firebaseUtils';
-import { getBlendProSubscription, getStripeCustomerWithSubscriptions, isOrganizationMember, isSubscribedToBlendPro } from '$lib/server/subscriptionUtils';
+import {
+  getBlendProSubscription,
+  getStripeCustomerWithSubscriptions,
+  isOrganizationMember,
+  isSubscribedToBlendPro,
+} from '$lib/server/subscriptionUtils';
 import type { RequestHandler } from './$types';
 
 export const GET = (async (event) => {
@@ -7,16 +12,14 @@ export const GET = (async (event) => {
   const [stripeCustomer, firebaseUserData] = await Promise.all([getStripeCustomerWithSubscriptions(uid), getUserData(uid)]);
   const subscriptionData = stripeCustomer && !stripeCustomer.deleted && getBlendProSubscription(stripeCustomer);
   const userOrganizations = await getUserOrganizations(uid);
-  const organizationInfo = (
-    await Promise.all(
-      userOrganizations.map(async (orgId) => {
-        const orgInfo = await getOrganizationInfo(orgId);
-        return {
-            orgName: orgInfo?.name,
-            orgId,
-        }
-      }),
-    )
+  const organizationInfo = await Promise.all(
+    userOrganizations.map(async (orgId) => {
+      const orgInfo = await getOrganizationInfo(orgId);
+      return {
+        orgName: orgInfo?.name,
+        orgId,
+      };
+    }),
   );
   const userData = {
     ...firebaseUserData,
