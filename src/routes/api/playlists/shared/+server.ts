@@ -2,7 +2,7 @@ import { authenticate, getUserFromEmail, pushPath, readPath, getUserData } from 
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { getStripeCustomerWithSubscriptions, isOrganizationMember, isSubscribedToBlendPro } from '$lib/server/subscriptionUtils';
-import { sendDeckShareEmail } from '$lib/server/emailUtils';
+import { sendPlaylistShareEmail } from '$lib/server/emailUtils';
 
 export const POST = (async (event) => {
   const { uid: sourceUid } = await authenticate(event);
@@ -35,12 +35,11 @@ export const POST = (async (event) => {
       playlist,
     })
   ).key!;
-  // TODO: implement listmonk util function to send the playlist share email
-  // await sendDeckShareEmail(targetUserEmail, targetUserName, {
-  //   deckName: deck.name,
-  //   shareId: sharedKey,
-  //   sender: sourceUserName,
-  // });
+  await sendPlaylistShareEmail(targetUserEmail, targetUserName, {
+    playlistName: playlist.name,
+    shareId: sharedKey,
+    sender: sourceUserName,
+  });
   return json(
     {
       sharedKey,
