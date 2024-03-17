@@ -27,16 +27,18 @@ export const POST: RequestHandler = async (event) => {
   const playlists = (await db.ref('/playlists/user').get()).val();
 
   const counts: { [userId: string]: { [id: string]: number } } = {};
+  const usersWithPlaylistsLinked = new Set();
 
   if (playlists) {
-    Object.keys(playlists).forEach(async (userId) => {
+    Object.keys(playlists).forEach((userId) => {
       counts[userId] = { '113822357': 0, '541852177': 0 }; // Initialize counts for each user
       const userPlaylists = playlists[userId];
 
-      Object.keys(userPlaylists).forEach(async (playlistId) => {
+      Object.keys(userPlaylists).forEach((playlistId) => {
         const playlist = userPlaylists[playlistId] as PlaylistData;
         if (playlist.linked_deck_id === 113822357 || playlist.linked_deck_id === 541852177) {
           counts[userId][playlist.linked_deck_id]++;
+          usersWithPlaylistsLinked.add(userId);
         }
       });
     });
@@ -61,5 +63,7 @@ export const POST: RequestHandler = async (event) => {
       }
     }
   });
+  console.log('=====================================');
+  console.log('# Users whose libraries were updated with a copy of a preloaded deck: ', usersWithPlaylistsLinked.size);
   return new Response();
 };
