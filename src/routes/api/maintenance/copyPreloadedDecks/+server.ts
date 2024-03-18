@@ -43,9 +43,9 @@ export const POST: RequestHandler = async (event) => {
     });
   }
 
-  Object.entries(playlistsToChange)
+  const allChanges = Object.entries(playlistsToChange)
     .filter(([userId, playlists]) => playlists.length > 0)
-    .forEach(async ([userId, playlists]) => {
+    .flatMap(([userId, playlists]) => {
       let newCvcDeckId: number;
       let newBlendsAdvancedVowelsDeckId: number;
 
@@ -63,8 +63,9 @@ export const POST: RequestHandler = async (event) => {
           }
         }
       });
-      await Promise.all(promises);
+      return promises;
     });
+  await Promise.all(allChanges);
   console.log('=====================================');
   console.log(
     '# Users whose libraries were updated with a copy of a preloaded deck: ',
