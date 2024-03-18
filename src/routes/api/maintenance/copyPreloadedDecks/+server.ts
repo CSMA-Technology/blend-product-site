@@ -45,7 +45,7 @@ export const POST: RequestHandler = async (event) => {
 
   Object.entries(playlistsToChange)
     .filter(([userId, playlists]) => playlists.length > 0)
-    .forEach(([userId, playlists]) => {
+    .forEach(async ([userId, playlists]) => {
       let newCvcDeckId: number;
       let newBlendsAdvancedVowelsDeckId: number;
 
@@ -62,8 +62,8 @@ export const POST: RequestHandler = async (event) => {
             await writePath(`/playlists/user/${userId}/${playlist.refId}/linked_deck_id`, newCvcDeckId);
           }
         }
-        await Promise.all(promises);
       });
+      await Promise.all(promises);
     });
   console.log('=====================================');
   console.log(
