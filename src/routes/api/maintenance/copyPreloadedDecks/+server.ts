@@ -45,22 +45,18 @@ export const POST: RequestHandler = async (event) => {
 
   const allChanges = Object.entries(playlistsToChange)
     .filter(([userId, playlists]) => playlists.length > 0)
-    .flatMap(([userId, playlists]) => {
-      let newCvcDeckId: number;
-      let newBlendsAdvancedVowelsDeckId: number;
+    .flatMap(async ([userId, playlists]) => {
+      let newCvcDeckId = playlists.find((playlist) => playlist.linked_deck_id === 541852177) ? await createDeckCopy(541852177, userId) : null; // CVC (Consonant-Vowel-Consonant
+      let newBlendsAdvancedVowelsDeckId = playlists.find((playlist) => playlist.linked_deck_id === 113822357)
+        ? await createDeckCopy(113822357, userId)
+        : null; // Blends Advanced Vowels
 
       const promises = playlists.map(async (playlist) => {
         const { linked_deck_id } = playlist;
         if (linked_deck_id === 113822357) {
-          if (!newBlendsAdvancedVowelsDeckId) {
-            newBlendsAdvancedVowelsDeckId = await createDeckCopy(113822357, userId);
-            await writePath(`/playlists/user/${userId}/${playlist.refId}/linked_deck_id`, newBlendsAdvancedVowelsDeckId);
-          }
+          await writePath(`/playlists/user/${userId}/${playlist.refId}/linked_deck_id`, newBlendsAdvancedVowelsDeckId);
         } else if (linked_deck_id === 541852177) {
-          if (!newCvcDeckId) {
-            newCvcDeckId = await createDeckCopy(541852177, userId);
-            await writePath(`/playlists/user/${userId}/${playlist.refId}/linked_deck_id`, newCvcDeckId);
-          }
+          await writePath(`/playlists/user/${userId}/${playlist.refId}/linked_deck_id`, newCvcDeckId);
         }
       });
       return promises;
