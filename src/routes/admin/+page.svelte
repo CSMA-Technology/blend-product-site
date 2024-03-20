@@ -36,22 +36,15 @@
       },
       body: JSON.stringify({ uid }),
     }).then((res) => res.json());
-    // windowHandle = window.open(
-    //   `${PUBLIC_APP_URL}?jumpScene=${encodeURIComponent('res://Scenes/Account/Account.tscn')}&context=${encodeURIComponent(JSON.stringify({ token: emulationToken }))}`,
-    //   'BlendEmulator',
-    //   'width=1920,height=1080',
-    // );
     windowHandle = window.open('', 'BlendEmulator', 'width=1920,height=1080,popup')!;
     windowHandle.document.write(
-      `<iframe width="1920" height="1080" src="${`${PUBLIC_APP_URL}?jumpScene=${encodeURIComponent('res://Scenes/Account/Account.tscn')}&context=${encodeURIComponent(JSON.stringify({ token: emulationToken }))}`}" frameBorder="0" allowfullscreen></iframe>`,
+      `<iframe credentialless width="1920" height="1080" src="${`${PUBLIC_APP_URL}?jumpScene=${encodeURIComponent('res://Scenes/Account/Account.tscn')}&context=${encodeURIComponent(JSON.stringify({ token: emulationToken }))}`}" frameBorder="0" allowfullscreen></iframe>`,
     );
     windowHandle.document.head.innerHTML += `<style>body { margin: 0; overflow: hidden }</style>`;
     windowHandle.onunload = () => {
       windowHandle = null;
     };
   };
-
-  // $: windowHandle && windowHandle?.closed && console.log(windowHandle.closed);
 
   const stopEmulation = () => {
     windowHandle?.close();

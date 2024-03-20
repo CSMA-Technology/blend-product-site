@@ -2,9 +2,9 @@ import { auth, checkSessionAuth, isUserGlobalAdmin } from '$lib/server/firebaseU
 import { json } from '@sveltejs/kit';
 
 export const POST = async (event) => {
-  await checkSessionAuth(event.cookies, { authFunction: (decodedToken) => isUserGlobalAdmin(decodedToken.uid) });
+  await checkSessionAuth(event.cookies, { authFunction: ({ uid }) => isUserGlobalAdmin(uid) });
 
-  const { uid } = await event.request.json();
-  const emulationToken = await auth.createCustomToken(uid);
+  const { uid: emulationUid } = await event.request.json();
+  const emulationToken = await auth.createCustomToken(emulationUid);
   return json({ emulationToken }, { status: 201 });
 };
