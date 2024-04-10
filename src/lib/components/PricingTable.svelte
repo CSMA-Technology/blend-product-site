@@ -6,7 +6,7 @@
 
 <section class="pricing" id="pricing">
   <div class="content">
-    <h1>Pricing</h1>
+    <h1>Compare Plans</h1>
     <ProBadgeWrapper>
       <div class="banner">
         <div>Get a 7-day free trial when you subscribe to Blend Pro!</div>
