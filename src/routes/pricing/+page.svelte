@@ -23,10 +23,6 @@
 
 <section class="features">
   <div class="content">
-    <div class="blurb">
-      <h1>Plans</h1>
-      <p>Blend is the all-in-one solution for your blending drill.</p>
-    </div>
     <div class="tier basic">
       <div class="section-title">
         <h2>Basic</h2>

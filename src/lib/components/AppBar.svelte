@@ -26,6 +26,9 @@
         <a id="pricing" href="/pricing">pricing</a>
       </li>
       <li>
+        <a id="organization" href="/organization">organizations</a>
+      </li>
+      <li>
         <a id="library" href="/library">library</a>
       </li>
       <li>
@@ -116,12 +119,12 @@
     color: #84e3de;
   }
 
-  a#blog:hover {
-    color: #fa9a9a;
+  a#organization:hover {
+    color: #ffc076;
   }
 
-  a#login:hover {
-    color: #ffc076;
+  a#blog:hover {
+    color: #fa9a9a;
   }
 
   a#library:hover {

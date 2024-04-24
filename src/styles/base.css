@@ -88,6 +88,22 @@ h6 {
   background: #aa2a03bb !important;
 }
 
+.btn-purple {
+  background: #7f71d2 !important;
+  border: none;
+}
+
+.btn-outlined {
+  background: none !important;
+  border: black solid 1px;
+  border-radius: 8px;
+  color: black;
+}
+
+.btn-outlined:hover {
+  color: black !important;
+}
+
 a:hover.btn {
   color: white;
 }
