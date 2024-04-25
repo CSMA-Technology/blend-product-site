@@ -14,13 +14,14 @@
     <div class="header">
       <div class="side-by-side">
         <div class="description">
-          <h1>Teamwork makes the dream work</h1>
+          <p class="subtitle">Blend Organization Licensing</p>
+          <h1>Blend is better together.</h1>
           <p>
             Whether you're part of a large school district or a small tutoring group, organization licensing could the perfect plan for your team.
           </p>
           <p>
-            Blend becomes even more powerful with shared resources and seamless collaboration, empowering your team to save time in lesson planning
-            and focus on cultivating fluent readers! Request a quote or read on to learn more.
+            Blend is even more powerful with shared resources and seamless collaboration, empowering your team to save time in lesson planning and
+            focus on cultivating fluent readers! Request a quote or read on to learn more.
           </p>
           <div class="side-by-side">
             <a class="btn btn-purple" href="/organization#form">Request a quote</a>
@@ -46,7 +47,7 @@
           </ul>
         </div>
         <div class="feature" id="members">
-          <h2>Blend is better together</h2>
+          <h2>The more the merrier</h2>
           <img src={network} alt="playlists side by side" />
           <p>
             We make it easy to get your team onboard and stay organized. With separate admin and member roles, you can make sure everyone has the
@@ -61,54 +62,52 @@
       </div>
     </div>
     <div class="other-features">
-      <div class="side-by-side">
-        <div class="title">
-          <h1>Other features</h1>
+      <div class="title">
+        <h1>Other features</h1>
+      </div>
+      <div class="other-features-list">
+        <div class="item">
+          <div class="side-by-side">
+            <span class="material-symbols-rounded item-icon">new_releases</span>
+            <div class="item-text">
+              <h2>Blend Pro for everyone</h2>
+              <p>
+                Organization members benefit from access to all Blend Pro features like unlimited custom decks, playlist creation, and the deck
+                library.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="other-features-list">
-          <div class="item">
-            <div class="side-by-side">
-              <span class="material-symbols-rounded item-icon">new_releases</span>
-              <div class="item-text">
-                <h2>Blend Pro for everyone</h2>
-                <p>
-                  Organization members benefit from access to all Blend Pro features like unlimited custom decks, playlist creation, and the deck
-                  library.
-                </p>
-              </div>
+        <div class="item">
+          <div class="side-by-side">
+            <span class="material-symbols-rounded item-icon">live_help</span>
+            <div class="item-text">
+              <h2>Dedicated support</h2>
+              <p>
+                We're with you every step of the way! We provide onboarding support, demos and trainings, and ongoing support for any issues you come
+                across.
+              </p>
             </div>
           </div>
-          <div class="item">
-            <div class="side-by-side">
-              <span class="material-symbols-rounded item-icon">live_help</span>
-              <div class="item-text">
-                <h2>Dedicated support</h2>
-                <p>
-                  We're with you every step of the way! We provide onboarding support, demos and trainings, and ongoing support for any issues you
-                  come across.
-                </p>
-              </div>
+        </div>
+        <div class="item">
+          <div class="side-by-side">
+            <span class="material-symbols-rounded item-icon">lock_open</span>
+            <div class="item-text">
+              <h2>Early access to new features</h2>
+              <p>Be our beta testers and drive the future of Blend Reading's tools for phonics instruction.</p>
             </div>
           </div>
-          <div class="item">
-            <div class="side-by-side">
-              <span class="material-symbols-rounded item-icon">lock_open</span>
-              <div class="item-text">
-                <h2>Early access to new features</h2>
-                <p>Be our beta testers and drive the future of Blend Reading's tools for phonics instruction.</p>
-              </div>
-            </div>
-          </div>
-          <div class="item">
-            <div class="side-by-side">
-              <span class="material-symbols-rounded item-icon">widgets</span>
-              <div class="item-text">
-                <h2>Custom pricing and billing</h2>
-                <p>
-                  We'll work with you to find a plan that suits your team! Choose monthly or yearly billing, and adjust the number of seats in your
-                  license at any time.
-                </p>
-              </div>
+        </div>
+        <div class="item">
+          <div class="side-by-side">
+            <span class="material-symbols-rounded item-icon">widgets</span>
+            <div class="item-text">
+              <h2>Custom pricing and billing</h2>
+              <p>
+                We'll work with you to find a plan that suits your team! Choose monthly or yearly billing, and adjust the number of seats in your
+                license at any time.
+              </p>
             </div>
           </div>
         </div>
@@ -164,12 +163,19 @@
   .header {
     padding: 2rem;
   }
+  .subtitle {
+    font-size: 1rem;
+    font-weight: bolder;
+    color: #588dff;
+  }
   .header img {
     object-fit: contain;
+    flex-basis: 30rem;
     width: 45%;
   }
   .description {
     width: 45%;
+    flex-basis: 35rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -194,6 +200,7 @@
     padding: 1rem 2rem;
     border-radius: 10px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 1rem;
   }
   ul {
     margin: 0;
@@ -207,23 +214,22 @@
     background: linear-gradient(60deg, #99c2f4 20%, #91dbf9 80%);
   }
   .other-features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem;
   }
-  .other-features .title {
-    display: flex;
-    align-items: center;
-    width: 20%;
-  }
   .other-features-list {
+    margin: 1rem;
     width: 80%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
   .item {
-    width: 50%;
     display: flex;
     flex-direction: column;
+    flex-basis: 25rem;
   }
   .item-icon {
     font-size: 2.4rem;
@@ -242,11 +248,12 @@
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 1rem;
   }
   .quote-details {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    flex-basis: 20rem;
     justify-content: center;
     align-items: center;
   }
@@ -256,7 +263,7 @@
   .quote-form {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    flex-basis: 35rem;
   }
   input,
   textarea,
@@ -274,6 +281,34 @@
     box-sizing: border-box;
   }
   h1 {
-    margin-bottom: 0;
+    margin: 0;
+  }
+  @media (max-width: 480px) {
+    main {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+    .content {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+    }
+    .features {
+      margin: 0;
+      padding: 0;
+    }
+    .feature {
+      width: 100%;
+    }
+    .other-features-list {
+      width: 100%;
+    }
+    .quote-details {
+      text-align: center;
+    }
+    h2 {
+      text-align: center;
+    }
   }
 </style>
