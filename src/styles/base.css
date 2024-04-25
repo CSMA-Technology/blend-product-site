@@ -88,9 +88,17 @@ h6 {
   background: #aa2a03bb !important;
 }
 
+.btn-orange {
+  background: #ffc076 !important;
+  border: none;
+}
+
 .btn-purple {
   background: #7f71d2 !important;
-  border: none;
+}
+
+.btn-blurple {
+  background: #588dff !important;
 }
 
 .btn-outlined {

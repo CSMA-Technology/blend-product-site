@@ -120,7 +120,7 @@
   }
 
   a#organization:hover {
-    color: #ffc076;
+    color: #588dff;
   }
 
   a#blog:hover {

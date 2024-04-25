@@ -141,7 +141,7 @@
           </select>
           <label
             >Additional Info (Optional)<textarea name="message" placeholder="Feel free to provide more details about your needs."></textarea></label>
-          <button class="btn btn-purple" type="submit"><h3>Submit</h3></button>
+          <button class="btn btn-blurple" type="submit"><h3>Submit</h3></button>
         </form>
       </div>
     </div>
