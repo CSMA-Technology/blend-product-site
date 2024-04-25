@@ -127,7 +127,6 @@
           method="POST"
           netlify-honeypot="bot-field"
           data-netlify="true">
-          <input type="hidden" name="form-name" value="organization-form" />
           <input type="hidden" name="subject" value="Org License Quote Request from blendreading.com" />
           <label>Name<input name="name" placeholder="Enter name" required /></label>
           <label>Email<input type="email" name="email" placeholder="Enter email" required /></label>
