@@ -75,7 +75,7 @@
             // Now that we have logged in, the customToken store in firebase.ts will be updated, so we wait for that before redirecting
             const unsubscribe = customLoginToken.subscribe(async (customToken) => {
               if (customToken) {
-                unsubscribe(); // Make sure this doesn't fire again after the first time the token is updated
+                setTimeout(() => unsubscribe()); // Make sure this doesn't fire again after the first time the token is updated. SetTimeout is to ensure unsubscribe is defined, because this callback may get called immediately
                 await sessionCookiePromise; // Make sure this finished to set the login cookie before redirecting
                 if (!actionParam && authResult.additionalUserInfo.isNewUser) {
                   goto(`/account${$page.url.search || '?'}&action=choosePlan`);
