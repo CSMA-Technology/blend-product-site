@@ -14,7 +14,7 @@
   <h1>Focus Group RSVP</h1>
   <div class="paper" style="margin-top: 0">
     <p>
-      Thank you for the interest in our focus group! We expect this session to be about 30-45 minutes long.
+      Thank you for the interest in our focus group! We expect this session to be about 30-45 minutes long and will be held virtually.
     </p>
     <p>
       Please fill in your contact information below and select a time to join us. We will reach out via
