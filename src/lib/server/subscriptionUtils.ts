@@ -38,7 +38,7 @@ export const getStripeCustomerWithSubscriptions = async (uid: string) => {
 export const getAllCustomersWithSubscriptions = async (): Promise<{ [uid: string]: Stripe.Customer }> => {
   return (
     await stripe.customers.list({
-      expand: ['subscriptions'],
+      expand: ['data.subscriptions'],
     })
   ).data
     .filter((customer) => customer.metadata.uid)
