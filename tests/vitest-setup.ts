@@ -70,6 +70,7 @@ vi.mock('firebase-admin', async () => {
                 if (i === arr.length - 1) acc[cur] = data;
                 else return acc[cur];
               }, db);
+              errorCb(null);
             },
             push: (data: any, errorCb: any) => {
               const key = 'mockKey';
@@ -77,6 +78,7 @@ vi.mock('firebase-admin', async () => {
                 if (i === arr.length - 1) acc[cur][key] = data;
                 else return acc[cur];
               }, db);
+              errorCb(null);
               return { key };
             },
             remove: (errorCb: any) => {
@@ -84,6 +86,7 @@ vi.mock('firebase-admin', async () => {
                 if (i === arr.length - 1) delete acc[cur];
                 else return acc[cur];
               }, db);
+              errorCb(null);
             },
           };
         },

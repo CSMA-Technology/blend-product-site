@@ -8,7 +8,11 @@ import {
   listAllUsers,
   readPath,
 } from '$lib/server/firebaseUtils';
-import { getAllCustomersWithSubscriptions, getStripeCustomerWithSubscriptions, isSubscribedToBlendPro } from '$lib/server/subscriptionUtils';
+import {
+  getAllCustomersWithSubscriptions,
+  getStripeCustomerWithSubscriptions,
+  isStripeCustomerSubscribedToBlendPro,
+} from '$lib/server/subscriptionUtils';
 import { json } from '@sveltejs/kit';
 import type { UserRecord } from 'firebase-admin/auth';
 
@@ -54,7 +58,7 @@ const getUserSearchResult = async (user: UserRecord) => {
     displayName: user.displayName ?? 'N/A',
     email: user.email ?? 'N/A',
     uid: user.uid,
-    isSubscribedToBlendPro: isSubscribedToBlendPro(stripeCustomer),
+    isSubscribedToBlendPro: isStripeCustomerSubscribedToBlendPro(stripeCustomer),
     accountCreated: user.metadata.creationTime,
     lastLogin: user.metadata.lastSignInTime,
     lastRefresh: user.metadata.lastRefreshTime ?? 'N/A',
@@ -78,7 +82,7 @@ const getAllUsers = async () => {
       displayName: user.displayName ?? 'N/A',
       email: user.email ?? 'N/A',
       uid: user.uid,
-      isSubscribedToBlendPro: isSubscribedToBlendPro(allStripeUsers[user.uid]),
+      isSubscribedToBlendPro: isStripeCustomerSubscribedToBlendPro(allStripeUsers[user.uid]),
       accountCreated: user.metadata.creationTime,
       lastLogin: user.metadata.lastSignInTime,
       lastRefresh: user.metadata.lastRefreshTime ?? 'N/A',
