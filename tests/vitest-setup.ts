@@ -68,7 +68,10 @@ vi.mock('firebase-admin', async () => {
             set: (data: any, errorCb: any) => {
               path.split('/').reduce((acc, cur, i, arr) => {
                 if (i === arr.length - 1) acc[cur] = data;
-                else return acc[cur];
+                else if (!acc[cur]) {
+                  acc[cur] = {};
+                  return acc[cur];
+                } else return acc[cur];
               }, db);
               errorCb(null);
             },

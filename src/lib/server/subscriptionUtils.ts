@@ -91,12 +91,7 @@ export const isSubscribedToBlendPro = async (uid: string) => {
   let isSubscribed = await readPath<boolean>(`users/${uid}/protected/isSubscribedToBlendPro`);
   if (isSubscribed === null) {
     console.log(`isSubscribedToBlendPro not found in Firebase for user ${uid}, fetching from Stripe`);
-    const stripeCustomer = await getStripeCustomerWithSubscriptions(uid);
-    if (stripeCustomer === null) {
-      console.error(`Stripe customer not found for user ${uid}. Returning false for subscription status and not writing anything to Firebase.`);
-      return false;
-    }
-    isSubscribed = isStripeCustomerSubscribedToBlendPro(stripeCustomer);
+    isSubscribed = isStripeCustomerSubscribedToBlendPro(await getStripeCustomerWithSubscriptions(uid));
     console.log(`isSubscribedToBlendPro for user ${uid} is ${isSubscribed}. Writing to Firebase for next time.`);
     await writePath(`users/${uid}/protected/isSubscribedToBlendPro`, isSubscribed);
   }
