@@ -7,10 +7,13 @@ export const GET = (async (event) => {
   const { uid } = await authenticate(event);
   const authenticateTime = Date.now();
   console.log(`Authenticated in ${authenticateTime - startTime}ms`);
-  const [firebaseUserData, isProSubscriber] = await Promise.all([getUserData(uid), isSubscribedToBlendPro(uid)]);
+  const [firebaseUserData, isProSubscriber, userOrganizations] = await Promise.all([
+    getUserData(uid),
+    isSubscribedToBlendPro(uid),
+    getUserOrganizations(uid),
+  ]);
   const userDataTime = Date.now();
   console.log(`Got user data in ${userDataTime - authenticateTime}ms`);
-  const userOrganizations = await getUserOrganizations(uid);
   const organizationInfo = await Promise.all(
     userOrganizations.map(async (orgId) => {
       const orgInfo = await getOrganizationInfo(orgId);
