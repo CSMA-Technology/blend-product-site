@@ -28,11 +28,14 @@ export const YEARLY_PRICE_CODE = STRIPE_BLEND_PRO_ANNUAL_PRICE_CODE;
 export const PRODUCT_CODE = STRIPE_BLEND_PRO_PRODUCT_CODE;
 
 export const getStripeCustomerWithSubscriptions = async (uid: string) => {
+  const startTime = Date.now();
   const stripeCustomerId: string | null = (await db.ref(`/users/${uid}/private/stripeCustomerId`).once('value')).val();
   if (stripeCustomerId === null) return stripeCustomerId;
-  return await stripe.customers.retrieve(stripeCustomerId, {
+  const data = await stripe.customers.retrieve(stripeCustomerId, {
     expand: ['subscriptions'],
   });
+  console.log(`Got Stripe customer data in ${Date.now() - startTime}ms`);
+  return data;
 };
 
 export const getAllCustomersWithSubscriptions = async (): Promise<{ [uid: string]: Stripe.Customer }> => {
