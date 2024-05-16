@@ -91,14 +91,14 @@ export const isSubscribedToBlendPro = async (uid: string) => {
   let isSubscribed = await readPath<boolean>(`users/${uid}/protected/isSubscribedToBlendPro`);
   if (isSubscribed === null) {
     console.log(`isSubscribedToBlendPro not found in Firebase for user ${uid}, fetching from Stripe`);
-    isSubscribed = isStripeCustomerSubscribedToBlendPro(await getStripeCustomerWithSubscriptions(uid));
+    isSubscribed = isCustomerSubscribedToBlendPro(await getStripeCustomerWithSubscriptions(uid));
     console.log(`isSubscribedToBlendPro for user ${uid} is ${isSubscribed}. Writing to Firebase for next time.`);
     await writePath(`users/${uid}/protected/isSubscribedToBlendPro`, isSubscribed);
   }
   return isSubscribed;
 };
 
-export const isStripeCustomerSubscribedToBlendPro = (customer: Stripe.Customer | Stripe.DeletedCustomer | null) =>
+export const isCustomerSubscribedToBlendPro = (customer: Stripe.Customer | Stripe.DeletedCustomer | null) =>
   !!(customer && !customer.deleted && getBlendProSubscription(customer));
 
 export const getCustomerPortalSession = (customer: Stripe.Customer, returnUrl: string) =>
