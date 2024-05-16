@@ -4,9 +4,9 @@ import type { RequestHandler } from './$types';
 
 export const GET = (async (request) => {
   const playlists = (await readPath<Database.Playlists.Preloaded>('/playlists/preloaded')) || {};
-  const playlistArray = Object.entries(playlists).map(([key, val]) => ({
-    ...val,
-    words: val.words?.map((word) => word.map((letters) => (letters === false ? null : letters))) ?? [],
+  const playlistArray = Object.values(playlists).map((playlist) => ({
+    ...playlist,
+    words: playlist.words?.map((word) => word.map((letters) => (letters === false ? null : letters))) ?? [],
   }));
   return json(playlistArray, {
     headers: [['Access-Control-Allow-Origin', '*']],
