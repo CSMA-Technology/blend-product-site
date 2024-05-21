@@ -23,12 +23,12 @@ export const appUrl = readable<string>(PUBLIC_APP_URL, (set) => {
 });
 
 export const filterAttributes = (attributes: string[], input: object | object[]) => {
-  const filteredObject = (obj: object) => {
-    return Object.fromEntries(Object.entries(obj).filter(([key]) => attributes.includes(key)));
-  };
-  if (Array.isArray(input)) {
-    return input.map(filteredObject);
-  } else {
-    return filteredObject(input);
-  }
+  const filter = (obj: object) => Object.fromEntries(Object.entries(obj).filter(([key]) => attributes.includes(key)));
+  return Array.isArray(input) ? input.map(filter) : filter(input);
 };
+
+export const convertPlaylistWordsFalseToNull = (playlist: Database.Playlist) =>
+  playlist.words?.map((word) => word.map((letter) => (letter === false ? null : letter)));
+
+export const convertPlaylistWordsNullToFalse = (playlist: Database.Playlist) =>
+  playlist.words?.map((word) => word.map((letter) => (letter === null ? false : letter)));
