@@ -27,8 +27,8 @@ export const filterAttributes = (attributes: string[], input: object | object[])
   return Array.isArray(input) ? input.map(filter) : filter(input);
 };
 
-export const convertPlaylistWordsFalseToNull = (playlist: Database.Playlist) =>
+export const transformPlaylistForClient = (playlist: Database.Playlist) =>
   playlist.words?.map((word) => word.map((letter) => (letter === false ? null : letter)));
 
-export const convertPlaylistWordsNullToFalse = (playlist: Database.Playlist) =>
+export const transformPlaylistForDatabase = (playlist: Database.Playlist) =>
   playlist.words?.map((word) => word.map((letter) => (letter === null ? false : letter)));

@@ -1,7 +1,7 @@
 import { authenticate, deletePath, readPath, writePath } from '$lib/server/firebaseUtils';
 import { error, json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { convertPlaylistWordsFalseToNull, convertPlaylistWordsNullToFalse } from '$lib/utils';
+import { transformPlaylistForClient, transformPlaylistForDatabase } from '$lib/utils';
 
 export const GET = (async (event) => {
   const { playlistId } = event.params;
@@ -12,7 +12,7 @@ export const GET = (async (event) => {
   }
   const modifiedPlaylist = {
     ...playlist,
-    words: convertPlaylistWordsFalseToNull(playlist) ?? [],
+    words: transformPlaylistForClient(playlist) ?? [],
   };
   return json(modifiedPlaylist);
 }) satisfies RequestHandler;
@@ -23,7 +23,7 @@ export const POST = (async (event) => {
   const playlistData = await event.request.json();
   const modifiedData = {
     ...playlistData,
-    words: convertPlaylistWordsNullToFalse(playlistData),
+    words: transformPlaylistForDatabase(playlistData),
   };
   await writePath(`/playlists/user/${uid}/${playlistId}`, modifiedData);
   return json(playlistData, {
@@ -42,7 +42,7 @@ export const PUT = (async (event) => {
   }
   const modifiedExistingPlaylist = {
     ...existingPlaylist,
-    words: convertPlaylistWordsNullToFalse(existingPlaylist),
+    words: transformPlaylistForDatabase(existingPlaylist),
   };
   const modifiedPlaylistData = {
     ...playlistData,
