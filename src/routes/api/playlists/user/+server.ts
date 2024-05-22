@@ -26,7 +26,7 @@ export const GET = (async (event) => {
 
   const modifiedPlaylists = [...userPlaylistsArray, ...organizationPlaylistsArray].map((playlist) => ({
     ...playlist,
-    words: transformPlaylistForClient(playlist) ?? [],
+    words: transformPlaylistForClient(playlist),
   }));
   return json(modifiedPlaylists);
 }) satisfies RequestHandler;

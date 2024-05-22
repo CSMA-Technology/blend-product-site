@@ -8,7 +8,7 @@ export const GET = (async (request) => {
   const playlists = (await readPath<Database.Playlists.Library>('/playlists/library')) || {};
   const playlistArray = Object.values(playlists).map((playlist) => ({
     ...playlist,
-    words: transformPlaylistForClient(playlist) ?? [],
+    words: transformPlaylistForClient(playlist),
   }));
   const filteredPlaylists = filterAttributes(attributes, playlistArray);
   return json(filteredPlaylists.some((playlist: Database.Playlist) => Object.keys(playlist).length > 0) ? filteredPlaylists : playlistArray);
