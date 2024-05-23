@@ -3,6 +3,10 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { filterAttributes, transformPlaylistForClient } from '$lib/utils';
 
+setInterval(() => {
+  console.log('Hmmm');
+}, 30000);
+
 export const GET = (async (request) => {
   const attributes = request.url.searchParams.get('attributes')?.split(',') ?? [];
   const playlists = (await readPath<Database.Playlists.Library>('/playlists/library')) || {};
