@@ -3,13 +3,17 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { filterAttributes, transformPlaylistForClient } from '$lib/utils';
 
-setInterval(() => {
-  console.log('Hmmm');
-}, 30000);
+let playlistsPromise = readPath<Database.Playlists.Library>('/playlists/library');
+const refreshPlaylistsPromise = () => {
+  console.log('Refreshing playlists');
+  playlistsPromise = readPath<Database.Playlists.Library>('/playlists/library');
+};
+setInterval(refreshPlaylistsPromise, 30000);
 
 export const GET = (async (request) => {
   const attributes = request.url.searchParams.get('attributes')?.split(',') ?? [];
-  const playlists = (await readPath<Database.Playlists.Library>('/playlists/library')) || {};
+  console.log('Awaiting playlists');
+  const playlists = (await playlistsPromise) || {};
   const playlistArray = Object.values(playlists).map((playlist) => ({
     ...playlist,
     words: transformPlaylistForClient(playlist) ?? [],
