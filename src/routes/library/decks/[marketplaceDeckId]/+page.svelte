@@ -3,12 +3,10 @@
   import { enhance } from '$app/forms';
   import type { PageData } from './$types';
   import { onMount } from 'svelte';
-  import ProBadgeWrapper from '$lib/components/ProBadgeWrapper.svelte';
-  import AuthCheck from '$lib/components/AuthCheck.svelte';
   export let data: PageData;
 
   let isPro = false;
-  let isLoading = true;
+  let isLoading = false;
 
   onMount(async () => {
     const idToken = await $user?.getIdToken();
@@ -21,10 +19,9 @@
 </script>
 
 <svelte:head>
-  <title>Import Deck</title>
+  <title>Import Deck - Blend</title>
 </svelte:head>
 
-<AuthCheck />
 <main>
   <div class="content">
     {#if isLoading}
@@ -33,25 +30,15 @@
       <div class="deck">
         <div class="info">
           <div class="title">{data.deckMetadata.name}</div>
-          <!-- <p style="margin-top: 0;">Created by: {data.deckMetadata.author}</p> -->
           <p>{data.deckMetadata.description}</p>
         </div>
         <img src={data.deckMetadata.image} alt="deck letters" />
-        {#if isPro}
-          <form method="POST" use:enhance>
-            <fieldset>
-              <input type="hidden" name="uid" value={$user?.uid} />
-              <button formaction="?/accept" type="submit" class="btn btn-green">Import</button>
-            </fieldset>
-          </form>
-        {:else}
-          <ProBadgeWrapper>
-            <a href="/" class="btn disabled">Import</a>
-          </ProBadgeWrapper>
-          <p class="subtitle">
-            Importing from our Deck Library is available to Blend Pro users. <a href="/account?action=upgrade">Upgrade to Blend Pro</a> to get access to this deck!
-          </p>
-        {/if}
+        <form method="POST" use:enhance>
+          <fieldset>
+            <input type="hidden" name="uid" value={$user?.uid} />
+            <button formaction="?/accept" type="submit" class="btn btn-green">Import</button>
+          </fieldset>
+        </form>
       </div>
       <a href="/library">Back to Library</a>
     {/if}
