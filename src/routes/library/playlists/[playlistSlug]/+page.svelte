@@ -11,6 +11,7 @@
 <main>
   <div class="content">
     <div class="deck">
+      <div class="back"><a href="/library">Back to Library</a></div>
       <div class="info">
         <h1>{data.playlist.name}</h1>
       </div>
@@ -18,11 +19,18 @@
       <a href="https://app.blendreading.com" class="btn btn-purple">Open in Blend</a>
       <p>All playlists in the Blend Library are available right in the app!</p>
     </div>
-    <a href="/library">Back to Library</a>
   </div>
 </main>
 
 <style>
+  .back {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .back a:hover {
+    color: #588dff;
+  }
   p {
     margin-top: 0;
   }

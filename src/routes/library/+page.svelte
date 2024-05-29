@@ -47,7 +47,7 @@
     <div class="cards">
       {#each marketplaceDecks as deck}
         <div class="library-card">
-          <a href="/library/{deck.id}">
+          <a href="/library/decks/{deck.id}">
             <img src={deck.image} alt="Deck Preview" />
           </a>
           <div class="title">{deck.name}</div>
@@ -101,6 +101,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 2rem;
   }
   .heading {
     align-items: center;

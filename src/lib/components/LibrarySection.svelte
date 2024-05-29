@@ -8,11 +8,10 @@
   <div class="section">
     {#each section.playlists as playlist}
       <div class="library-card">
-        <a href="/">
+        <a href="/library/playlists/{playlist.slug}">
           <img src={playlist.imagePath} alt="Playlist Preview" />
         </a>
         <h2 class="title">{playlist.name}</h2>
-        <!-- TODO: Pass this playlist into the next page -->
         <a href="/library/playlists/{playlist.slug}" class="btn btn-blurple">More Info</a>
       </div>
     {/each}

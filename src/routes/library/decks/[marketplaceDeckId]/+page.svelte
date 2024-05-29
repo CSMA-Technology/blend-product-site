@@ -28,6 +28,7 @@
       <h2 class="loading-label">Loading...</h2>
     {:else}
       <div class="deck">
+        <div class="back"><a href="/library">Back to Library</a></div>
         <div class="info">
           <div class="title">{data.deckMetadata.name}</div>
           <p>{data.deckMetadata.description}</p>
@@ -40,12 +41,19 @@
           </fieldset>
         </form>
       </div>
-      <a href="/library">Back to Library</a>
     {/if}
   </div>
 </main>
 
 <style>
+  .back {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .back a:hover {
+    color: #588dff;
+  }
   .loading-label {
     font-family: 'Contrail One';
     margin-top: 2rem;
@@ -66,7 +74,7 @@
     margin: 2rem;
     padding: 1rem;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.7);
   }
   a:hover {
     color: white;
