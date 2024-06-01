@@ -1,10 +1,10 @@
 <script lang="ts">
   import marketplaceDecks from '$lib/data/library/marketplaceDecks';
   import ProBadge from '$lib/components/ProBadge.svelte';
-  import LibrarySection from '$lib/components/LibrarySection.svelte';
   import consonantsAndShortVowels from '$lib/data/library/playlists/consonantsAndShortVowels';
   import consonantDigraphs from '$lib/data/library/playlists/consonantDigraphs';
   import bannerImg from '$lib/assets/library-banner.png';
+  import PlaylistCarousel from '$lib/components/PlaylistCarousel.svelte';
 </script>
 
 <svelte:head>
@@ -64,8 +64,8 @@
       reading specialist created these playlists so you can jump right into your lessons with a scope and sequence that makes sense. These playlists
       are available in the app for all pro users! Try them out today!
     </p>
-    <LibrarySection section={consonantsAndShortVowels} />
-    <LibrarySection section={consonantDigraphs} />
+    <PlaylistCarousel section={consonantsAndShortVowels} scrollBy={3} />
+    <PlaylistCarousel section={consonantDigraphs} />
   </section>
 </main>
 
