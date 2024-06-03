@@ -8,7 +8,7 @@
 
   $: offset = customOffset;
   $: atStart = offset === 0;
-  $: atEnd = offset <= paginationFactor * (section.playlists.length - scrollBy) * -1;
+  $: atEnd = offset <= paginationFactor * (section.items.length - scrollBy) * -1;
 
   const move = (direction: number) => {
     if (direction > 0 && !atEnd) {
@@ -17,50 +17,48 @@
       offset += totalPaginationPixels;
     }
   };
+
+  const scrollToEnd = (direction: number) => {
+    if (direction > 0 && !atEnd) {
+      offset = paginationFactor * (section.items.length - scrollBy) * -1;
+    } else if (direction < 0 && !atStart) {
+      offset = 0;
+    }
+  };
 </script>
 
 <div class="section-outer">
   <h2 class="title">{section.title}</h2>
-  <p class="subtitle">{section.playlists.length} Playlists</p>
+  <p class="subtitle">{section.items.length} Items</p>
   <div class="section">
     <div class="items" style="transform: translateX({offset}px);">
-      {#each section.playlists as playlist, i}
+      {#each section.items as item, i}
         <div class="item">
-          <a href="/library/playlists/{playlist.slug}?offset={offset}">
-            <img src={playlist.imagePath} alt="Playlist Preview" />
+          <a href="/library/{item.type}s/{item.id}?offset={offset}">
+            <img src={item.imagePath} alt="Item Preview" />
           </a>
-          <h2 class="title">{playlist.name}</h2>
-          <a href="/library/playlists/{playlist.slug}?offset={offset} " class="btn btn-blurple">More Info</a>
+          <h2 class="title title-small">{item.name}</h2>
+          <a href="/library/{item.type}s/{item.id}?offset={offset}" class="btn btn-outlined">More Info</a>
         </div>
       {/each}
     </div>
   </div>
   <div class="controls">
-    <button class="page-btn" disabled={atStart} on:click={() => move(-1)}>&lsaquo; Prev</button>
-    <button class="page-btn" disabled={atEnd} on:click={() => move(1)}>Next &rsaquo;</button>
+    <button class="btn btn-small" disabled={atStart} on:click={() => scrollToEnd(-1)}
+      ><span class="material-symbols-rounded"> keyboard_double_arrow_left </span></button>
+    <button class="btn btn-small" disabled={atStart} on:click={() => move(-1)}
+      ><span class="material-symbols-rounded"> keyboard_arrow_left </span></button>
+    <button class="btn btn-small" disabled={atEnd} on:click={() => move(1)}
+      ><span class="material-symbols-rounded"> keyboard_arrow_right </span></button>
+    <button class="btn btn-small" disabled={atEnd} on:click={() => scrollToEnd(1)}
+      ><span class="material-symbols-rounded"> keyboard_double_arrow_right </span></button>
+  </div>
+  <div class="swipe">
+    <p>Swipe to browse!</p>
   </div>
 </div>
 
 <style>
-  .page-btn {
-    background-color: #e0e6ff;
-    color: black;
-    border: none;
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    margin: 0.5rem;
-    cursor: pointer;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-  }
-  .page-btn:hover {
-    filter: brightness(1.1);
-  }
-  .page-btn:disabled {
-    background-color: #e6e6e6;
-    color: #808080;
-    filter: none;
-    cursor: auto;
-  }
   .section {
     width: 100%;
     overflow: hidden;
@@ -70,11 +68,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: black 2px solid;
+    border: black 1.5px solid;
     border-radius: 10px;
     padding: 2rem;
-    margin: 1.5rem;
-    width: 100%;
+    margin: 1rem;
+    width: 90%;
   }
 
   .items {
@@ -84,6 +82,7 @@
   }
 
   .item {
+    text-align: center;
     display: flex;
     flex-direction: column;
     min-width: 16rem;
@@ -92,7 +91,7 @@
     border-radius: 0.7rem;
     color: black;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     user-select: none;
     overflow: hidden;
@@ -113,26 +112,37 @@
   .title {
     font-family: 'Contrail One';
   }
+  .title-small {
+    font-size: 1.2rem;
+  }
   .subtitle {
     margin: 0;
   }
 
-  .details {
-    margin-top: 20px;
-    font-style: italic;
-    color: #9f9f9f;
+  .controls {
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
   }
 
-  @media (max-width: 768px) {
+  .swipe {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
     .item {
       margin: 0.5rem;
       padding: 0.5rem;
     }
     .section {
       overflow: scroll;
+      scrollbar-width: none;
     }
     .controls {
       display: none;
+    }
+    .swipe {
+      display: block;
     }
   }
 </style>
