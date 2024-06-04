@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { images } from '$lib/utils';
+
   export let section: BlendLibrary.Section;
   export let scrollBy = 1;
   export let customOffset = 0;
@@ -36,7 +38,11 @@
       {#each section.items as item, i}
         <div class="item">
           <a href="/library/{item.type}s/{item.id}?offset={offset}">
-            <enhanced:img loading={i >= initiallyVisibleItems ? 'lazy' : undefined} class="item-img" src={item.imagePath} alt="Item Preview" />
+            <enhanced:img
+              fetchpriority={i <= initiallyVisibleItems ? 'high' : 'low'}
+              class="item-img"
+              src={images[item.imagePath]}
+              alt="Item Preview" />
           </a>
           <h2 class="title title-small">{item.name}</h2>
           <a href="/library/{item.type}s/{item.id}?offset={offset}" class="btn btn-outlined">More Info</a>
@@ -105,7 +111,7 @@
 
   .item-img {
     width: 16rem;
-    min-height: 12rem;
+    height: 12rem;
     object-fit: cover;
     border-radius: 10px;
   }
