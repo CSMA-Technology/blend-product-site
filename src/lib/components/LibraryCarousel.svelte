@@ -5,6 +5,7 @@
 
   const paginationFactor = 320;
   const totalPaginationPixels = scrollBy * paginationFactor;
+  const initiallyVisibleItems = 4;
 
   $: offset = customOffset;
   $: atStart = offset === 0;
@@ -35,7 +36,7 @@
       {#each section.items as item, i}
         <div class="item">
           <a href="/library/{item.type}s/{item.id}?offset={offset}">
-            <img src={item.imagePath} alt="Item Preview" />
+            <img loading={i >= initiallyVisibleItems ? 'lazy' : undefined} src={item.imagePath} alt="Item Preview" />
           </a>
           <h2 class="title title-small">{item.name}</h2>
           <a href="/library/{item.type}s/{item.id}?offset={offset}" class="btn btn-outlined">More Info</a>
