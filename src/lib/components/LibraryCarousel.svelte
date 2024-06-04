@@ -36,7 +36,7 @@
       {#each section.items as item, i}
         <div class="item">
           <a href="/library/{item.type}s/{item.id}?offset={offset}">
-            <img loading={i >= initiallyVisibleItems ? 'lazy' : undefined} src={item.imagePath} alt="Item Preview" />
+            <enhanced:img loading={i >= initiallyVisibleItems ? 'lazy' : undefined} class="item-img" src={item.imagePath} alt="Item Preview" />
           </a>
           <h2 class="title title-small">{item.name}</h2>
           <a href="/library/{item.type}s/{item.id}?offset={offset}" class="btn btn-outlined">More Info</a>
@@ -103,7 +103,7 @@
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
 
-  .item img {
+  .item-img {
     width: 16rem;
     min-height: 12rem;
     object-fit: cover;
