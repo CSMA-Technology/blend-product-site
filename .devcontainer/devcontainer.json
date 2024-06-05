@@ -20,9 +20,12 @@
     // Configure properties specific to VS Code.
     "vscode": {
       // Add the IDs of extensions you want installed when the container is created.
-      "extensions": ["dbaeumer.vscode-eslint", "svelte.svelte-vscode", "esbenp.prettier-vscode"],
+      "extensions": ["dbaeumer.vscode-eslint", "svelte.svelte-vscode", "esbenp.prettier-vscode", "yoavbls.pretty-ts-errors"],
       "settings": {
         "eslint.validate": ["javascript", "svelte", "typescript"],
+        "editor.insertSpaces": true,
+				"editor.tabSize": 2,
+				"editor.formatOnSave": true,
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "[svelte]": {
           "editor.defaultFormatter": "svelte.svelte-vscode"

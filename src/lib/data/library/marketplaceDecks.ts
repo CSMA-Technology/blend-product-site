@@ -1,9 +1,12 @@
-import doublingPractice from '$lib/assets/marketplace/doubling-practice.png';
-import weldedSounds from '$lib/assets/marketplace/welded-sounds.png';
-import latin from '$lib/assets/marketplace/latin.png';
-import twosyllable from '$lib/assets/marketplace/2syllable.png';
-import cvcMagicE from '$lib/assets/marketplace/cvc-and-magic-e.jpg';
-import blendsAdvancedVowels from '$lib/assets/marketplace/blends-and-advanced-vowels.jpg';
+import { transformImages } from '$lib/utils';
+
+const images = transformImages(
+  import.meta.glob('$lib/assets/marketplace/**/*.{png,jpg,jpeg}', {
+    query: { enhanced: true },
+    import: 'default',
+    eager: true,
+  }),
+);
 
 const marketplaceDecks: BlendLibrary.Section = {
   title: 'Available Decks',
@@ -14,7 +17,7 @@ const marketplaceDecks: BlendLibrary.Section = {
       description:
         'This deck features six columns and is great for introducing 2 syllable words and syllable division patterns to your students. Create VC/CV words or collapse the 3rd column to change them to V/CV and VC/V.',
       author: 'Summer Kiesel',
-      imagePath: twosyllable,
+      image: images['2syllable'],
       id: '-Nl4-F3yj7JTYznUkUXL',
     },
     {
@@ -22,7 +25,7 @@ const marketplaceDecks: BlendLibrary.Section = {
       name: 'Doubling Practice',
       description: 'This deck is perfect for practicing the doubling rule when adding on a vowel suffix or consonant-le.',
       author: 'Summer Kiesel',
-      imagePath: doublingPractice,
+      image: images['doubling-practice'],
       id: '-Nami4dTLiMr5iCw2UNz',
     },
     {
@@ -31,7 +34,7 @@ const marketplaceDecks: BlendLibrary.Section = {
       description:
         'Whether you call these welded sounds, glued sounds, wild old words, or closed syllable exceptions, this deck is great for practicing those trickier word families.',
       author: 'Summer Kiesel',
-      imagePath: weldedSounds,
+      image: images['welded-sounds'],
       id: '-Nami9-twBSGvYqDI1HW',
     },
     {
@@ -40,7 +43,7 @@ const marketplaceDecks: BlendLibrary.Section = {
       description:
         'This deck contains 100 of the most common Latin roots and affixes for practicing morphology and fluency with multi-syllabic words. We recommend this deck for creating playlists or editing down to a smaller selection of morphemes to work on.',
       author: 'Summer Kiesel',
-      imagePath: latin,
+      image: images['latin'],
       id: '-NarqpewAp2p8H6inYXL',
     },
     {
@@ -48,7 +51,7 @@ const marketplaceDecks: BlendLibrary.Section = {
       name: 'CVC and Magic E',
       description: 'This is one of our old preloaded decks. It contains basic graphemes for CVC words with the option to add in Magic E.',
       author: 'Summer Kiesel',
-      imagePath: cvcMagicE,
+      image: images['cvc-and-magic-e'],
       id: '-NtE1MN0Cf_aInFK3FtP',
     },
     {
@@ -57,7 +60,7 @@ const marketplaceDecks: BlendLibrary.Section = {
       description:
         'This is one of our old preloaded decks. It contains basic graphemes for some consonant blends and more advanced vowels. The blends on this board are separated.',
       author: 'Summer Kiesel',
-      imagePath: blendsAdvancedVowels,
+      image: images['blends-and-advanced-vowels'],
       id: '-NtE1YEqHfSFUzdkeLzM',
     },
   ],

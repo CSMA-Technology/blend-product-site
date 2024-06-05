@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { images } from '$lib/utils';
-
   export let section: BlendLibrary.Section;
   export let scrollBy = 1;
   export let customOffset = 0;
+  import blendLogo from '$lib/assets/blend_logo.png';
 
   const paginationFactor = 320;
   const totalPaginationPixels = scrollBy * paginationFactor;
@@ -38,11 +37,15 @@
       {#each section.items as item, i}
         <div class="item">
           <a href="/library/{item.type}s/{item.id}?offset={offset}">
-            <enhanced:img
-              fetchpriority={i <= initiallyVisibleItems ? 'high' : 'low'}
-              class="item-img"
-              src={images[item.imagePath]}
-              alt="Item Preview" />
+            {#if item.image}
+              <enhanced:img
+                fetchpriority={i <= initiallyVisibleItems ? 'high' : 'low'}
+                class="item-img"
+                src={item.image}
+                alt={`Screenshot of ${item.name}`} />
+            {:else}
+              <img fetchpriority={i <= initiallyVisibleItems ? 'high' : 'low'} class="item-img" src={blendLogo} alt="" />
+            {/if}
           </a>
           <h2 class="title title-small">{item.name}</h2>
           <a href="/library/{item.type}s/{item.id}?offset={offset}" class="btn btn-outlined">More Info</a>

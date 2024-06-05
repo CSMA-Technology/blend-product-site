@@ -1,6 +1,18 @@
 // See https://kit.svelte.dev/docs/types#app
 // for information about these interfaces
 declare global {
+  interface ImageFile {
+    sources: {
+      avif: string
+      webp: string
+      png: string
+    }
+    img: {
+      src: string
+      w: number
+      h: number
+    }
+  }
   interface Window {
     dataLayer: Record<string, any>[];
     'ga-disable-G-LLGRDWVVEV': boolean;
@@ -72,7 +84,7 @@ declare global {
       type: 'deck' | 'playlist';
       name: string;
       id: string;
-      imagePath: string;
+      image: ImageFile;
       description?: string;
       author?: string;
     }
