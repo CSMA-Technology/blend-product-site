@@ -15,8 +15,8 @@
     border-radius: 100%;
     background-color: rgb(253, 249, 241);
     padding: 0.3rem;
-    max-width: 10rem;
-    max-height: 10rem;
+    width: 10rem;
+    height: 10rem;
     box-shadow: 3px 4px 4px 0px black;
     transition: transform 0.3s ease-in-out;
   }
