@@ -18,7 +18,7 @@ if (!dev) {
     replaysOnErrorSampleRate: 1.0,
 
     // If you don't want to use Session Replay, just remove the line below:
-    integrations: [replayIntegration()],
+    integrations: [replayIntegration({ maskAllText: false, networkDetailAllowUrls: [window.location.origin] })],
     environment: PUBLIC_DEPLOY_CONTEXT,
   });
 }
