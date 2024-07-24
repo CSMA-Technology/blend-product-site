@@ -157,6 +157,7 @@ export const deleteUser = async (uid: string) => {
     deletePath(`users/${uid}`),
     deletePath(`decks/user/${uid}`),
     deletePath(`playlists/user/${uid}`),
+    deletePath(`flags/user/${uid}`),
     auth.deleteUser(uid),
   ]);
 };
