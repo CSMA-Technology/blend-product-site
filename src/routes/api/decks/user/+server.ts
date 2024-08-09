@@ -6,11 +6,17 @@ export const GET = (async (event) => {
   const { uid } = await authenticate(event);
   const omitOrgDecks = event.url.searchParams.get('omitOrgDecks') ?? false;
   const orgIdParam = event.url.searchParams.get('orgId');
+
+  const headers = {
+    'Cache-Control': event.request.headers.get('x-cache-nonce') ? 'private, max-age=300, must-revalidate' : 'private, no-cache',
+    Vary: 'x-cache-nonce',
+  };
+
   if (omitOrgDecks && orgIdParam) return new Response('Cannot specify both omitOrgDecks and orgId', { status: 400 });
   if (omitOrgDecks) {
     const userDecks = (await readPath<Database.Decks.User>(`/decks/user/${uid}`)) || {};
     const deckArray = Object.entries(userDecks).map(([key, val]) => val);
-    return json(deckArray);
+    return json(deckArray, { headers });
   } else if (orgIdParam) {
     const organizationIds = await getUserOrganizations(uid);
     if (!organizationIds.includes(orgIdParam)) return new Response('User is not a member of this organization', { status: 403 });
@@ -23,7 +29,7 @@ export const GET = (async (event) => {
         orgId: orgIdParam,
       },
     }));
-    return json(deckArray);
+    return json(deckArray, { headers });
   } else {
     const userDecks = (await readPath<Database.Decks.User>(`/decks/user/${uid}`)) || {};
     const userDeckArray = Object.entries(userDecks).map(([key, val]) => val);
@@ -46,7 +52,7 @@ export const GET = (async (event) => {
       )
     ).flat();
 
-    return json([...userDeckArray, ...organizationDeckArray]);
+    return json([...userDeckArray, ...organizationDeckArray], { headers });
   }
 }) satisfies RequestHandler;
 

@@ -8,6 +8,12 @@ export const GET = (async (event) => {
   const userPlaylists = (await readPath<Database.Playlists.User>(`/playlists/user/${uid}`)) || {};
   const userPlaylistsArray = Object.values(userPlaylists).map((playlist) => playlist);
   const organizationIds = await getUserOrganizations(uid);
+
+  const headers = {
+    'Cache-Control': event.request.headers.get('x-cache-nonce') ? 'private, max-age=300, must-revalidate' : 'private, no-cache',
+    Vary: 'x-cache-nonce',
+  };
+
   const organizationPlaylistsArray = (
     await Promise.all(
       organizationIds.map(async (orgId) => {
@@ -28,7 +34,7 @@ export const GET = (async (event) => {
     ...playlist,
     words: transformPlaylistWordsForClient(playlist.words ?? []),
   }));
-  return json(modifiedPlaylists);
+  return json(modifiedPlaylists, { headers });
 }) satisfies RequestHandler;
 
 export const OPTIONS = (() => {
