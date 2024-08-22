@@ -11,8 +11,9 @@
   const { organizationId } = $page.params;
   let members: Database.Organization.MemberDetails[];
   let invites: Database.Invite.InviteDetails[];
-  $: members = JSON.parse(data.memberDetails);
-  $: invites = JSON.parse(data.inviteDetails);
+  $: members = data.memberDetails;
+  $: invites = data.inviteDetails;
+  $: inviteRequests = data.inviteRequestDetails;
   $: organizationDecks = createWritableStore<Database.Decks.Organization>(`/decks/organization/${organizationId}`);
   $: organizationPlaylists = createWritableStore<Database.Playlists.Organization>(`/playlists/organization/${organizationId}`);
   $: userDecks = createWritableStore<Database.Decks.User>(`/decks/user/${$user?.uid}`);
@@ -96,23 +97,40 @@
   };
 
   const cancelInvite = (inviteId: string) =>
+    confirm('Are you sure you want to cancel this invite?') &&
     fetch(`${$page.url.href}/invites`, {
       method: 'DELETE',
       body: JSON.stringify([inviteId]),
     });
 
   const removeMember = (uid: string) =>
+    confirm('Are you sure you want to remove this member?') &&
     fetch(`${$page.url.href}/members`, {
       method: 'DELETE',
       body: JSON.stringify([uid]),
     });
 
   const promoteMember = (uid: string) => {
+    if (!confirm('Are you sure you want to promote this member to an admin?')) return;
     $organization!.private!.members![uid].role = 'admin';
   };
 
   const demoteMember = (uid: string) => {
+    if (!confirm('Are you sure you want to demote this admin to a member?')) return;
     $organization!.private!.members![uid].role = 'member';
+  };
+
+  const approveInviteRequest = (uid: string) => {
+    if (!confirm('Are you sure you want to approve this invite request? This will take up an available seat.')) return;
+    $organization!.private!.members![uid] = {
+      role: 'member',
+    };
+    $organization!.private!.inviteRequests![uid] = null;
+  };
+
+  const denyInviteRequest = (uid: string) => {
+    if (!confirm('Are you sure you want to deny this invite request?')) return;
+    $organization!.private!.inviteRequests![uid] = null;
   };
 </script>
 
@@ -123,59 +141,105 @@
 <AuthCheck />
 <div class="content" style="overflow-x: auto;">
   {#if $organization}
-    <h1>{$organization.public.name}</h1>
-    <section>
-      <h2>Members</h2>
-      <table class="member-table">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-        {#each invites as { id, inviteeEmail, displayName } (id)}
-          <tr class="bottom-border">
-            <td>{displayName ?? 'New Blend User'}</td>
-            <td>{inviteeEmail}</td>
-            <td>Invite Sent</td>
-            <td style="padding-right: 0">
-              <span>
-                <button class="btn btn-small btn-red" style="margin: 0" on:click={() => cancelInvite(id)}>Cancel</button>
-              </span>
+    <div style="position: relative;">
+      <h1 style="width: 40rem; margin-bottom: 0">{$organization.public.name}</h1>
+      <div class="card" style="height: fit-content; width: fit-content; position: absolute; top: 1rem; right: 0;">
+        Seats Used: {Object.keys($organization.private?.members ?? {}).length}/{$organization.locked.seats}
+      </div>
+    </div>
+    <div class="row flex-wrap">
+      <section class="card" style="width: 45%">
+        <h2>Members</h2>
+        <table class="member-table" style="font-size: medium;">
+          <tr>
+            <th>Name</th>
+            <th style="width: 50%">Email</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+          {#each invites as { id, inviteeEmail, displayName } (id)}
+            <tr class="bottom-border">
+              <td>{displayName ?? 'New Blend User'}</td>
+              <td>{inviteeEmail}</td>
+              <td>Invite Sent</td>
+              <td style="padding-right: 0">
+                <span>
+                  <button class="btn btn-small btn-red" style="margin: 0" on:click={() => cancelInvite(id)}>Cancel</button>
+                </span>
+              </td>
+            </tr>
+          {/each}
+          {#each members as { displayName, email, uid, role } (uid)}
+            <tr class="bottom-border">
+              <td>{displayName}</td>
+              <td>{email}</td>
+              <td>{role}</td>
+              <td style="padding-right: 0">
+                <span>
+                  <button disabled={uid === $user?.uid} class="btn btn-small btn-red" style="margin: 0" on:click={() => removeMember(uid)}
+                    >Remove</button>
+                  <button
+                    class="btn btn-small btn-gray"
+                    style="margin: 0; "
+                    on:click={() => (role === 'admin' ? demoteMember(uid) : promoteMember(uid))}>
+                    {role === 'admin' ? 'Demote' : 'Promote'}
+                  </button>
+                </span>
+              </td>
+            </tr>
+          {/each}
+          <tr>
+            <td colspan="4" style="text-align: center; padding: 0">
+              <button
+                class="btn add-button btn-green"
+                on:click={() => {
+                  showMemberAddModal = true;
+                }}>Add</button>
             </td>
           </tr>
-        {/each}
-        {#each members as { displayName, email, uid, role } (uid)}
-          <tr class="bottom-border">
-            <td>{displayName}</td>
-            <td>{email}</td>
-            <td>{role}</td>
-            <td style="padding-right: 0">
-              <span>
-                <button disabled={uid === $user?.uid} class="btn btn-small btn-red" style="margin: 0" on:click={() => removeMember(uid)}
-                  >Remove</button>
-                <button class="btn btn-small" style="margin: 0" on:click={() => (role === 'admin' ? demoteMember(uid) : promoteMember(uid))}>
-                  {role === 'admin' ? 'Demote' : 'Promote'}
-                </button>
-              </span>
-            </td>
+        </table>
+        <InviteModal bind:showModal={showMemberAddModal} organization={$organization} orgId={$page.params.organizationId} />
+      </section>
+      <section class="card" style="width: 45%">
+        <h2>Invite Requests</h2>
+        <p style="font-size: medium;">Requests that Blend users have made to join your oganization will appear here.</p>
+        <table style="list-style: none; width: 100%; font-size: medium;">
+          <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Message</th>
+            <th>Actions</th>
           </tr>
-        {/each}
-        <tr>
-          <td colspan="4" style="text-align: center">
-            <button
-              class="btn"
-              style="width: 95%; margin: 10px auto;"
-              on:click={() => {
-                showMemberAddModal = true;
-              }}>Add</button>
-          </td>
-        </tr>
-      </table>
-      <InviteModal bind:showModal={showMemberAddModal} organization={$organization} orgId={$page.params.organizationId} />
-    </section>
+          {#each inviteRequests as { uid, timestamp, message, displayName } (uid)}
+            <tr>
+              <td style="vertical-align: top;">{displayName}</td>
+              <td style="vertical-align: top;">{new Date(timestamp).toLocaleDateString()}</td>
+              <td style="vertical-align: top; max-width: 10rem;">
+                <p style="margin: 0; overflow-y: auto; max-height: 4rem; scrollbar-width: thin; scrollbar-color: black transparent;">{message}</p>
+              </td>
+              <td style="vertical-align: top;">
+                <div class="row flex-center" style="gap: 3px;">
+                  <button
+                    class="btn btn-small btn-green"
+                    style="margin: 0;"
+                    on:click={() => {
+                      approveInviteRequest(uid);
+                    }}>Approve</button>
+                  <button
+                    class="btn btn-small btn-red"
+                    style="margin: 0;"
+                    on:click={() => {
+                      denyInviteRequest(uid);
+                    }}>Deny</button>
+                </div>
+              </td>
+            </tr>
+          {/each}
+        </table>
+      </section>
+    </div>
 
-    <section>
+    <section class="card">
       <h2>Organization Decks</h2>
       <OrganizationItemTable
         items={$organizationDecks ?? {}}
@@ -210,7 +274,7 @@
       </Modal>
     </section>
 
-    <section>
+    <section class="card">
       <h2>Organization Playlists</h2>
       <OrganizationItemTable
         items={$organizationPlaylists ?? {}}
@@ -249,6 +313,9 @@
   .member-table {
     text-align: left;
     border-collapse: collapse;
+    width: 100%;
+    max-width: 50rem;
+    margin: 0 auto;
   }
   .member-table td {
     padding: 10px 30px 10px 0px;
@@ -262,5 +329,13 @@
     padding-bottom: 5px;
     height: fit-content;
     margin: 1rem auto 2rem;
+  }
+
+  .card {
+    background-color: rgba(245, 245, 245, 0.473);
+    border-radius: 1rem;
+    padding: 1rem;
+    max-width: 60rem;
+    margin: 1rem auto;
   }
 </style>

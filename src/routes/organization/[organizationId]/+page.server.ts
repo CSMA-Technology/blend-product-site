@@ -1,6 +1,7 @@
 import {
   checkSessionAuth,
   getOrganizationInviteDetails,
+  getOrganizationInviteRequestDetails,
   getOrganizationMemberDetails,
   isUserOrganizationAdmin,
   readPath,
@@ -16,7 +17,8 @@ export const load = (async ({ cookies, params: { organizationId }, url }) => {
     authFunction: async ({ uid }) => await isUserOrganizationAdmin(uid, organization),
   });
   return {
-    memberDetails: JSON.stringify(await getOrganizationMemberDetails(organization)),
-    inviteDetails: JSON.stringify(await getOrganizationInviteDetails(organization)),
+    memberDetails: await getOrganizationMemberDetails(organization),
+    inviteDetails: await getOrganizationInviteDetails(organization),
+    inviteRequestDetails: await getOrganizationInviteRequestDetails(organization),
   };
 }) satisfies PageServerLoad;
