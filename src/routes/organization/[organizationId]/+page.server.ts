@@ -5,9 +5,10 @@ import {
   getOrganizationMemberDetails,
   isUserOrganizationAdmin,
   readPath,
+  writePath,
 } from '$lib/server/firebaseUtils.js';
 import { error } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types.js';
+import type { Actions, PageServerLoad } from './$types.js';
 
 export const load = (async ({ cookies, params: { organizationId }, url }) => {
   const organization = await readPath<Database.Organization>(`/organizations/${organizationId}`);

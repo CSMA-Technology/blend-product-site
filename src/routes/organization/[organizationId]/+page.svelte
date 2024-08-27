@@ -19,6 +19,8 @@
   $: userDecks = createWritableStore<Database.Decks.User>(`/decks/user/${$user?.uid}`);
   $: userPlaylists = createWritableStore<Database.Playlists.User>(`/playlists/user/${$user?.uid}`);
 
+  let inviteRequestsProcessing: string[] = [];
+
   const organization = createWritableStore<Database.Organization>(`/organizations/${organizationId}`);
   let decksToAdd: string[] = [];
   let playlistsToAdd: string[] = [];
@@ -120,12 +122,15 @@
     $organization!.private!.members![uid].role = 'member';
   };
 
-  const approveInviteRequest = (uid: string) => {
+  const approveInviteRequest = async (uid: string) => {
     if (!confirm('Are you sure you want to approve this invite request? This will take up an available seat.')) return;
-    $organization!.private!.members![uid] = {
-      role: 'member',
-    };
-    $organization!.private!.inviteRequests![uid] = null;
+    inviteRequestsProcessing = [...inviteRequestsProcessing, uid];
+    // We have to do this addition server-side since we need to modify that user's organization list
+    await fetch(`${$page.url.href}/members`, {
+      method: 'POST',
+      body: JSON.stringify({ uids: [uid] }),
+    });
+    inviteRequestsProcessing = inviteRequestsProcessing.filter((id) => id !== uid);
   };
 
   const denyInviteRequest = (uid: string) => {
@@ -141,10 +146,14 @@
 <AuthCheck />
 <div class="content" style="overflow-x: auto;">
   {#if $organization}
-    <div style="position: relative;">
-      <h1 style="width: 40rem; margin-bottom: 0">{$organization.public.name}</h1>
-      <div class="card" style="height: fit-content; width: fit-content; position: absolute; top: 1rem; right: 0;">
-        Seats Used: {Object.keys($organization.private?.members ?? {}).length}/{$organization.locked.seats}
+    <div class="row flex-center" style="gap: 1rem; align-items: center;">
+      <!-- Spacer -->
+      <div style="flex-grow: 1; width: 100px" />
+      <h1 style="margin-bottom: 0">{$organization.public.name}</h1>
+      <div style="flex-grow: 1; position: relative; width: 100px">
+        <div class="card" style="height: fit-content; width: fit-content; margin: 15px 0 0 0;">
+          Seats Used: {Object.keys($organization.private?.members ?? {}).length}/{$organization.locked.seats}
+        </div>
       </div>
     </div>
     <div class="row flex-wrap">
@@ -222,12 +231,14 @@
                   <button
                     class="btn btn-small btn-green"
                     style="margin: 0;"
-                    on:click={() => {
+                    disabled={inviteRequestsProcessing.includes(uid)}
+                    on:click={(e) => {
                       approveInviteRequest(uid);
                     }}>Approve</button>
                   <button
                     class="btn btn-small btn-red"
                     style="margin: 0;"
+                    disabled={inviteRequestsProcessing.includes(uid)}
                     on:click={() => {
                       denyInviteRequest(uid);
                     }}>Deny</button>
