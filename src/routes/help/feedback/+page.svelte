@@ -9,10 +9,6 @@
   <title>Feedback - Blend</title>
 </svelte:head>
 
-{#if browser}
-  <AuthCheck />
-{/if}
-
 <div class="content">
   <h1>We want your feedback!</h1>
   <div class="form-details">
@@ -21,9 +17,8 @@
     <form name="feedback" method="post" action="/help/feedback/success" data-netlify="true">
       <input type="hidden" name="form-name" value="feedback" />
       <input type="hidden" name="subject" data-remove-prefix value="Feedback Submission from blendreading.com" />
-      <input type="hidden" name="uid" value={$user?.uid} />
-      <input type="hidden" name="name" value={$user?.displayName} />
-      <input type="hidden" name="email" value={$user?.email} />
+      <p><label class="form-label">Name<input type="text" name="name" /></label></p>
+      <p><label class="form-label">Email<input type="email" name="email" /></label></p>
       <p><label class="form-label">What do you like about using Blend?<textarea name="positiveFeedback" required></textarea></label></p>
       <p><label class="form-label">What could make your experience better?<textarea name="improvementFeedback" required></textarea></label></p>
       <p><label class="form-label">What new features would you like to see?<textarea name="featureRequests" required></textarea></label></p>
@@ -75,7 +70,8 @@
     margin: 1rem;
     width: 50%;
   }
-  textarea {
+  textarea,
+  input {
     display: block;
     margin-bottom: 1rem;
     background-color: white;
