@@ -3,6 +3,7 @@ import {
   FIREBASE_SERVICE_PRIVATE_KEY_ID,
   FIREBASE_AUTH_EMULATOR_HOST,
   FIREBASE_DATABASE_EMULATOR_HOST,
+  FIREBASE_STORAGE_EMULATOR_HOST,
 } from '$env/static/private';
 import { PUBLIC_DEPLOY_CONTEXT } from '$env/static/public';
 import { dev } from '$app/environment';
@@ -11,6 +12,7 @@ if (dev) {
     console.log('Starting Firebase Admin SDK in emulator mode');
     process.env.FIREBASE_AUTH_EMULATOR_HOST = FIREBASE_AUTH_EMULATOR_HOST;
     process.env.FIREBASE_DATABASE_EMULATOR_HOST = FIREBASE_DATABASE_EMULATOR_HOST;
+    process.env.FIREBASE_STORAGE_EMULATOR_HOST = FIREBASE_STORAGE_EMULATOR_HOST;
   } else {
     console.warn(
       `Dev environment detected, but at least one of FIREBASE_AUTH_EMULATOR_HOST and FIREBASE_DATABASE_EMULATOR_HOST is not set. Firebase Admin SDK will connect to the configured live instance: ${PUBLIC_DEPLOY_CONTEXT}`,

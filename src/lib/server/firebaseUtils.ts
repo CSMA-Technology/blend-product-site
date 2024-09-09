@@ -7,12 +7,13 @@ if (!firebaseAdmin.apps.length) {
   firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseAdminCredential),
     databaseURL,
+    storageBucket: 'csma-blend.appspot.com',
   });
 }
 
 export const db = firebaseAdmin.database();
 export const auth = firebaseAdmin.auth();
-
+export const storageBucket = firebaseAdmin.storage().bucket();
 export const verifySessionCookie = (cookie: string) => auth.verifySessionCookie(cookie);
 
 type CheckSessionAuthOptions = {
