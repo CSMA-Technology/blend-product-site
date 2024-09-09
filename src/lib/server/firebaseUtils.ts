@@ -1,5 +1,5 @@
 import firebaseAdmin from 'firebase-admin';
-import firebaseAdminCredential, { databaseURL } from '$lib/server/firebaseAdminCredential';
+import firebaseAdminCredential, { databaseURL, defaultStorageBucket } from '$lib/server/firebaseAdminCredential';
 import { error, type Cookies, type RequestEvent, redirect } from '@sveltejs/kit';
 import type { ThenableReference } from 'firebase-admin/database';
 import type { DecodedIdToken, UserIdentifier, UserRecord } from 'firebase-admin/auth';
@@ -7,7 +7,7 @@ if (!firebaseAdmin.apps.length) {
   firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(firebaseAdminCredential),
     databaseURL,
-    storageBucket: 'csma-blend.appspot.com',
+    storageBucket: defaultStorageBucket,
   });
 }
 

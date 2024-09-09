@@ -48,7 +48,7 @@ const testConfig = dev
     }
   : {
       ...commonConfig,
-      project_id: 'blend-test-96c76',
+      projectId: 'blend-test-96c76',
       clientEmail: 'firebase-adminsdk-3fr3p@blend-test-96c76.iam.gserviceaccount.com',
       clientId: '108712155394638013128',
       clientX509CertUrl: 'https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-3fr3p%40blend-test-96c76.iam.gserviceaccount.com',
@@ -59,5 +59,7 @@ const testDbUrl = dev ? 'http://127.0.0.1:9000/?ns=csma-blend-default-rtdb' : 'h
 const config = PUBLIC_DEPLOY_CONTEXT === 'production' ? prodConfig : testConfig;
 
 export const databaseURL = PUBLIC_DEPLOY_CONTEXT === 'production' ? 'https://csma-blend-default-rtdb.firebaseio.com' : testDbUrl;
+
+export const defaultStorageBucket = `${config.projectId}.appspot.com`;
 
 export default config;
