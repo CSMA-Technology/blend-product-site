@@ -5,5 +5,15 @@ import playlistsTutorial from './playlists-tutorial';
 import blendableSoundsTutorial from './blendable-sounds-tutorial';
 import alignWithSor from './align-teaching-with-the-science-of-reading';
 import morphologyMondays from './morphology-mondays';
+import septemberLaunch from './september-24-launch';
 
-export default [alignWithSor, whatIsABlendingBoard, morphologyMondays, gettingStarted, blend2Overview, playlistsTutorial, blendableSoundsTutorial];
+export default [
+  septemberLaunch,
+  alignWithSor,
+  whatIsABlendingBoard,
+  morphologyMondays,
+  gettingStarted,
+  blend2Overview,
+  playlistsTutorial,
+  blendableSoundsTutorial,
+];
