@@ -5,10 +5,10 @@ import playlistsTutorial from './playlists-tutorial';
 import blendableSoundsTutorial from './blendable-sounds-tutorial';
 import alignWithSor from './align-teaching-with-the-science-of-reading';
 import morphologyMondays from './morphology-mondays';
-import septemberLaunch from './september-24-launch';
+import fallLaunch from './fall-24-launch';
 
 export default [
-  septemberLaunch,
+  fallLaunch,
   alignWithSor,
   whatIsABlendingBoard,
   morphologyMondays,

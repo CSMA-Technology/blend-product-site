@@ -8,9 +8,9 @@ import menu from './images/menu.png';
 import createDeck from './images/create-deck.png';
 import stephHeadshot from '$lib/assets/people/stephanie-headshot.jpg';
 const post: Blog.BlogPost = {
-  slug: 'september-24-launch',
+  slug: 'fall-24-launch',
   summary: `This is Blend's biggest launch ever! From our new Word Mat to our new look, you don't want to miss out on all the new features we have to offer. Check out this post to read about what's new!`,
-  title: `What's New: September 2024 Launch`,
+  title: `What's New: Fall 2024 Launch`,
   previewImg: {
     type: 'image',
     src: thumbnail,
@@ -34,12 +34,16 @@ const post: Blog.BlogPost = {
     },
     {
       type: 'text',
-      content: `The question we get asked most often is: "Do you have a feature for spelling?" We're proud to say: YES - we do! The new Word Mat feature is the perfect complement to Decks and Playlists, which focus on the blending drill. With the word mat, you can focus on spelling and segmenting - on any device. Let's see how below! </br></br>`,
+      content: `The question we get asked most often is: "Do you have a feature for spelling?" We're proud to say: YES - we do! The new Word Mat feature is the perfect complement to Decks and Playlists, which focus on the blending drill. With the word mat, you can focus on spelling and segmenting - on any device. Let's see how below!`,
+    },
+    {
+      type: 'heading',
+      size: 3,
+      content: `Built-in support for Elkonin boxes`,
     },
     {
       type: 'image',
       src: sounds,
-      align: 'left',
       size: {
         width: 600,
       },
@@ -48,16 +52,16 @@ const post: Blog.BlogPost = {
     },
     {
       type: 'text',
-      content: `<h2>Built-in support for Elkonin boxes</h2>`,
+      content: `On our Word Mat, you can tap to add boxes to represent each sound in the word, reinforcing phonemic awareness for students. The number of boxes is adjustable at any time, so you can practice with individal words or even word chains!`,
     },
     {
-      type: 'text',
-      content: `On our Word Mat, you can tap to add boxes to represent each sound in the word, reinforcing phonemic awareness for students. The number of boxes is adjustable at any time, so you can practice with individal words or even word chains!`,
+      type: 'heading',
+      size: 3,
+      content: `Practice multisyllabic words`,
     },
     {
       type: 'image',
       src: syllables,
-      align: 'right',
       size: {
         width: 600,
       },
@@ -66,16 +70,16 @@ const post: Blog.BlogPost = {
     },
     {
       type: 'text',
-      content: `<br/><h2>Practice multisyllabic words</h2>`,
+      content: `Most of the solutions we've seen for Elkonin boxes only support single-syllable words. With the Blend Word Mat, you can practice syllable division, too! As always, our tools are designed to grow with your students as they build fluency.`,
     },
     {
-      type: 'text',
-      content: `Most of the solutions we've seen for Elkonin boxes only support single-syllable words. With the Blend Word Mat, you can practice syllable division, too! As always, our tools are designed to grow with your students as they build fluency.`,
+      type: 'heading',
+      size: 3,
+      content: `Two Preloaded Mats`,
     },
     {
       type: 'image',
       src: mats,
-      align: 'left',
       size: {
         width: 600,
       },
@@ -84,11 +88,7 @@ const post: Blog.BlogPost = {
     },
     {
       type: 'text',
-      content: `<br/><h2>2 Preloaded Mats</h2>`,
-    },
-    {
-      type: 'text',
-      content: `We have two mats available in the app: A-Z Tiles and Advanced Sounds. In addition to the grapheme tiles, we've also added a nifty heart tile for practicing those heart words and irregular sounds. Choose the mat that fits your student's needs and start spelling!`,
+      content: `We have two mats available in the app: A-Z Tiles and Advanced Sounds. In addition to the grapheme tiles, we've also added a nifty heart tile for practicing those heart words and irregular sounds. Choose the mat that fits your student's needs and start spelling!<br/><br/>`,
     },
     {
       type: 'heading',
@@ -100,9 +100,13 @@ const post: Blog.BlogPost = {
       content: `There's something satisfying about making your tools your own. We've added some customization features to the app to help you do just that!`,
     },
     {
+      type: 'heading',
+      size: 3,
+      content: `Custom in-app themes`,
+    },
+    {
       type: 'image',
       src: themes,
-      align: 'right',
       size: {
         width: 600,
       },
@@ -111,11 +115,12 @@ const post: Blog.BlogPost = {
     },
     {
       type: 'text',
-      content: `<br/><h2>Custom in-app themes</h2>`,
+      content: `Part of teaching is always making things fun and engaging for your students. You can now choose from a variety of themes that feature different backgrounds and characters. We have a few themes already, and more are coming soon!`,
     },
     {
-      type: 'text',
-      content: `Part of teaching is always making things fun and engaging for your students. You can now choose from a variety of themes that feature different backgrounds and characters. We have a few themes already, and more are coming soon!`,
+      type: 'heading',
+      size: 3,
+      content: `Blend badges`,
     },
     {
       type: 'image',
@@ -129,11 +134,7 @@ const post: Blog.BlogPost = {
     },
     {
       type: 'text',
-      content: `<br/><h2>Blend badges</h2>`,
-    },
-    {
-      type: 'text',
-      content: `Show some pride for your school or organization with badges! You can now add a badge to your profile to show off your school spirit. Organization admins can upload a logo image on the organization dashboard, and it will display for all members in the app!`,
+      content: `Show some pride for your school or organization with badges! You can now add a badge to your profile to show off your school spirit. Organization admins can upload a logo image on the organization dashboard, and it will display for all members in the app!<br/><br/>`,
     },
     {
       type: 'heading',
@@ -145,9 +146,13 @@ const post: Blog.BlogPost = {
       content: `We've made some changes in the app to make it easier to navigate and find the tools you need for your lessons! Our goal is to help you spend less time planning and more time teaching. Here are some of the changes we've made:`,
     },
     {
+      type: 'heading',
+      size: 3,
+      content: `New Menu Bar`,
+    },
+    {
       type: 'image',
       src: menu,
-      align: 'left',
       size: {
         width: 500,
       },
@@ -156,25 +161,21 @@ const post: Blog.BlogPost = {
     },
     {
       type: 'text',
-      content: `<br/><h2>New Menu Bar</h2>`,
+      content: `Our original app layout made it hard to find some of the most useful features, like Playlists! Now, you can access all of our tools - Playlists, Decks, and Word Mats - from the menu bar at the top of the screen.`,
     },
     {
-      type: 'text',
-      content: `Our original app layout made it hard to find some of the most useful features, like Playlists! Now, you can access all of our tools - Playlists, Decks, and Word Mats - from the menu bar at the top of the screen.`,
+      type: 'heading',
+      size: 3,
+      content: `An easier way to customize your decks`,
     },
     {
       type: 'image',
       src: createDeck,
-      align: 'left',
       size: {
         width: 500,
       },
       altText: 'Screenshot of the new deck creation process',
       caption: 'Choose to create a blank deck or copy from an existing one',
-    },
-    {
-      type: 'text',
-      content: `<br/><h2>An easier way to customize your decks</h2>`,
     },
     {
       type: 'text',
