@@ -166,6 +166,11 @@
 <div class="content" style="overflow-x: auto;">
   {#if $organization}
     <div class="row flex-center my-4 max-md:flex-wrap" style="gap: 1rem; align-items: center;">
+      <!-- Below is a spacer to keep the org name centered -->
+      <div
+        class={`!m-0 ${isUpdatingLogo ? `${isLogoFileTooBig || isLogoWrongSize ? 'h-48' : 'h-40'} w-96` : 'h-24 w-24'} !max-w-sm transition-all duration-500 max-sm:!mx-auto`}>
+      </div>
+
       <h1 class="mb-0">{$organization.public.name}</h1>
       <div
         class={`card !m-0 ${isUpdatingLogo ? `${isLogoFileTooBig || isLogoWrongSize ? 'h-48' : 'h-40'} w-96` : 'h-24 w-24'} !max-w-sm transition-all duration-500 max-sm:!mx-auto`}>
