@@ -4,7 +4,7 @@
   import edit from '$lib/assets/home/edit.png';
   import playlists from '$lib/assets/home/playlists-side-by-side.png';
 
-  import sageLogo from '$lib/assets/home/partner-logos/sage-logo.webp';
+  import sageLogo from '$lib/assets/home/partner-logos/sage-logo.png';
   import slantLogo from '$lib/assets/home/partner-logos/slant-logo.png';
   import reedLogo from '$lib/assets/home/partner-logos/reed-logo.png';
   import forestCityLogo from '$lib/assets/home/partner-logos/forest-city-logo.webp';
