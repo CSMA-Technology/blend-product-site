@@ -6,7 +6,6 @@
 
   import sageLogo from '$lib/assets/home/partner-logos/sage-logo.webp';
   import slantLogo from '$lib/assets/home/partner-logos/slant-logo.png';
-  import ontiverosLogo from '$lib/assets/home/partner-logos/ontiveros-logo.webp';
   import reedLogo from '$lib/assets/home/partner-logos/reed-logo.png';
   import forestCityLogo from '$lib/assets/home/partner-logos/forest-city-logo.webp';
 
@@ -130,7 +129,6 @@
     <div class="partner-logos">
       <PartnerCard name="Sage Literacy" logo={sageLogo} url="https://www.sageliteracy.org/" />
       <PartnerCard name="Slant System" logo={slantLogo} url="https://www.slantsystem.com/" />
-      <PartnerCard name="Juan Pacifico Ontiveros Elementary" logo={ontiverosLogo} url="https://ontiveros.smbsd.org/" />
       <PartnerCard name="Reed Charitable Foundation" logo={reedLogo} url="https://reedcharitablefoundation.org/" />
       <PartnerCard name="Forest City Elementary" logo={forestCityLogo} url="https://www.forestcity.k12.ia.us/home" />
     </div>
