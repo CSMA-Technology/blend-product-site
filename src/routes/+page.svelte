@@ -247,10 +247,6 @@
     width: 30%;
   }
 
-  img {
-    max-width: 80rem;
-  }
-
   .partner-logos {
     display: flex;
     flex-direction: row;
