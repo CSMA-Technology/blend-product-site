@@ -1,8 +1,8 @@
 <script lang="ts">
-  import playlist from '$lib/assets/features/playlist.png';
+  import wordMats from '$lib/assets/features/word-mats.png';
   import edit from '$lib/assets/features/edit.png';
   import preloaded from '$lib/assets/features/preloaded.png';
-  import history from '$lib/assets/features/history.png';
+  import play from '$lib/assets/features/play.png';
   import save from '$lib/assets/features/save.png';
   import unlimited from '$lib/assets/features/unlimited.png';
   import library from '$lib/assets/features/library.png';
@@ -27,31 +27,34 @@
       <div class="section-title">
         <h2>Basic</h2>
         <p>Free</p>
-        <a class="btn" href="/login">Sign Up</a>
+        <div class="side-by-side">
+          <a class="btn" href="https://app.blendreading.com" target="_blank">Try the app</a>
+          <a class="btn" href="/login">Sign up</a>
+        </div>
       </div>
       <p class="caption">
-        Get started right away with our free offering that combines the familiar features of a traditional blending board with modern tools.
+        Get started right away with our free plan that combines the familiar features of a traditional phonics tools with a modern approach.
       </p>
       <section class="highlights gap-3">
         <FeatureCard
+          imagePath={play}
+          featureTitle="No Login Required"
+          description="Jump into the Blend app without creating an account to see how it can transform your phonics instruction with our preloaded resources"
+          className="highlight" />
+        <FeatureCard
           imagePath={preloaded}
-          featureTitle="Preloaded Decks"
-          description="Blend comes with two starter decks with the most common graphemes to get you started out of the box"
+          featureTitle="Preloaded Resources"
+          description="Blend comes with a 1 starter decks and 3 playlists to get you started right out of the box - no setup required"
           className="highlight" />
         <FeatureCard
           imagePath={edit}
-          featureTitle="One Custom Deck"
-          description="Create and save your own deck that aligns with your students' needs and can be updated every lesson"
+          featureTitle="Custom Deck & Playlist"
+          description="With a Blend Basic account, you can save one custom deck and playlist so that you can differentiate your instruction"
           className="highlight" />
         <FeatureCard
           imagePath={save}
-          featureTitle="Deck Sync"
-          description="Access your boards across devices to take lesson planning on the go"
-          className="highlight" />
-        <FeatureCard
-          imagePath={history}
-          featureTitle="Word History"
-          description="Keep track of your progress in a lesson and revisit words to reinforce challenging concepts"
+          featureTitle="Synced Resources"
+          description="Access your decks and playlists across any of your devices to take lesson planning on the go"
           className="highlight" />
       </section>
     </div>
@@ -64,24 +67,24 @@
       <p class="caption">Elevate your phonics instruction with additional customization and tools to make lesson planning a breeze.</p>
       <section class="highlights gap-4">
         <FeatureCard
-          imagePath={unlimited}
-          featureTitle="Unlimited Decks"
-          description="Create decks that are aligned to each group or student, or even to practice a specific phonics skill"
+          imagePath={wordMats}
+          featureTitle="Word Mats"
+          description="Blend Pro grants you access to our innovative digital word work mat with built-in support for Elkonin boxes and multisyllable words"
           className="highlight pro" />
         <FeatureCard
-          imagePath={playlist}
-          featureTitle="Playlists"
-          description="Build premade word chains to breeze through your blending drill and use them again and again"
+          imagePath={unlimited}
+          featureTitle="Unlimited Resources"
+          description="Create as many custom decks and playlists as you want, so you can tailor your instruction to your students"
           className="highlight pro" />
         <FeatureCard
           imagePath={library}
-          featureTitle="Deck Library"
-          description="Access a collection of decks designed by a reading specialist that are targeted to specific skills"
+          featureTitle="Blend Library"
+          description="Access a collection of decks and playlists designed by a reading specialist that are targeted to specific skills"
           className="highlight pro" />
         <FeatureCard
           imagePath={share}
-          featureTitle="Deck Sharing"
-          description="Remotely share your custom decks with fellow Blend Pro users to collaborate on lesson planning"
+          featureTitle="Resource Sharing"
+          description="Remotely share your custom decks and playlists with fellow Blend Pro users to collaborate on lesson planning"
           className="highlight pro" />
       </section>
     </div>
