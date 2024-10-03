@@ -48,14 +48,14 @@
     <div class="plan">
       <div class="header pro">
         <h2>Blend Pro</h2>
-        <p>$3 / month</p>
+        <p>$10 / month</p>
       </div>
       <div class="features">
         <p>With Pro, you get all of the basic features, plus:</p>
         <ul>
           <li>Unlimited Decks & Playlists</li>
           <li>Access to Word Mats</li>
-          <li>Custom Themes</li>
+          <li>Themes</li>
           <li>Access to the Blend Library</li>
           <li>Resource Sharing</li>
         </ul>
