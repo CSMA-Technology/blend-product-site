@@ -48,7 +48,7 @@
     <div class="plan">
       <div class="header pro">
         <h2>Blend Pro</h2>
-        <p>$3 / month</p>
+        <p>$10 / month</p>
       </div>
       <div class="features">
         <p>With Pro, you get all of the basic features, plus:</p>

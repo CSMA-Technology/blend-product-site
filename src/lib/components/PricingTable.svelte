@@ -22,15 +22,15 @@
         </colgroup>
         <thead>
           <tr>
-            <th scope="col"><h1>Compare Plans</h1></th>
+            <th scope="col"><h1 style="margin: 0; line-height: normal;">Compare Plans</h1></th>
             <th scope="col" class="column-header"
               >Basic
-              <h6>free</h6>
-              <a href="/login"><h6>Sign Up</h6></a></th>
+              <h6>Always Free</h6>
+              <a class="btn" href="/login"><h6>Sign Up</h6></a></th>
             <th scope="col" class="column-header"
               >Pro
-              <h6>$3/month</h6>
-              <a href="/account?action=upgrade" on:click={upgrade}><h6>Upgrade</h6></a></th>
+              <h6>$10 / month</h6>
+              <a class="btn" href="/account?action=upgrade" on:click={upgrade}><h6>Upgrade</h6></a></th>
           </tr>
         </thead>
         <tbody>
@@ -40,7 +40,12 @@
             <td>{check}</td>
           </tr>
           <tr>
-            <th scope="row">Preloaded Standard Decks</th>
+            <th scope="row">Preloaded Decks & Playlists</th>
+            <td>{check}</td>
+            <td>{check}</td>
+          </tr>
+          <tr>
+            <th scope="row">One Custom Deck & Playlist</th>
             <td>{check}</td>
             <td>{check}</td>
           </tr>
@@ -50,32 +55,22 @@
             <td>{check}</td>
           </tr>
           <tr>
-            <th scope="row">One Custom Deck</th>
-            <td>{check}</td>
-            <td>{check}</td>
-          </tr>
-          <tr>
-            <th scope="row">Word History</th>
-            <td>{check}</td>
-            <td>{check}</td>
-          </tr>
-          <tr>
-            <th scope="row">Unlimited Custom Decks</th>
+            <th scope="row">Word Work Mats</th>
             <td class="empty" />
             <td>{check}</td>
           </tr>
           <tr>
-            <th scope="row">Deck Library</th>
+            <th scope="row">Unlimited Custom Resources</th>
             <td class="empty" />
             <td>{check}</td>
           </tr>
           <tr>
-            <th scope="row">Deck Playlists</th>
+            <th scope="row">Blend Library</th>
             <td class="empty" />
             <td>{check}</td>
           </tr>
           <tr>
-            <th scope="row">Remote Deck Sharing</th>
+            <th scope="row">Resource Sharing</th>
             <td class="empty" />
             <td>{check}</td>
           </tr>
@@ -107,6 +102,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .pricing-table .btn {
+    min-width: 8rem;
   }
   .side-by-side {
     justify-content: center;

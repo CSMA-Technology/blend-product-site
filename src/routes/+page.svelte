@@ -23,7 +23,7 @@
     <img width="726" height="313" src={cards} alt="cards spelling BLEND" />
   </div>
   <div class="side-by-side">
-    <a class="btn start-blending" href={$appUrl} target="_blank" rel="noopener noreferrer"><h2>start blending</h2></a>
+    <a class="btn start-blending" href={$appUrl} target="_blank" rel="noopener noreferrer"><h2>start now</h2></a>
     <a class="btn" href="/login"><h2>sign up</h2></a>
   </div>
 </section>
