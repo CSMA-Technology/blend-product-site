@@ -55,7 +55,7 @@
         <ul>
           <li>Unlimited Decks & Playlists</li>
           <li>Access to Word Mats</li>
-          <li>Custom Themes</li>
+          <li>Themes</li>
           <li>Access to the Blend Library</li>
           <li>Resource Sharing</li>
         </ul>

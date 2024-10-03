@@ -6,7 +6,7 @@
   import save from '$lib/assets/features/save.png';
   import unlimited from '$lib/assets/features/unlimited.png';
   import library from '$lib/assets/features/library.png';
-  import share from '$lib/assets/features/share.png';
+  import theme from '$lib/assets/features/theme.png';
 
   import PricingTable from '$lib/components/PricingTable.svelte';
   import FeatureCard from '$lib/components/FeatureCard.svelte';
@@ -77,14 +77,14 @@
           description="Create as many custom decks and playlists as you want, so you can tailor your instruction to your students"
           className="highlight pro" />
         <FeatureCard
-          imagePath={library}
-          featureTitle="Blend Library"
-          description="Access a collection of decks and playlists designed by a reading specialist that are targeted to specific skills"
+          imagePath={theme}
+          featureTitle="Fun Themes"
+          description="Make phonics fun with our collection of themes with colorful backgrounds and cute characters to keep your students engaged"
           className="highlight pro" />
         <FeatureCard
-          imagePath={share}
-          featureTitle="Resource Sharing"
-          description="Remotely share your custom decks and playlists with fellow Blend Pro users to collaborate on lesson planning"
+          imagePath={library}
+          featureTitle="Blend Library & Sharing"
+          description="Access a collection of premade content designed by a reading specialist or share your custom resources with others"
           className="highlight pro" />
       </section>
     </div>
