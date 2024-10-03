@@ -65,6 +65,11 @@
             <td>{check}</td>
           </tr>
           <tr>
+            <th scope="row">Themes</th>
+            <td class="empty" />
+            <td>{check}</td>
+          </tr>
+          <tr>
             <th scope="row">Blend Library</th>
             <td class="empty" />
             <td>{check}</td>

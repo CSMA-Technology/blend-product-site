@@ -3,6 +3,9 @@
   import play from '$lib/assets/home/play.png';
   import edit from '$lib/assets/home/edit.png';
   import playlists from '$lib/assets/home/playlists-side-by-side.png';
+  import wordMats1 from '$lib/assets/home/word-mat-1.png';
+  import playlist1 from '$lib/assets/home/playlist-1.png';
+  import decks1 from '$lib/assets/home/deck-1.png';
 
   import sageLogo from '$lib/assets/home/partner-logos/sage-logo.png';
   import slantLogo from '$lib/assets/home/partner-logos/slant-logo.png';
@@ -20,14 +23,42 @@
 <section class="banner">
   <h1>Personalize, plan, and transform your phonics instruction</h1>
   <div class="mb-4 mt-5 h-auto max-w-full">
-    <img width="726" height="313" src={cards} alt="cards spelling BLEND" />
+    <img src={cards} style="width: 32rem;" alt="cards spelling BLEND" />
   </div>
   <div class="side-by-side">
     <a class="btn start-blending" href={$appUrl} target="_blank" rel="noopener noreferrer"><h2>start now</h2></a>
     <a class="btn" href="/login"><h2>sign up</h2></a>
   </div>
 </section>
-
+<section class="features mx-2 mb-8 mt-2 flex flex-col rounded-lg border border-white bg-white/20 p-2 text-center sm:mx-4 lg:mx-8">
+  <h2>Discover the Blend toolkit</h2>
+  <div class="flex flex-wrap justify-center">
+    <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
+      <div class="flex flex-col items-center">
+        <h3>PLAYLISTS</h3>
+        <img class="rounded-lg" src={playlist1} />
+        <p>Plan your word chains ahead of time</p>
+        <a href="#decks" class="btn btn-purple w-2">learn more</a>
+      </div>
+    </div>
+    <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
+      <div class="flex flex-col items-center">
+        <h3>DECKS</h3>
+        <img class="rounded-lg" src={decks1} />
+        <p>Build your blending board with custom graphemes</p>
+        <a href="#decks" class="btn btn-blurple w-2">learn more</a>
+      </div>
+    </div>
+    <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
+      <div class="flex flex-col items-center">
+        <h3>WORD MATS</h3>
+        <img class="rounded-lg" src={wordMats1} />
+        <p>Spell & segment with built-in Elkonin boxes</p>
+        <a href="#decks" class="btn btn-green w-2">learn more</a>
+      </div>
+    </div>
+  </div>
+</section>
 <section id="play" class="feature" style="background: #3b2e86;">
   <div class="feature-title"><h1>Building fluency has never been easier</h1></div>
   <div class="inner-content">
@@ -166,9 +197,6 @@
 </section>
 
 <style>
-  .btn {
-    border-width: 2px;
-  }
   .start-blending {
     background: rgba(127, 113, 210, 0.5);
     border-color: #7f71d2;
@@ -208,7 +236,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 5%;
   }
 
   .btn:hover {
