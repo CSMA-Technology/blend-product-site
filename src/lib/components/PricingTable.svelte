@@ -26,11 +26,11 @@
             <th scope="col" class="column-header"
               >Basic
               <h6>Always Free</h6>
-              <a class="btn" href="/login"><h6>Sign Up</h6></a></th>
+              <a href="/login"><h6>Sign Up</h6></a></th>
             <th scope="col" class="column-header"
               >Pro
               <h6>$10 / month</h6>
-              <a class="btn" href="/account?action=upgrade" on:click={upgrade}><h6>Upgrade</h6></a></th>
+              <a href="/account?action=upgrade" on:click={upgrade}><h6>Upgrade</h6></a></th>
           </tr>
         </thead>
         <tbody>
