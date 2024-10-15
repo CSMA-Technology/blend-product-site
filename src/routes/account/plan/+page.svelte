@@ -16,24 +16,40 @@
     }
   };
 
+  let billingCycle = 'yearly';
+
   const selectPro = () => {
     gtag('event', 'choose_pro');
-    goto(`/account${$page.url.search || '?'}&action=upgrade`);
+    goto(`/account${$page.url.search || '?'}&action=upgrade${billingCycle === 'yearly' ? '&subscriptionType=yearly' : ''}`);
   };
 </script>
 
 <svelte:head>Choose Plan - Blend</svelte:head>
 
 <div class="content">
-  <h1>Choose your plan</h1>
+  <h1 class="mt-4">Choose your plan</h1>
+  <div class="my-2 flex flex-col">
+    <div class="flex justify-center">
+      <div class="switch mb-1 w-[26rem]">
+        <button class={billingCycle === 'monthly' ? 'active' : ''} on:click={() => (billingCycle = 'monthly')}><p class="text-lg">Monthly</p></button>
+        <button class={billingCycle === 'yearly' ? 'active' : ''} on:click={() => (billingCycle = 'yearly')}
+          ><div class="flex items-center justify-center gap-x-3">
+            <p class="text-lg">Yearly</p>
+            <div class="rounded-lg bg-[#ff5c5c] px-2 py-1 text-sm text-white shadow">Save 20%</div>
+          </div></button>
+      </div>
+    </div>
+    {#if billingCycle === 'monthly'}
+      <h1 class="text-2xl">Save 20% by paying yearly!</h1>
+    {/if}
+  </div>
   <div class="side-by-side">
     <div class="plan">
       <div class="header basic">
         <h2>Basic</h2>
-        <p>Free</p>
       </div>
       <div class="features">
-        <p>Every user gets these features out of the box:</p>
+        <h2>Free forever</h2>
         <ul>
           <li>Virtual Blending Board</li>
           <li>Preloaded Decks</li>
@@ -48,13 +64,15 @@
     <div class="plan">
       <div class="header pro">
         <h2>Blend Pro</h2>
-        <p>$10 / month</p>
+        <p>Basic features included</p>
       </div>
       <div class="features">
-        <p>With Pro, you get all of the basic features, plus:</p>
+        {@html billingCycle === 'monthly'
+          ? '<h2>$10 / month</h2>'
+          : `<div class="flex items-center justify-center gap-x-2"><h2 class="mb-0">$8 / month</h2><p class="mt-0 text-md">($96 / year)</p></div>`}
         <ul>
           <li>Unlimited Decks & Playlists</li>
-          <li>Access to Word Mats</li>
+          <li>Word Mats</li>
           <li>Themes</li>
           <li>Access to the Blend Library</li>
           <li>Resource Sharing</li>
@@ -67,6 +85,38 @@
 </div>
 
 <style>
+  .switch {
+    display: flex;
+    border-radius: 10px;
+    border: 2px solid #006d74;
+    overflow: hidden;
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .switch button {
+    flex: 1;
+    padding: 0.5rem 2rem;
+    cursor: pointer;
+    border: none;
+    background: rgba(255, 255, 255, 0.35);
+    color: #006d74;
+    font-size: 16px;
+    font-weight: bold;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
+  }
+
+  .switch button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    filter: brightness(1.1);
+  }
+
+  .switch button.active {
+    background-color: #006d74;
+    color: white;
+  }
+
   .features {
     padding: 1rem;
     border-radius: 0 0 10px 10px;
@@ -122,5 +172,10 @@
     margin: 0.7rem;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     padding: 0.8rem;
+  }
+  @media (max-width: 480px) {
+    .side-by-side {
+      width: 100%;
+    }
   }
 </style>

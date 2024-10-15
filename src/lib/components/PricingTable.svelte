@@ -24,13 +24,15 @@
           <tr>
             <th scope="col"><h1 style="margin: 0; line-height: normal;">Compare Plans</h1></th>
             <th scope="col" class="column-header"
-              >Basic
-              <h6>Always Free</h6>
-              <a href="/login"><h6>Sign Up</h6></a></th>
+              >Basic Plan
+              <h6>Free Forever</h6>
+              <h6 class="text-sm"><br /></h6>
+              <a class="text-[#ffc076] underline" href="/login"><h6>Sign Up</h6></a></th>
             <th scope="col" class="column-header"
-              >Pro
-              <h6>$10 / month</h6>
-              <a href="/account?action=upgrade" on:click={upgrade}><h6>Upgrade</h6></a></th>
+              >Blend Pro
+              <h6>$10/month</h6>
+              <h6 class="text-sm">$8/month on yearly plan</h6>
+              <a class="text-[#ffc076] underline" href="/account?action=upgrade" on:click={upgrade}><h6>Upgrade</h6></a></th>
           </tr>
         </thead>
         <tbody>
@@ -83,7 +85,7 @@
       </table>
       <div class="site-licensing">
         <div class="column-header">Group Licensing</div>
-        <a href="/organization#form">Request a quote</a>
+        <a class="text-[#ffc076] underline" href="/organization#form">Request a quote</a>
         <div class="feature">All Blend Pro Features</div>
         <div class="feature">Easy Organization Management</div>
         <div class="feature">Organization-Wide Shared Decks & Playlists</div>
@@ -108,9 +110,7 @@
     flex-direction: column;
     align-items: center;
   }
-  .pricing-table .btn {
-    min-width: 8rem;
-  }
+
   .side-by-side {
     justify-content: center;
   }
@@ -216,6 +216,10 @@
   @media (max-width: 480px) {
     .pricing-table {
       width: 100%;
+      margin: 0;
+    }
+    .pricing {
+      padding: 0.5rem;
     }
     td {
       font-size: 1.5rem;

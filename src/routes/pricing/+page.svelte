@@ -26,7 +26,7 @@
     <div class="tier basic">
       <div class="section-title">
         <h2>Basic</h2>
-        <p>Free</p>
+        <p class="text-2xl">Free</p>
         <div class="side-by-side">
           <a class="btn" href="https://app.blendreading.com" target="_blank">Try the app</a>
           <a class="btn" href="/login">Sign up</a>
@@ -61,7 +61,8 @@
     <div class="tier pro">
       <div class="section-title">
         <h2>Pro</h2>
-        <p>$10/month</p>
+        <p class="text-2xl">$10/month</p>
+        <p>$8/month if billed yearly</p>
         <a class="btn" style="color: black; border-color: black;" href="/account?action=upgrade" on:click={upgrade}>Upgrade</a>
       </div>
       <p class="caption">Elevate your phonics instruction with additional customization and tools to make lesson planning a breeze.</p>
@@ -102,17 +103,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.8rem 1rem;
-    margin: 2rem 0;
+    padding: 1rem 1rem;
+    margin: 0.8rem 0;
   }
   .section-title h2 {
     margin: 0;
   }
   .section-title p {
     margin: -0.5rem;
-  }
-  .caption {
-    margin: 1.5rem;
   }
   h2 {
     font-family: 'Contrail One';
