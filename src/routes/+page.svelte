@@ -21,48 +21,50 @@
   <title>Blend Reading</title>
 </svelte:head>
 
-<section class="mx-auto mt-8 flex w-[80%] flex-wrap items-center justify-center gap-x-4 py-4 text-center">
-  <div class="my-4 h-auto w-[28rem] max-w-full">
-    <img src={cards} alt="cards spelling BLEND" />
-  </div>
-  <div class="flex w-[100%] flex-col justify-center sm:w-[80%] lg:w-[60%]">
-    <h1>Meet your new favorite phonics tool.</h1>
-    <h2 class="!my-0">Personalize, plan, and transform your structured literacy lessons.</h2>
+<div class="flex min-h-[calc(100vh-66px)] flex-col justify-around">
+  <section class="mx-auto mt-8 flex w-[90%] flex-wrap items-center justify-center py-4 text-center">
+    <div class="my-4 h-auto w-[28rem] max-w-full">
+      <img src={cards} alt="cards spelling BLEND" />
+    </div>
+    <div class="flex w-[100%] flex-col justify-center sm:w-[80%] lg:w-[60%]">
+      <h1>Meet your new favorite phonics tool.</h1>
+      <h2 class="!my-0">Personalize, plan, and transform your structured literacy lessons.</h2>
+      <div class="flex flex-wrap justify-center">
+        <a class="btn start-blending !mb-0" href={$appUrl} target="_blank" rel="noopener noreferrer"><h2>try the app</h2></a>
+        <a class="btn !mb-0" href="/login"><h2>sign up</h2></a>
+      </div>
+    </div>
+  </section>
+  <section class="features mx-2 mb-8 mt-2 flex flex-col rounded-lg border border-white bg-white/20 p-8 text-center sm:mx-4 lg:mx-[4rem]">
+    <h2 style="font-family: 'Contrail One';" class="text-center text-4xl">Explore the Blend toolkit</h2>
     <div class="flex flex-wrap justify-center">
-      <a class="btn start-blending !mb-0" href={$appUrl} target="_blank" rel="noopener noreferrer"><h2>try the app</h2></a>
-      <a class="btn !mb-0" href="/login"><h2>sign up</h2></a>
-    </div>
-  </div>
-</section>
-<section class="features mx-2 mb-8 mt-2 flex flex-col rounded-lg border border-white bg-white/20 p-8 text-center sm:mx-4 lg:mx-[4rem]">
-  <h2 style="font-family: 'Contrail One';" class="text-center text-4xl">Explore the Blend toolkit</h2>
-  <div class="flex flex-wrap justify-center">
-    <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
-      <div class="flex flex-col items-center">
-        <img class="m-2 rounded-xl shadow-md" src={decks1} alt="Blend app showing a deck" />
-        <p style="font-family: 'Contrail One';" class="text-2xl">Decks</p>
-        <p>Blending board with adjustable graphemes</p>
-        <a href="#decks" class="btn !mt-1 w-2">learn more</a>
+      <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
+        <div class="flex flex-col items-center">
+          <img class="m-2 rounded-xl shadow-md" src={decks1} alt="Blend app showing a deck" />
+          <p style="font-family: 'Contrail One';" class="text-2xl">Decks</p>
+          <p>Blending board with adjustable graphemes</p>
+          <a href="#decks" class="btn !mt-1 w-2">learn more</a>
+        </div>
+      </div>
+      <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
+        <div class="flex flex-col items-center">
+          <img class="m-2 rounded-xl shadow-md" src={playlist} alt="Blend app showing a playlist" />
+          <p style="font-family: 'Contrail One';" class="text-2xl">Playlists</p>
+          <p>Custom, reusable word chains</p>
+          <a href="#playlists" class="btn !mt-1 w-2">learn more</a>
+        </div>
+      </div>
+      <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
+        <div class="flex flex-col items-center">
+          <img class="m-2 rounded-xl shadow-md" src={wordMat} alt="Blend app showing a word mat" />
+          <p style="font-family: 'Contrail One';" class="text-2xl">Word Mats</p>
+          <p>Spelling mat with tap-to-create Elkonin boxes</p>
+          <a href="#word-mats" class="btn !mt-1 w-2">learn more</a>
+        </div>
       </div>
     </div>
-    <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
-      <div class="flex flex-col items-center">
-        <img class="m-2 rounded-xl shadow-md" src={playlist} alt="Blend app showing a playlist" />
-        <p style="font-family: 'Contrail One';" class="text-2xl">Playlists</p>
-        <p>Custom, reusable word chains</p>
-        <a href="#playlists" class="btn !mt-1 w-2">learn more</a>
-      </div>
-    </div>
-    <div class="w-full px-4 sm:w-1/2 lg:w-1/3">
-      <div class="flex flex-col items-center">
-        <img class="m-2 rounded-xl shadow-md" src={wordMat} alt="Blend app showing a word mat" />
-        <p style="font-family: 'Contrail One';" class="text-2xl">Word Mats</p>
-        <p>Spelling mat with tap-to-create Elkonin boxes</p>
-        <a href="#word-mats" class="btn !mt-1 w-2">learn more</a>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+</div>
 <section id="decks" class="feature" style="background: #012a51;">
   <div class="feature-title"><h1>Building fluency has never been easier</h1></div>
   <div class="inner-content">
