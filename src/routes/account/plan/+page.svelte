@@ -95,7 +95,7 @@
 
   .switch button {
     flex: 1;
-    padding: 0.5rem 2rem;
+    padding: 0.8rem 1.5rem;
     cursor: pointer;
     border: none;
     background: rgba(255, 255, 255, 0.35);
@@ -176,6 +176,10 @@
   @media (max-width: 480px) {
     .side-by-side {
       width: 100%;
+    }
+    .switch {
+      width: 100%;
+      margin: 0;
     }
   }
 </style>

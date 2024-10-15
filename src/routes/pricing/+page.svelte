@@ -44,7 +44,7 @@
         <FeatureCard
           imagePath={preloaded}
           featureTitle="Preloaded Resources"
-          description="Blend comes with a 1 starter decks and 3 playlists to get you started right out of the box - no setup required"
+          description="Blend comes with a 2 starter decks and 3 playlists to get you started right out of the box - no setup required"
           className="highlight" />
         <FeatureCard
           imagePath={edit}
@@ -63,7 +63,7 @@
         <h2>Pro</h2>
         <p class="text-2xl">$10/month</p>
         <p>$8/month if billed yearly</p>
-        <a class="btn" style="color: black; border-color: black;" href="/account?action=upgrade" on:click={upgrade}>Upgrade</a>
+        <a class="btn" style="color: black; border-color: black;" href="/account?action=choosePlan" on:click={upgrade}>Upgrade</a>
       </div>
       <p class="caption">Elevate your phonics instruction with additional customization and tools to make lesson planning a breeze.</p>
       <section class="highlights gap-4">

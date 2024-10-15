@@ -79,7 +79,7 @@
         <ul class="list-disc pl-10">
           <li><b>Elegant interface</b> inspired by physical blending boards</li>
           <li>Automatic recognition and <b>color-coding of vowel sounds</b></li>
-          <li>Support for up to six columns, which are adjustable during the drill</li>
+          <li>Support for <b>up to six columns</b>, which are adjustable during the drill</li>
           <li><b>Versatile display</b> suitable for whole group classroom instruction, online learning, or one-on-one tutoring</li>
           <li><b>Get started right away</b> with two premade boards available in your library to use and build on</li>
           <li><b>Easily differentiate</b> by targeting the specific skills and needs of every group of students with custom decks</li>
@@ -127,10 +127,12 @@
         <h2>Key Features</h2>
         <ul class="list-disc pl-10">
           <li><b>Built-in support for Elkonin boxes</b> with a tap-to-create gesture for a tactile experience that builds phonemic awareness</li>
-          <li>The only tool with support for building <b>multisyllabic words</b></li>
-          <li>Two preloaded mats that provide flexible options for your lessons, whether you need A-Z alphabet tiles or more advanced sounds</li>
+          <li>The only tool with built-in <b>syllable division</b> & separate syllable boxes</li>
+          <li>
+            <b>Two preloaded mats</b> that provide flexible options for your lessons, whether you need A-Z alphabet tiles or more advanced sounds
+          </li>
           <li><b>Interactive layout</b> compatible with desktops, iPads and even smart boards, allowing students to engage on multiple platforms</li>
-          <li><b>Special heart tile</b> that can be used to work on spelling irregular words</li>
+          <li><b>Heart tile</b> that can be used to work on spelling irregular words</li>
         </ul>
       </div>
     </div>

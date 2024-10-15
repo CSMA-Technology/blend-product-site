@@ -32,7 +32,7 @@
               >Blend Pro
               <h6>$10/month</h6>
               <h6 class="text-sm">$8/month on yearly plan</h6>
-              <a class="text-[#ffc076] underline" href="/account?action=upgrade" on:click={upgrade}><h6>Upgrade</h6></a></th>
+              <a class="text-[#ffc076] underline" href="/account/plan" on:click={upgrade}><h6>Upgrade</h6></a></th>
           </tr>
         </thead>
         <tbody>
