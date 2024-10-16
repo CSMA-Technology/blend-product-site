@@ -1,6 +1,6 @@
 <script lang="ts">
   import cards from '$lib/assets/cards.png';
-  import play2 from '$lib/assets/home/play-2.png';
+  import deck from '$lib/assets/home/deck.png';
   import playlist from '$lib/assets/home/playlist.png';
   import wordMat from '$lib/assets/home/word-mat.png';
   import wordMat1 from '$lib/assets/home/word-mat-1.png';
@@ -69,7 +69,7 @@
   <div class="feature-title"><h1>Building fluency has never been easier</h1></div>
   <div class="inner-content">
     <div class="side-by-side">
-      <img src={play2} alt="blend play screen" />
+      <img src={deck} alt="blend play screen" />
       <div class="description">
         <p>
           With Blend, you have total control of the graphemes in your deck. You now have the freedom to save a customized deck that aligns and adjusts
@@ -79,10 +79,10 @@
 
         <h2>Key Features</h2>
         <ul class="list-disc pl-10">
-          <li><b>Elegant interface</b> inspired by physical blending boards</li>
+          <li><b>Versatile display</b> suitable for whole group classroom instruction, online learning, or one-on-one tutoring</li>
           <li>Automatic recognition and <b>color-coding of vowel sounds</b></li>
           <li>Support for <b>up to six columns</b>, which are adjustable during the drill</li>
-          <li><b>Versatile display</b> suitable for whole group classroom instruction, online learning, or one-on-one tutoring</li>
+          <li>Create your own <b>custom grapheme cards</b> with up to 5 letters so you can build your perfect blending board</li>
           <li><b>Get started right away</b> with two premade boards available in your library to use and build on</li>
           <li><b>Easily differentiate</b> by targeting the specific skills and needs of every group of students with custom decks</li>
         </ul>
@@ -172,7 +172,7 @@
   <h1>Ready to get started?</h1>
   <p>See our pricing plans and try Blend now!</p>
   <div class="side-by-side">
-    <a class="btn" href="/pricing"><h2>pricing plans</h2></a>
+    <a class="btn" href="/pricing#plans"><h2>pricing plans</h2></a>
     <a class="btn" href={$appUrl} target="_blank" rel="noopener noreferrer" on:click={() => window.gtag('event', 'open_app')}><h2>try the app</h2></a>
   </div>
   <div class="footnote">

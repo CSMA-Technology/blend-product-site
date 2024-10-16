@@ -8,8 +8,8 @@
   import library from '$lib/assets/features/library.png';
   import theme from '$lib/assets/features/theme.png';
 
-  import PricingTable from '$lib/components/PricingTable.svelte';
   import FeatureCard from '$lib/components/FeatureCard.svelte';
+  import PlanSelection from '$lib/components/PlanSelection.svelte';
 
   const upgrade = () => {
     gtag('event', 'click_upgrade');
@@ -22,7 +22,7 @@
 </svelte:head>
 
 <section class="features">
-  <div class="content">
+  <div class="content !pb-0">
     <div class="tier basic">
       <div class="section-title">
         <h2>Basic</h2>
@@ -91,8 +91,8 @@
     </div>
   </div>
 </section>
-<section class="pricing">
-  <PricingTable />
+<section id="plans">
+  <PlanSelection />
 </section>
 
 <style>
@@ -141,9 +141,6 @@
     .tier {
       width: 100%;
     }
-  }
-  .pricing {
-    background-color: #006d74;
   }
   .features {
     color: white;
