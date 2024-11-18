@@ -43,6 +43,10 @@
         <input class="border-gray rounded-md border-2 px-2" required type="text" bind:value={partner.public.displayName} />
       </label>
       <label>
+        <p>Social Link</p>
+        <input class="border-gray rounded-md border-2 px-2" required type="text" bind:value={partner.public.socialUrl} />
+      </label>
+      <label>
         <p>Stripe Promo Code ID <span class="text-xs">(Starts with <b>promo_</b>)</span></p>
         <input class="border-gray rounded-md border-2 px-2" type="text" bind:value={partner.public.stripePromoCodeId} />
       </label>

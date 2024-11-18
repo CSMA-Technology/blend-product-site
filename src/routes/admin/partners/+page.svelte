@@ -5,7 +5,7 @@
 
   const partners = createWritableStore<Database.Partners>('/partners');
   const newEmptyPartner = (): Database.Partner => ({
-    public: { displayName: '', partnerMessage: '', stripePromoCodeId: '', logoUrl: '', blendMessage: '' },
+    public: { displayName: '', socialUrl: '', partnerMessage: '', stripePromoCodeId: '', logoUrl: '', blendMessage: '' },
     locked: { redemptions: {} },
   });
 

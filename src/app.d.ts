@@ -212,6 +212,7 @@ declare global {
     interface Partner {
       public: {
         displayName: string;
+        socialUrl: string;
         stripePromoCodeId?: string;
         logoUrl?: string;
         urlSlug?: string;

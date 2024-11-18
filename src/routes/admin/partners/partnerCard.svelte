@@ -45,6 +45,8 @@
         <img src={$partner?.public.logoUrl} alt="Partner logo" class="max-h-32 text-sm font-light" />
       </dd>
     {/if}
+    <dt>Social URL:</dt>
+    <dd><a href={$partner?.public.socialUrl} target="_blank" rel="noopener noreferrer">{$partner?.public.socialUrl}</a></dd>
     <dt>Blend Message:</dt>
     <dd class="col-span-2 max-h-10 overflow-y-auto">{$partner?.public.blendMessage}</dd>
     {#if $partner?.public.partnerMessage}
