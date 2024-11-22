@@ -75,17 +75,15 @@
       <li>
         <a id="blog" href="/blog">blog</a>
       </li>
-      <div class="min-w-[70px]">
-        {#if !isLoggedIn}
-          <li>
-            <a id="login" href="/login">login</a>
-          </li>
-        {:else}
-          <li>
-            <a id="account" href="/account">account</a>
-          </li>
-        {/if}
-      </div>
+      {#if !isLoggedIn}
+        <li class="min-w-[70px]">
+          <a id="login" href="/login">login</a>
+        </li>
+      {:else}
+        <li class="min-w-[70px]">
+          <a id="account" href="/account">account</a>
+        </li>
+      {/if}
     </ul>
     <button
       on:click={() => {

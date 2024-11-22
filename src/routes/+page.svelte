@@ -60,7 +60,9 @@
   <div class="feature-title"><h1>Building fluency has never been easier</h1></div>
   <div class="inner-content">
     <div class="side-by-side">
-      <enhanced:img class="w-full" src="$lib/assets/home/deck.png" alt="blend play screen" />
+      <div class="my-auto w-1/2 min-w-[min(40rem,100%)]">
+        <enhanced:img src="$lib/assets/home/deck.png" alt="blend play screen" />
+      </div>
       <div class="description">
         <p>
           With Blend, you have total control of the graphemes in your deck. You now have the freedom to save a customized deck that aligns and adjusts
@@ -101,7 +103,9 @@
           </li>
         </ul>
       </div>
-      <enhanced:img class="w-full" src="$lib/assets/home/playlist-1.png" alt="Blend Playlists screen showing the word 'quick' on the big cards" />
+      <div class="my-auto w-1/2 min-w-[min(40rem,100%)]">
+        <enhanced:img class="w-full" src="$lib/assets/home/playlist-1.png" alt="Blend Playlists screen showing the word 'quick' on the big cards" />
+      </div>
     </div>
   </div>
 </section>
@@ -109,7 +113,9 @@
   <div class="feature-title"><h1>Boost confidence and engage your students</h1></div>
   <div class="inner-content">
     <div class="side-by-side">
-      <enhanced:img class="w-full" src="$lib/assets/home/word-mat-1.png" alt="blend play screen" />
+      <div class="my-auto w-1/2 min-w-[min(40rem,100%)]">
+        <enhanced:img class="w-full" src="$lib/assets/home/word-mat-1.png" alt="blend play screen" />
+      </div>
       <div class="description">
         <p>
           Watch your students grow in confidence as they practice spelling with our unique <b>Word Mats</b>. Our mats feature a dynamic interface that
@@ -260,7 +266,7 @@
     align-items: center;
   }
 
-  /* .inner-content img {
+  /* .side-by-side-img {
     width: 50%;
     flex-basis: 40rem;
     object-fit: contain;
