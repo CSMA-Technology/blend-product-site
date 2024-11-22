@@ -266,12 +266,6 @@
     align-items: center;
   }
 
-  /* .side-by-side-img {
-    width: 50%;
-    flex-basis: 40rem;
-    object-fit: contain;
-  } */
-
   .epilogue {
     display: flex;
     flex-direction: column;
