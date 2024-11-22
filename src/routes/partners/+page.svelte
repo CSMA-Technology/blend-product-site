@@ -73,28 +73,37 @@
   </div>
   <div class="m-5 w-full rounded-xl bg-[#f5f5ef] p-5 shadow-md md:w-[40%]">
     <h2>Blend Partner Application</h2>
-    <form class="flex w-full flex-col justify-center gap-4 py-4">
+    <form
+      name="partner-application"
+      action="/partners/submit"
+      method="POST"
+      data-netlify="true"
+      class="flex w-full flex-col justify-center gap-4 py-4">
+      <input type="hidden" name="form-name" value="partner-application" />
+      <input type="hidden" name="subject" data-remove-prefix value="New Partner Application from blendreading.com" />
       <label>
-        <p>Name</p>
-        <input class="w-full rounded-md border border-gray-400 p-2" required type="text" placeholder="Enter Name" />
+        <p>Name *</p>
+        <input class="w-full rounded-md border border-gray-400 p-2" type="text" name="name" placeholder="Enter Name" required />
       </label>
       <label>
-        <p>Email</p>
-        <input class="w-full rounded-md border border-gray-400 p-2" required type="text" placeholder="Enter Email" />
+        <p>Email *</p>
+        <input class="w-full rounded-md border border-gray-400 p-2" type="email" name="email" placeholder="Enter Email" required />
       </label>
       <label>
-        <p>Social Link</p>
+        <p>Social Link *</p>
         <input
           class="w-full rounded-md border border-gray-400 p-2"
-          required
           type="text"
-          placeholder="Your Instagram, YouTube, Facebook or other social link" />
+          name="url"
+          placeholder="Your Instagram, YouTube, Facebook or other social link"
+          required />
       </label>
       <label>
         <p>Tell us about your community</p>
         <textarea
           rows="4"
           class="w-full rounded-md border border-gray-400 p-2"
+          name="message"
           placeholder="What type of content do you make? Describe your audience." />
       </label>
       <button type="submit" class="btn btn-purple !mx-auto !mt-0" style="auto 0 auto">Submit</button>
