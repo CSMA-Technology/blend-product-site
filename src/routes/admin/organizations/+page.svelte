@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createWritableStore, generatePushID } from '$lib/firebase';
-  import OrganizationEditModal from '../OrganizationEditModal.svelte';
+  import OrganizationEditModal from './OrganizationEditModal.svelte';
 
   const emptyOrganization = {
     public: {

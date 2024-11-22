@@ -3,6 +3,7 @@
   import AuthCheck from '$lib/components/AuthCheck.svelte';
   const navLinks = [
     { href: '/admin', text: 'Home' },
+    { href: '/admin/tools', text: 'Tools' },
     { href: '/admin/organizations', text: 'Organizations' },
     { href: '/admin/partners', text: 'Partners' },
   ];
