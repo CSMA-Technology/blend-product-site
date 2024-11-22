@@ -11,9 +11,9 @@
 </script>
 
 <div class="flex flex-wrap-reverse items-center justify-center gap-x-8 bg-[#f5f5ef] py-8 md:min-h-[calc(100vh-66px)]">
-  <img src={instagramGraphic} alt="Instagram Graphic" class="w-full object-contain md:w-[40%]" />
-  <div class="flex w-full flex-col items-center px-5 text-center md:w-1/3 md:p-0 md:text-left">
-    <img class="hidden w-[10rem] md:block" src={logo} alt="Blend Logo" />
+  <img src={instagramGraphic} alt="Graphic of smartphone with Instagram reel" class="min-h-[50%] w-full object-contain md:w-[40%]" />
+  <div class="flex w-full flex-col items-center px-5 text-center md:w-1/3 md:p-0">
+    <img class="hidden min-h-[4rem] w-[10rem] md:block" src={logo} alt="Blend Logo" />
     <h1>Partner Program</h1>
     <p class="text-center text-2xl">Help us get Blend into the hands of teachers everywhere, and get paid for doing it!</p>
     <div class="flex flex-wrap items-center justify-center">
@@ -41,7 +41,7 @@
   </div>
   <div class="relative flex flex-col items-center justify-center rounded-full bg-white p-8 text-center shadow-md md:h-[22rem] md:w-[22rem]">
     <div class="absolute left-5 top-4 hidden -translate-y-1/2 transform md:block">
-      <img src={party} alt="Party Icon" class="h-[8rem] w-[8rem]" />
+      <img src={party} alt="Party Popper" class="h-[8rem] w-[8rem]" />
     </div>
     <h1 class="leading-tight">Earn on each referral</h1>
     <p>Keep 100% of the first month of each new subscription created with your link</p>
@@ -55,7 +55,7 @@
     <div class="hidden md:block">
       <h1>Ready to start?</h1>
       <p>Submit the application, and we'll be in touch!</p>
-      <img src={formGraphic} alt="Form Graphic" class="mt-4 w-[15rem]" />
+      <img src={formGraphic} alt="Graphic of mail letter with heart icon" class="mt-4 w-[15rem]" />
       <hr class="my-8 h-px border-0 bg-gray-700" />
     </div>
     <div class="w-full rounded-xl bg-white p-4 shadow-md">
