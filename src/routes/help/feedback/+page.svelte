@@ -3,11 +3,15 @@
   import AuthCheck from '$lib/components/AuthCheck.svelte';
   import { user } from '$lib/firebase';
   import { page } from '$app/stores';
-  import { onMount } from 'svelte';
+  import { beforeUpdate } from 'svelte';
 
-  const originalSearchParams = $page.url.searchParams;
-  onMount(() => {
+  let originalSearchParams = new URLSearchParams();
+  let didCleanParams = false;
+  beforeUpdate(() => {
+    if (didCleanParams) return;
+    originalSearchParams = new URLSearchParams($page.url.search);
     window.history.replaceState({}, '', '/help/feedback');
+    didCleanParams = true;
   });
 </script>
 
@@ -18,7 +22,7 @@
 {#if browser}
   <AuthCheck
     messageId="feedbackRedirect"
-    loginRedirect={originalSearchParams.size ? `${$page.url.pathname}?${originalSearchParams.toString()}` : $page.url.pathname} />
+    loginRedirect={originalSearchParams.size ? `${$page.url.pathname}?${encodeURIComponent(originalSearchParams.toString())}` : $page.url.pathname} />
 {/if}
 
 <div class="content">
