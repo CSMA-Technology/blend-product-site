@@ -108,7 +108,7 @@
   <thead>
     <tr>
       {#if draggableItems}
-        <th style="width: 0;"></th>
+        <th style="width: 1.2rem;"></th>
       {/if}
       {#if selectable}
         <th></th>
@@ -186,7 +186,7 @@
 <style>
   table {
     width: 100%;
-    max-width: 50rem;
+    max-width: 90rem;
     table-layout: fixed;
     margin: 0 auto;
   }

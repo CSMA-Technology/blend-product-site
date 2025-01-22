@@ -241,10 +241,18 @@
       </div>
       <div class="card col-span-2">
         <h2>Seats Used</h2>
-        {Object.keys($organization.private?.members ?? {}).length}/{$organization.locked.seats}
-        <p style="font-size: medium;">
-          To modify your seat limit, please email <a href="mailto:support@blendreading.com">support@blendreading.com</a>
-        </p>
+        {#if $organization.locked.isLicensed}
+          {Object.keys($organization.private?.members ?? {}).length}/{$organization.locked.seats}
+          <p style="font-size: medium;">
+            To modify your seat limit, please email <a href="mailto:support@blendreading.com">support@blendreading.com</a>
+          </p>
+        {:else}
+          {Object.keys($organization.private?.members ?? {}).length}
+          <p style="font-size: medium;">
+            This is a team, which means members do not automatically get Blend Pro licenses. To upgrade to a paid organization, please email <a
+              href="mailto:support@blendreading.com">support@blendreading.com</a>
+          </p>
+        {/if}
       </div>
       <div class="card col-span-2 flex-col">
         <h2>Invite Link</h2>
@@ -453,7 +461,7 @@
     background-color: rgba(245, 245, 245, 0.473);
     border-radius: 1rem;
     padding: 1rem;
-    max-width: 60rem;
+    max-width: 90rem;
     margin: 1rem 0;
   }
 </style>
