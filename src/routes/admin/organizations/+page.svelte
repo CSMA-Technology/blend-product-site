@@ -15,6 +15,23 @@
   const organizations = createWritableStore<{ [id: string]: Database.Organization }>('/organizations');
   let showAddOrganizationModal = false;
   let currentOrganizationId = '';
+
+  const generateUserReport = async (orgId: string, orgName: string) => {
+    if (!confirm(`Are you sure you want to generate a user report for ${orgName}?`)) return;
+    const response = await fetch(`/api/admin/organization/${orgId}/userData`);
+    const users = await response.json();
+    const csv = ['Email,DisplayName,lastActiveTime'];
+    for (const user of users) {
+      csv.push([`"${user.email}"`, `"${user.displayName}"`, `"${user.lastActiveTime}"`].join(','));
+    }
+    const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'user_report.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  };
 </script>
 
 {#if $organizations}
@@ -52,11 +69,13 @@
           </td>
           <td class="flex flex-col items-end">
             <button
-              class="btn btn-red btn-small !mr-0"
+              class="btn btn-red btn-small !mr-0 w-full"
               on:click={() => {
                 currentOrganizationId = orgId;
                 showAddOrganizationModal = true;
               }}>Edit</button>
+            <button class="btn btn-gray btn-small !mr-0 w-full p-0 text-xs" on:click={() => generateUserReport(orgId, org.public.name)}
+              >User Report</button>
           </td>
         </tr>
       {/each}
