@@ -2,7 +2,7 @@
   import { appUrl } from '$lib/utils';
 </script>
 
-<div class="content">
+<div class="content mt-6">
   <h1>Deck Accepted</h1>
   <p style="font-weight: bold;">
     Success! You'll now see the deck on the homepage of the <a style="color: darkviolet;" href={$appUrl}>app</a>.
