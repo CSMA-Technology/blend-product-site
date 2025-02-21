@@ -78,6 +78,18 @@
       <li>
         <a id="blog" href="/blog">blog</a>
       </li>
+      <li>
+        <a
+          id="shop"
+          href="https://the-blend-shop.square.site/"
+          target="_blank"
+          rel="noopener noreferrer"
+          on:click={() => window.gtag('event', 'click_shop')}
+          class="flex items-center space-x-1">
+          <span>shop</span>
+          <span class="material-symbols-rounded text-base">open_in_new</span>
+        </a>
+      </li>
       {#if !isLoggedIn}
         <li class="min-w-[70px]">
           <a id="login" href="/login">login</a>
@@ -210,6 +222,10 @@
 
   a#library:hover {
     color: #8ec9ff;
+  }
+
+  a#shop:hover {
+    color: #ffa841;
   }
 
   .hamburger-button {
