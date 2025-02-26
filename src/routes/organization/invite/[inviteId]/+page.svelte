@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from '$app/forms';
+  import AuthCheck from '$lib/components/AuthCheck.svelte';
   import ProBadgeWrapper from '$lib/components/ProBadgeWrapper.svelte';
   import { user } from '$lib/firebase';
   import { upgradeUrl } from '$lib/utils';
@@ -12,7 +13,9 @@
   <title>Organization Invite</title>
 </svelte:head>
 
-<div class="content">
+<AuthCheck />
+
+<div class="content mt-4">
   <h1>Join {data.organizationName}</h1>
   <form method="post" use:enhance>
     <p>You have been invited to join</p>

@@ -3,7 +3,10 @@
 
   This is a *client-side* auth check to ensure the user is logged in.
   
-  It is useful where server-side session auth is unavailable, or if you want the page to redirect to the log in when the user is logged out.
+  It is useful where server-side session auth is unavailable, or if you want the page to redirect to the log in when the user becomes logged out.
+
+  Since we are using two different auth methods (session cookie and firebase SDK, which uses local indexedDB), it is also possible to have a mismatch where the cookie is present but the user is logged out on the client. 
+  This should therefore be used redundantly with the server-side `checkSessionAuth` function where user auth is critical. 
 
   It is not appropriate on its own to protect sensitive data on a server-rendered page, as the HTML may be sent to the client regardless of the user's auth status.
 -->
