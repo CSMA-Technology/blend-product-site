@@ -125,14 +125,21 @@
   };
 
   const approveInviteRequest = async (uid: string) => {
-    if (!confirm('Are you sure you want to approve this invite request? This will take up an available seat.')) return;
-    inviteRequestsProcessing = [...inviteRequestsProcessing, uid];
-    // We have to do this addition server-side since we need to modify that user's organization list
-    await fetch(`${$page.url.href}/members`, {
-      method: 'POST',
-      body: JSON.stringify({ uids: [uid] }),
-    });
-    inviteRequestsProcessing = inviteRequestsProcessing.filter((id) => id !== uid);
+    // Check if org is at seat limit first
+    if (Object.keys($organization?.private?.members ?? {}).length >= ($organization?.locked.seats ?? 0)) {
+      alert(
+        '⚠️No Available Seats\n\nYou have reached the seat limit for your organization. Please reach out to support@blendreading.com to increase your seat limit.',
+      );
+    } else {
+      if (!confirm('Are you sure you want to approve this invite request? This will take up an available seat.')) return;
+      inviteRequestsProcessing = [...inviteRequestsProcessing, uid];
+      // We have to do this addition server-side since we need to modify that user's organization list
+      await fetch(`${$page.url.href}/members`, {
+        method: 'POST',
+        body: JSON.stringify({ uids: [uid] }),
+      });
+      inviteRequestsProcessing = inviteRequestsProcessing.filter((id) => id !== uid);
+    }
   };
 
   const denyInviteRequest = (uid: string) => {

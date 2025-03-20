@@ -78,7 +78,10 @@
     newMembers = newMembers.filter((m) => m !== member);
   };
 
-  $: disableSubmit = requestProcessing || newMembers.length === 0 || !!newMembers.find(({ error, validated }) => error || !validated);
+  $: disableSubmit =
+    requestProcessing ||
+    newMembers.length === 0 ||
+    !!newMembers.find(({ error, validated }) => error || !validated || numSeatsUsed >= availableSeats);
 </script>
 
 <Modal bind:showModal>
@@ -123,6 +126,7 @@
     {/if}
     {#if newMembers.length > availableSeats}
       <p style="color: red">Too many invitations added. Please remove {newMembers.length - availableSeats}.</p>
+      <p>If you would like to increase your seat limit, reach out to support@blendreading.com</p>
     {/if}
     {#if error}
       <p style="color: red">{error}</p>
