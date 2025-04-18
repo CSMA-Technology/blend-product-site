@@ -9,6 +9,7 @@
   import rControlledVowels from '$lib/data/library/playlists/rControlledVowels';
   import vowelTeams from '$lib/data/library/playlists/vowelTeams';
   import diphthongs from '$lib/data/library/playlists/diphthongs';
+  import morphology from '$lib/data/library/playlists/morphology';
 </script>
 
 <svelte:head>
@@ -65,6 +66,7 @@
     <LibraryCarousel section={rControlledVowels} />
     <LibraryCarousel section={vowelTeams} />
     <LibraryCarousel section={diphthongs} />
+    <LibraryCarousel section={morphology} />
   </section>
 </main>
 

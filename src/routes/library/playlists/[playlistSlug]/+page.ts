@@ -7,6 +7,7 @@ import suffixes from '$lib/data/library/playlists/suffixes';
 import rControlledVowels from '$lib/data/library/playlists/rControlledVowels';
 import vowelTeams from '$lib/data/library/playlists/vowelTeams';
 import diphthongs from '$lib/data/library/playlists/diphthongs';
+import morphology from '$lib/data/library/playlists/morphology';
 
 export const load = (({ params }) => {
   const playlists: BlendLibrary.Item[] = [
@@ -17,6 +18,7 @@ export const load = (({ params }) => {
     ...rControlledVowels.items,
     ...vowelTeams.items,
     ...diphthongs.items,
+    ...morphology.items,
   ];
   const playlist: BlendLibrary.Item | undefined = playlists.find((playlist) => playlist.id === params.playlistSlug);
   if (playlist) {
