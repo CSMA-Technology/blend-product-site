@@ -45,15 +45,17 @@
           const cleanedEmail = email.trim();
           let status = 'None';
           let error = false;
+          let validated = false;
           if (!validate(cleanedEmail)) {
             status = 'Invalid Email';
             error = true;
+            validated = true;
           }
           return {
             email: cleanedEmail,
             status,
             error,
-            validated: false,
+            validated,
           };
         });
       newMembers = [...newMembers, ...newAdditions];
@@ -81,12 +83,13 @@
   $: disableSubmit =
     requestProcessing ||
     newMembers.length === 0 ||
-    !!newMembers.find(({ error, validated }) => error || !validated || numSeatsUsed >= availableSeats);
+    numSeatsUsed >= availableSeats ||
+    !!newMembers.find(({ error, validated }) => error || !validated);
 </script>
 
 <Modal bind:showModal>
   <h3 slot="header">Add Members</h3>
-  <p>Enter up to {availableSeats} email addresses and click the "validate" button below.</p>
+  <p>Enter up to {availableSeats} email addresses and click the "Submit" button below.</p>
   <p>You may enter multiple emails at once seperated by a comma. They will be split up automatically.</p>
   <table>
     <tr>
