@@ -83,8 +83,18 @@
   $: disableSubmit =
     requestProcessing ||
     newMembers.length === 0 ||
-    numSeatsUsed >= availableSeats ||
+    availableSeats - newMembers.length < 0 ||
     !!newMembers.find(({ error, validated }) => error || !validated);
+
+  //@ts-ignore
+  window.debugOrganization = () => {
+    console.log('Organization:', organization);
+    console.log('Num Seats Used:', numSeatsUsed);
+    console.log('Available Seats:', availableSeats);
+    console.log('New Members:', newMembers);
+    console.log('Request Processing:', requestProcessing);
+    console.log('Error:', error);
+  };
 </script>
 
 <Modal bind:showModal>
