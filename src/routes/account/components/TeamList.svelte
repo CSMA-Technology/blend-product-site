@@ -43,7 +43,7 @@
     <p class="">You are not a member of any teams.</p>
     <p class="text-[1rem]">Teams allow you to share resources with other Blend users.</p>
   {/if}
-  {#if data.isSubscribedToBlendPro}
+  {#if data.isSubscribedToBlendPro || data.hasLicensedOrgMembership}
     <button
       class="btn btn-small !mt-2 !bg-green-600 !p-2"
       on:click={() => {

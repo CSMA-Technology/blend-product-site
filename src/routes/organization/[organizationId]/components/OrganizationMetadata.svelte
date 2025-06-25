@@ -99,7 +99,7 @@
       <button
         class="btn btn-small btn-blurple"
         on:click={() => {
-          navigator.clipboard.writeText(`https://blendreading.com/organization/join/${organizationId}`);
+          navigator.clipboard.writeText(inviteLink);
         }}>Copy</button>
     </div>
     <p style="font-size: medium;">Send this link to users who want to join your {organizationOrTeamLabel}.</p>
