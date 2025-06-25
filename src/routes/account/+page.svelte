@@ -90,6 +90,8 @@
           }}>Leave Organization</button>
       </div>
     </Modal>
+  </section>
+  <section class="info">
     {#if data.licensedOrganizations.length}
       <div class="detail">
         <h3 class="text-2xl font-bold">Organizations</h3>
@@ -107,7 +109,7 @@
           {/each}
         </ul>
       </div>
-      <div class="org-help mt-4">
+      <div class="org-help mt-1">
         <p>Need help with your organization?</p>
         <p>
           Check out our guide here: <a
