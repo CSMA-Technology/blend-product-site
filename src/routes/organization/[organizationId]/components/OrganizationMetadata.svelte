@@ -87,7 +87,7 @@
     {:else}
       {Object.keys($organization?.private?.members ?? {}).length}
       <p style="font-size: medium;">
-        This is a team, which means members do not automatically get Blend Pro licenses. To upgrade to a paid organization, please email <a
+        Each member of a team is billed individually for Blend Pro. To upgrade to a paid organization, please email <a
           href="mailto:support@blendreading.com">support@blendreading.com</a>
       </p>
     {/if}
