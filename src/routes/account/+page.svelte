@@ -70,26 +70,9 @@
       <h3 class="font-bold">Email</h3>
       <p>{$user?.email}</p>
     </div>
-    <Modal bind:showModal={showOrgLeaveConfirmation}>
-      <h2 slot="header">Are you sure?</h2>
-      <p class="p-4">
-        This will remove you from the {allOrganizations.find(({ id }) => id === selectedOrgId)?.name} organization. You will need to be invited back in
-        order to re-join.
-      </p>
-      <div slot="footer" class="row flex-around">
-        <button
-          class="btn btn-gray"
-          on:click={() => {
-            showOrgLeaveConfirmation = false;
-          }}>Cancel</button>
-        <button
-          class="btn btn-red"
-          on:click={() => {
-            leaveOrganization(selectedOrgId);
-            showOrgLeaveConfirmation = false;
-          }}>Leave Organization</button>
-      </div>
-    </Modal>
+    <div class="detail">
+      <button disabled={disableSignOut} on:click={onSignOutCLicked} class="btn">Sign Out</button>
+    </div>
   </section>
   <section class="info">
     {#if data.licensedOrganizations.length}
@@ -120,9 +103,6 @@
       </div>
     {/if}
     <TeamList {data} />
-    <div class="detail">
-      <button disabled={disableSignOut} on:click={onSignOutCLicked} class="btn">Sign Out</button>
-    </div>
   </section>
   <section class="info">
     <h2>Subscription Information</h2>
@@ -181,6 +161,26 @@
 </div>
 
 <TeamCreationModal bind:show={showTeamCreationModal} />
+<Modal bind:showModal={showOrgLeaveConfirmation}>
+  <h2 slot="header">Are you sure?</h2>
+  <p class="p-4">
+    This will remove you from the {allOrganizations.find(({ id }) => id === selectedOrgId)?.name} organization. You will need to be invited back in order
+    to re-join.
+  </p>
+  <div slot="footer" class="row flex-around">
+    <button
+      class="btn btn-gray"
+      on:click={() => {
+        showOrgLeaveConfirmation = false;
+      }}>Cancel</button>
+    <button
+      class="btn btn-red"
+      on:click={() => {
+        leaveOrganization(selectedOrgId);
+        showOrgLeaveConfirmation = false;
+      }}>Leave Organization</button>
+  </div>
+</Modal>
 
 <style>
   @media (max-width: 480px) {
