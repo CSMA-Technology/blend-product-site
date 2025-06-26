@@ -33,7 +33,7 @@
       {name}
       <span>
         <button class="btn btn-small btn-red" style="margin-right: 0;" on:click={() => leaveTeam(id)}>Leave</button>
-        {#if role === 'admin'}
+        {#if data.isGlobalAdmin || role === 'admin'}
           <a href={`/organization/${id}`} class="btn btn-small" style="margin-left: 0; margin-right: 0;">Manage</a>
         {/if}
       </span>

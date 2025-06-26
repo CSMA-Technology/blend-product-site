@@ -70,7 +70,7 @@
       <h3 class="font-bold">Email</h3>
       <p>{$user?.email}</p>
     </div>
-    <div class="detail">
+    <div class="detail mt-0">
       <button disabled={disableSignOut} on:click={onSignOutCLicked} class="btn">Sign Out</button>
     </div>
   </section>
@@ -84,7 +84,7 @@
               {name}
               <span>
                 <button class="btn btn-small btn-red" style="margin-right: 0;" on:click={() => onLeaveClicked(id)}>Leave</button>
-                {#if role === 'admin'}
+                {#if data.isGlobalAdmin || role === 'admin'}
                   <a href={`/organization/${id}`} class="btn btn-small" style="margin-left: 0; margin-right: 0;">Manage</a>
                 {/if}
               </span>

@@ -89,6 +89,7 @@ export const load = (async ({ url, cookies }) => {
     subscriptionPendingCancellation: subscription?.cancel_at_period_end ?? false,
     licensedOrganizations,
     unlicensedOrganizations,
+    isGlobalAdmin: await isUserGlobalAdmin(uid),
   };
 }) satisfies PageServerLoad;
 
