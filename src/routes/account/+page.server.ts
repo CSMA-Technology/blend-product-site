@@ -46,7 +46,7 @@ export const load = (async ({ url, cookies }) => {
     .filter(({ organization }) => !organization.locked?.isLicensed)
     .map(({ organization, id }) => ({
       id,
-      role: organization.private?.members?.[uid].role ?? 'member',
+      role: organization.private?.members?.[uid]?.role ?? 'member',
       ...organization.public,
     }));
   const customer = await getStripeCustomerWithSubscriptions(uid);
