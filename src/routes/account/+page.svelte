@@ -70,7 +70,7 @@
       <h3 class="font-bold">Email</h3>
       <p>{$user?.email}</p>
     </div>
-    <div class="detail mt-0">
+    <div class="detail !mt-0">
       <button disabled={disableSignOut} on:click={onSignOutCLicked} class="btn">Sign Out</button>
     </div>
   </section>
