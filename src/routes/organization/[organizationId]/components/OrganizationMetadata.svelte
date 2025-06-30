@@ -71,7 +71,7 @@
   {#if $organization?.locked.isLicensed}
     <div class="card col-span-2">
       <h2>License End</h2>
-      {$organization.locked.termEnd ? new Date($organization.locked.termEnd).toLocaleDateString() : 'N/A'}
+      {$organization.locked.termEnd ? new Date($organization.locked.termEnd).toLocaleDateString('en-US', { timeZone: 'UTC' }) : 'N/A'}
       <p style="font-size: medium;">
         To renew or modify your license duration, please email <a href="mailto:support@blendreading.com">support@blendreading.com</a>
       </p>
