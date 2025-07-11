@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createWritableStore, generatePushID } from '$lib/firebase';
   import OrganizationEditModal from '../OrganizationEditModal.svelte';
+  import NotesModal from './NotesModal.svelte';
 
   const emptyOrganization = {
     public: {
@@ -14,6 +15,7 @@
   };
   const organizations = createWritableStore<{ [id: string]: Database.Organization }>('/organizations');
   let showAddOrganizationModal = false;
+  let showNotesModal = false;
   let currentOrganizationId = '';
 
   const generateUserReport = async (orgId: string, orgName: string) => {
@@ -45,7 +47,7 @@
         <th class="w-28" title="Whether or not this is a licensed organization that provides Blend Pro to its members">Licensed</th>
         <th class="w-36">Term Start</th>
         <th class="w-36">Term End</th>
-        <th class="w-20 text-right">Actions</th>
+        <th class="w-52 text-left">Actions</th>
       </tr>
       {#each Object.entries($organizations) as [orgId, org]}
         <tr>
@@ -67,15 +69,20 @@
           <td>
             {org.locked.termEnd ? new Date(org.locked.termEnd).toLocaleDateString('en-US', { timeZone: 'UTC' }) : 'N/A'}
           </td>
-          <td class="flex flex-col items-end">
+          <td class="flex flex-row items-end gap-0">
             <button
-              class="btn btn-red btn-small !mr-0 w-full"
+              class="btn btn-red btn-small action-button"
               on:click={() => {
                 currentOrganizationId = orgId;
                 showAddOrganizationModal = true;
               }}>Edit</button>
-            <button class="btn btn-gray btn-small !mr-0 w-full p-0 text-xs" on:click={() => generateUserReport(orgId, org.public.name)}
-              >User Report</button>
+            <button class="btn btn-gray btn-small action-button" on:click={() => generateUserReport(orgId, org.public.name)}>Users</button>
+            <button
+              class="btn btn-gray btn-small action-button"
+              on:click={() => {
+                currentOrganizationId = orgId;
+                showNotesModal = true;
+              }}>Notes</button>
           </td>
         </tr>
       {/each}
@@ -97,3 +104,14 @@
       $organizations[id] = organization;
     }
   }} />
+
+<NotesModal bind:show={showNotesModal} orgId={currentOrganizationId} />
+
+<style>
+  .action-button {
+    margin: 0;
+    padding: 0.5rem;
+    text-align: center;
+    flex-grow: 1;
+  }
+</style>

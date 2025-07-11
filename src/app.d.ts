@@ -99,6 +99,13 @@ declare global {
       position: number;
       refId: number;
     }
+
+    namespace AdminData {
+      interface OrganizationNotes {
+        [orgId: string]: string;
+      }
+    }
+
     interface Playlist {
       linked_deck_id: number;
       created_ts: string;
