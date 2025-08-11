@@ -5,7 +5,7 @@ export default () => {
     name: 'createAppThemeManifest',
     buildStart: () => {
       const files = fs
-        .readdirSync('./static/app/themes', { withFileTypes: true })
+        .readdirSync('./static/assets/app/themes', { withFileTypes: true })
         .filter((dirent) => dirent.isDirectory())
         .map((dirent) => ({
           name: dirent.name,
@@ -19,7 +19,7 @@ export default () => {
               ),
             })),
         }));
-      fs.writeFileSync('./static/app/themes/manifest.json', JSON.stringify(files));
+      fs.writeFileSync('./static/assets/app/themes/manifest.json', JSON.stringify(files));
     },
   };
 };
