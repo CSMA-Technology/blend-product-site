@@ -1,5 +1,6 @@
+/assets/app/themes/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
 /assets/app/themes/manifest.json
   Cache-Control: no-cache
 
-/assets/app/themes/*
-  Cache-Control: public, max-age=0, stale-while-revalidate=86400
