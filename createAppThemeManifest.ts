@@ -11,9 +11,9 @@ export default () => {
           name: dirent.name,
           backgrounds: fs
             .readdirSync(path.join(dirent.path, dirent.name), { withFileTypes: true })
-            .filter((file) => file.isFile() && file.name.endsWith('.webp'))
+            .filter((file) => file.isFile() && (file.name.endsWith('.webp') || file.name.endsWith('.png')))
             .map((file) => ({
-              scene: file.name.replace('.webp', ''),
+              scene: file.name.replace('.webp', '').replace('.png', ''),
               location: path.join(
                 `/themes/${dirent.name}/${file.name}?v=${fs.statSync(path.join(dirent.path, dirent.name, file.name)).mtimeMs.toFixed(0)}`,
               ),
