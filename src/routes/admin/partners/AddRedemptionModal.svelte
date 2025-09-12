@@ -69,6 +69,7 @@
           class="border-gray rounded-md border-2 px-2"
           required
           type="number"
+          step="0.01"
           bind:value={redemption.partnerOwedAmount} />
       </label>
       <label>
