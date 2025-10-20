@@ -20,9 +20,20 @@
   let showDeckAddModal = false;
 
   const reorderOrganizationDecks = (itemIdsInOrder: string[]) => {
-    itemIdsInOrder.forEach((id, index) => {
-      $organizationDecks![id].deck.position = index;
-    });
+    // We do this like this instead of updating each position entry so that we just have one write to firebase
+    const newDecks = itemIdsInOrder.reduce((acc, id, index) => {
+      return {
+        ...acc,
+        [id]: {
+          ...$organizationDecks![id],
+          deck: {
+            ...$organizationDecks![id].deck,
+            position: index,
+          },
+        },
+      };
+    }, {});
+    $organizationDecks = newDecks;
   };
 
   const handleDeckAdd = () => {
