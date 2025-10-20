@@ -24,9 +24,20 @@
   };
 
   const reorderOrganizationPlaylists = (itemIdsInOrder: string[]) => {
-    itemIdsInOrder.forEach((id, index) => {
-      $organizationPlaylists![id].playlist.position = index;
-    });
+    // We do this like this instead of updating each position entry so that we just have one write to firebase
+    const newPlaylists = itemIdsInOrder.reduce((acc, id, index) => {
+      return {
+        ...acc,
+        [id]: {
+          ...$organizationPlaylists![id],
+          playlist: {
+            ...$organizationPlaylists![id].playlist,
+            position: index,
+          },
+        },
+      };
+    }, {});
+    $organizationPlaylists = newPlaylists;
   };
 
   const handlePlaylistAdd = () => {
