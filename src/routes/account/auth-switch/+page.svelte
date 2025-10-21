@@ -37,8 +37,8 @@
       // Updating password will create an email/password provider if it doesn't exist
       await updatePassword(currentUser, password);
       await unlink(currentUser, 'google.com'); // Unlink Google provider if needed
-      alert('Authentication method switched successfully. Please log in again.');
-      goto('/account');
+      alert('Authentication method switched successfully. Please log in with your new email and password.');
+      goto('/login');
     } catch (err: any) {
       errorMsg = err?.message || 'Failed to switch authentication method.';
     } finally {
