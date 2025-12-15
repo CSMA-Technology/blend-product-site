@@ -97,7 +97,6 @@
         .slice(0, draggedItemIndex)
         .concat(flattenedItems.slice(draggedItemIndex + 1))
         .toSpliced(destinationIndex, 0, flattenedItems[draggedItemIndex]);
-      console.log('New items:', newItems);
       onItemReorder(newItems.map((item) => String(item.refId)));
     }
     isDragging = false;
