@@ -98,6 +98,7 @@ declare global {
       name: string;
       position: number;
       refId: number;
+      themeName?: string;
     }
 
     namespace AdminData {
@@ -115,6 +116,7 @@ declare global {
       position: number;
       refId: number;
       words?: (string | false)[][];
+      themeName?: string;
     }
     interface OrganizationPlaylist {
       author?: string;
