@@ -64,3 +64,43 @@ export const transformImages = (images: { [key: string]: ImageFile }) =>
     if (!name) return acc;
     return { ...acc, [name]: images[key] };
   }, {});
+
+/**
+ * Jump Scene Link Generation
+ * Utility functions for generating jump scene links for the Blend app
+ */
+
+const SCENE_PLAY_DECK = 'res://Scenes/Play/PlayDeck.tscn';
+const SCENE_PLAY_PLAYLIST = 'res://Scenes/Play/Playlist/PlayPlaylist.tscn';
+
+export type ResourceSourceType = 'preloaded' | 'library';
+export type AccessLevel = 'public' | 'pro';
+
+/**
+ * Generate a jump scene link for a deck
+ * @param deckId - The ID of the deck to load
+ * @param appUrl - The base URL of the Blend app
+ * @param skipTutorial - Whether to skip the tutorial prompt (default: true)
+ * @returns The complete jump scene URL
+ */
+export function generateDeckJumpLink(deckId: string, appUrl: string, skipTutorial = true): string {
+  const encodedScene = encodeURIComponent(SCENE_PLAY_DECK);
+  const context = JSON.stringify({ deckId, skip_tutorial: skipTutorial });
+  const encodedContext = encodeURIComponent(context);
+
+  return `${appUrl}?jumpScene=${encodedScene}&context=${encodedContext}`;
+}
+
+/**
+ * Generate a jump scene link for a playlist
+ * @param playlistId - The ID of the playlist to load
+ * @param appUrl - The base URL of the Blend app
+ * @returns The complete jump scene URL
+ */
+export function generatePlaylistJumpLink(playlistId: string, appUrl: string): string {
+  const encodedScene = encodeURIComponent(SCENE_PLAY_PLAYLIST);
+  const context = JSON.stringify({ playlistId });
+  const encodedContext = encodeURIComponent(context);
+
+  return `${appUrl}?jumpScene=${encodedScene}&context=${encodedContext}`;
+}

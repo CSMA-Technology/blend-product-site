@@ -1,6 +1,7 @@
 <script lang="ts">
   import { PUBLIC_APP_URL } from '$env/static/public';
   import type { AllUserData, UserSearchResult } from '../api/admin/userData/+server';
+  import LinkGeneratorCard from './LinkGeneratorCard.svelte';
 
   let emulationUid = '';
   let windowHandle: Window | null = null;
@@ -111,6 +112,8 @@
     URL.revokeObjectURL(url);
   };
 </script>
+
+<LinkGeneratorCard />
 
 <div class="paper">
   <h2>Emulation Mode</h2>
