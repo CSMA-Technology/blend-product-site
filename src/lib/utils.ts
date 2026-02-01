@@ -72,6 +72,7 @@ export const transformImages = (images: { [key: string]: ImageFile }) =>
 
 const SCENE_PLAY_DECK = 'res://Scenes/Play/PlayDeck.tscn';
 const SCENE_PLAY_PLAYLIST = 'res://Scenes/Play/Playlist/PlayPlaylist.tscn';
+const SCENE_PLAY_WORD_MAT = 'res://Scenes/Play/WordMat/PlayWordMat.tscn';
 
 export type ResourceSourceType = 'preloaded' | 'library';
 export type AccessLevel = 'public' | 'pro';
@@ -104,3 +105,24 @@ export function generatePlaylistJumpLink(playlistId: string, appUrl: string): st
 
   return `${appUrl}?jumpScene=${encodedScene}&context=${encodedContext}`;
 }
+
+/**
+ * Generate a jump scene link for a word mat
+ * @param wordMatId - The ID of the word mat to load
+ * @param appUrl - The base URL of the Blend app
+ * @returns The complete jump scene URL
+ */
+export function generateWordMatJumpLink(wordMatId: string, appUrl: string): string {
+  const encodedScene = encodeURIComponent(SCENE_PLAY_WORD_MAT);
+  const context = JSON.stringify({ wordMatId });
+  const encodedContext = encodeURIComponent(context);
+
+  return `${appUrl}?jumpScene=${encodedScene}&context=${encodedContext}`;
+}
+
+/** Hardcoded word mats available in the app */
+export const WORD_MATS = [
+  { id: '1234', name: 'A-Z Tiles' },
+  { id: '4321', name: 'Advanced Sounds' },
+  { id: '1423', name: 'Phonemes Only' },
+] as const;
