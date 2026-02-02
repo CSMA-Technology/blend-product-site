@@ -1,5 +1,70 @@
 <script lang="ts">
   import schwaDay from '$lib/assets/events/schwa-day/national-schwa-day.png';
+  import playlistThumbnail from '$lib/assets/events/schwa-day/schwa-playlist-thumbnail.png';
+  import wordMatThumbnail from '$lib/assets/events/schwa-day/schwa-word-mat-thumbnail.png';
+
+  let staticConfetti: Array<{
+    id: number;
+    left: number;
+    top: number;
+    color: string;
+    shape: string;
+    size: number;
+    rotate: number;
+  }> = [];
+  let nextId = 0;
+
+  // Create static background confetti concentrated along the page border
+  function createStaticConfetti() {
+    const colors = ['#5AEDF2', '#F44FFF', '#FFFF00', '#FF7934', '#FB0093', '#4DD7FE'];
+    const shapes = ['circle', 'square', 'star'];
+    const count = 220;
+
+    staticConfetti = Array.from({ length: count }, () => {
+      let left: number;
+      let top: number;
+      const region = Math.random();
+
+      // Distribute evenly around edges: top, bottom, left, right
+      if (region < 0.25) {
+        // top strip (0-8%)
+        left = Math.random() * 100;
+        top = Math.random() * 8;
+      } else if (region < 0.5) {
+        // bottom strip (92-100%)
+        left = Math.random() * 100;
+        top = 92 + Math.random() * 8;
+      } else if (region < 0.75) {
+        // left strip (0-8%)
+        left = Math.random() * 8;
+        top = Math.random() * 100;
+      } else {
+        // right strip (92-100%)
+        left = 92 + Math.random() * 8;
+        top = Math.random() * 100;
+      }
+
+      const shape = shapes[Math.floor(Math.random() * shapes.length)];
+      const size = Math.round(6 + Math.random() * 18); // px
+      const rotate = Math.floor(Math.random() * 360);
+      const color = colors[Math.floor(Math.random() * colors.length)];
+
+      return {
+        id: nextId++,
+        left,
+        top,
+        color,
+        shape,
+        size,
+        rotate,
+      };
+    });
+  }
+
+  // Create confetti on page load
+  if (typeof window !== 'undefined') {
+    createStaticConfetti();
+  }
 </script>
 
 <svelte:head>
@@ -8,6 +73,47 @@
 </svelte:head>
 
 <main>
+  <!-- Static Confetti Background -->
+  <div class="static-confetti-container">
+    {#each staticConfetti as piece (piece.id)}
+      {#if piece.shape === 'circle'}
+        <div
+          class="static-confetti static-circle"
+          style="
+            left: {piece.left}%;
+            top: {piece.top}%;
+            background-color: {piece.color};
+            width: {piece.size}px;
+            height: {piece.size}px;
+            transform: rotate({piece.rotate}deg);
+          " />
+      {:else if piece.shape === 'square'}
+        <div
+          class="static-confetti static-square"
+          style="
+            left: {piece.left}%;
+            top: {piece.top}%;
+            background-color: {piece.color};
+            width: {piece.size}px;
+            height: {piece.size}px;
+            transform: rotate({piece.rotate}deg);
+          " />
+      {:else if piece.shape === 'star'}
+        <div
+          class="static-confetti static-star"
+          style="
+            left: {piece.left}%;
+            top: {piece.top}%;
+            color: {piece.color};
+            font-size: {piece.size}px;
+            transform: rotate({piece.rotate}deg);
+          ">
+          ★
+        </div>
+      {/if}
+    {/each}
+  </div>
+
   <div class="content">
     <!-- Hero Section -->
     <div class="header">
@@ -37,17 +143,21 @@
     <div class="demo-section" id="demo">
       <h2>How to Get Started</h2>
       <p class="demo-subtitle">Watch a quick demo to learn how to access and start using the Schwa Day resources</p>
-      <div class="video-container">
-        <div class="flex aspect-video items-center justify-center rounded-lg bg-gray-300">
-          <!-- Replace with your YouTube embed or video link -->
-          <div class="text-center">
-            <p class="mb-4 text-gray-700">Video coming soon!</p>
-            <p class="text-sm text-gray-600">Embed YouTube video or add video player here</p>
-          </div>
+      <div class="video-container mx-auto max-w-3xl">
+        <div class="relative aspect-video overflow-hidden rounded-xl shadow-md">
+          <iframe
+            class="absolute inset-0 h-full w-full"
+            src="https://www.youtube.com/embed/dujrxDwD1os?si=bLbXLkOWESuObh4h"
+            title="How to Get Started demo video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
         </div>
       </div>
       <div class="mt-6 text-center">
-        <a href="https://app.blendreading.com" target="_blank" class="btn btn-blurple">Watch Blend Tutorials</a>
+        <a href="https://www.youtube.com/watch?v=jKHS5_ObPYc&list=PL2TEs6eelwhfLxHTn2hyXDiYdKuh1Upv-" target="_blank" class="btn btn-blurple"
+          >More Blend Tutorials</a>
       </div>
     </div>
 
@@ -57,41 +167,27 @@
         <h2>FREE Classroom Resources</h2>
         <p>
           Celebrate with premade blending drills and spelling activities featuring characters from
-          <em>The Not So Lazy Schwa</em> phonics read-aloud story.
+          <em>The Not So Lazy Schwa</em> Phonics Read-Alouds story.
         </p>
       </div>
       <div class="resources-grid">
-        <!-- Blending Boards -->
         <div class="resource-item">
-          <h3>Blending Boards</h3>
-          <div class="resource-preview from-orange-200 to-pink-200">
-            <div class="text-center">
-              <p class="font-semibold text-gray-700">Coming Soon</p>
-            </div>
+          <h3>The Not So Lazy Schwa Playlist</h3>
+          <div class="resource-preview">
+            <img src={playlistThumbnail} alt="Blending Drills resource preview" class="h-full w-full rounded object-cover" />
           </div>
-          <p>Interactive digital blending board perfect for practicing schwa skills with the whole-class or one-on-one!</p>
+          <p>Premade word list featuring words with schwa sounds! No prep required - just click the link below and get started!</p>
+          <!-- <a href="https://app.blendreading.com" target="_blank" class="btn btn-blurple">Open in Blend</a> -->
           <button class="btn btn-blurple" disabled>COMING SOON</button>
         </div>
 
         <div class="resource-item">
-          <h3>Blending Drills</h3>
-          <div class="resource-preview from-blue-200 to-purple-200">
-            <div class="text-center">
-              <p class="font-semibold text-gray-700">Coming Soon</p>
-            </div>
-          </div>
-          <p>Engaging blending drills focused on words featuring schwa sounds. Perfect for building fluency!</p>
-          <button class="btn btn-blurple" disabled>COMING SOON</button>
-        </div>
-
-        <div class="resource-item">
-          <h3>Spelling Mat</h3>
-          <div class="resource-preview from-green-200 to-teal-200">
-            <div class="text-center">
-              <p class="font-semibold text-gray-700">Coming Soon</p>
-            </div>
+          <h3>The Not So Lazy Schwa Spelling Mat</h3>
+          <div class="resource-preview">
+            <img src={wordMatThumbnail} alt="Spelling Mat resource preview" class="h-full w-full rounded object-cover" />
           </div>
           <p>Interactive spelling mat with built-in Elkonin boxes. Mark schwa sounds using The Not So Lazy Schwa character!</p>
+          <!-- <a href="https://app.blendreading.com" target="_blank" class="btn btn-blurple">Open in Blend</a> -->
           <button class="btn btn-blurple" disabled>COMING SOON</button>
         </div>
       </div>
@@ -110,7 +206,7 @@
             <div class="item-text">
               <h2>Check Out The Not So Lazy Schwa</h2>
               <p>
-                Explore the book that inspired these resources! Visit Phonics Read-Alouds to discover the full collection of stories and teaching
+                Explore the story that inspired these resources! Visit Phonics Read-Alouds to discover the full collection of stories and teaching
                 aids.
               </p>
               <a href="https://phonicsreadalouds.com/products/the-not-so-lazy-schwa-book" target="_blank" class="external-link">
@@ -131,7 +227,7 @@
                 Curious about the history and significance of this holiday? Visit the official National Schwa Day website to learn more about this
                 special day.
               </p>
-              <a href="https://www.schwaday.org" target="_blank" class="external-link">
+              <a href="https://nationalschwaday.org/" target="_blank" class="external-link">
                 Visit National Schwa Day site
                 <span class="material-symbols-rounded external-icon">open_in_new</span>
               </a>
@@ -144,8 +240,8 @@
           <div class="side-by-side">
             <span class="material-symbols-rounded item-icon">favorite</span>
             <div class="item-text">
-              <h2>Explore Blend Pricing</h2>
-              <p>Ready to unlock more features for your classroom? Learn about Blend Pro and how it can enhance your phonics instruction!</p>
+              <h2>Blend Pricing</h2>
+              <p>Ready to unlock more features for your classroom? Learn about Blend's pricing plans and which one is right for you!</p>
               <a href="/pricing" class="internal-link">View Blend Pricing</a>
             </div>
           </div>
@@ -171,15 +267,71 @@
 </main>
 
 <style>
+  .static-confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+  }
+
+  .static-confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    opacity: 0.4;
+  }
+
+  .static-confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .static-confetti {
+    position: absolute;
+    opacity: 0.4;
+  }
+
+  .static-circle {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .static-square {
+    width: 14px;
+    height: 14px;
+    border-radius: 2px;
+  }
+
+  .static-star {
+    font-size: 16px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+
   main {
     display: flex;
     flex-direction: column;
     align-items: center;
     background: linear-gradient(135deg, #abe6ee 0%, #d4f1f9 50%, #c6fdff 100%);
     padding: 2rem;
+    position: relative;
   }
 
   .content {
+    position: relative;
+    z-index: 2;
     width: 80%;
     text-align: left;
   }
@@ -309,7 +461,7 @@
     display: flex;
     flex-direction: column;
     flex-basis: 25rem;
-    padding: 2rem 0;
+    padding: 0 0 2rem 0;
   }
 
   .item-icon {
