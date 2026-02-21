@@ -177,8 +177,10 @@
             <img src={playlistThumbnail} alt="Blending Drills resource preview" class="h-full w-full rounded object-cover" />
           </div>
           <p>Premade word list featuring words with schwa sounds! No prep required - just click the link below and get started!</p>
-          <!-- <a href="https://app.blendreading.com" target="_blank" class="btn btn-blurple">Open in Blend</a> -->
-          <button class="btn btn-blurple" disabled>COMING SOON</button>
+          <a
+            href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FPlaylist%2FPlayPlaylist.tscn&context=%7B%22playlistId%22%3A2562374201%7D"
+            target="_blank"
+            class="btn btn-blurple">Open in Blend</a>
         </div>
 
         <div class="resource-item">
@@ -187,8 +189,10 @@
             <img src={wordMatThumbnail} alt="Spelling Mat resource preview" class="h-full w-full rounded object-cover" />
           </div>
           <p>Interactive spelling mat with built-in Elkonin boxes. Mark schwa sounds using The Not So Lazy Schwa character!</p>
-          <!-- <a href="https://app.blendreading.com" target="_blank" class="btn btn-blurple">Open in Blend</a> -->
-          <button class="btn btn-blurple" disabled>COMING SOON</button>
+          <a
+            href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FWordMat%2FPlayWordMat.tscn&context=%7B%22wordMatId%22%3A%22schwa%22%7D"
+            target="_blank"
+            class="btn btn-blurple">Open in Blend</a>
         </div>
       </div>
     </div>
