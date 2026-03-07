@@ -2,6 +2,7 @@
   import schwaDay from '$lib/assets/events/schwa-day/national-schwa-day.png';
   import playlistThumbnail from '$lib/assets/events/schwa-day/schwa-playlist-thumbnail.png';
   import wordMatThumbnail from '$lib/assets/events/schwa-day/schwa-word-mat-thumbnail.png';
+  import webinarImage from '$lib/assets/events/schwa-day/Schwa Day Webinar 2x.png';
 
   let staticConfetti: Array<{
     id: number;
@@ -115,6 +116,25 @@
   </div>
 
   <div class="content">
+    <!-- Webinar Banner Section -->
+    <div class="webinar-section py-4 text-center" style="width: 80%; margin-left: auto; margin-right: auto;">
+      <h1>The Official Schwa Day Celebration Kickoff</h1>
+      <a href="https://us06web.zoom.us/webinar/register/WN_BmDMcx59SlGQvKOHNEJANQ#/registration" target="_blank" rel="noopener">
+        <img src={webinarImage} alt="Webinar placeholder" class="mx-auto w-full" style="max-width: 95%;" />
+      </a>
+      <div class="mt-6 text-center text-lg font-semibold">
+        <h2>Tuesday, March 10 // 7 PM ET</h2>
+        <h3>Learn about National Schwa Day and how to celebrate it + WIN PRIZES!</h3>
+        <div class="flex w-full justify-center">
+          <a
+            href="https://us06web.zoom.us/webinar/register/WN_BmDMcx59SlGQvKOHNEJANQ#/registration"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-green">Register Now</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Hero Section -->
     <div class="header">
       <div class="side-by-side">
