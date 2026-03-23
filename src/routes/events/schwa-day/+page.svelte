@@ -631,7 +631,7 @@
   @media (max-width: 480px) {
     main {
       margin: 0;
-      padding: 0;
+      padding: 0 1rem;
       width: 100%;
     }
 
