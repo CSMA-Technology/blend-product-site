@@ -3,6 +3,7 @@
   import playlistThumbnail from '$lib/assets/events/schwa-day/schwa-playlist-thumbnail.png';
   import wordMatThumbnail from '$lib/assets/events/schwa-day/schwa-word-mat-thumbnail.png';
   import webinarImage from '$lib/assets/events/schwa-day/webinar.png';
+  import schwaDayKickoff from '$lib/assets/events/schwa-day/schwa-day-kickoff.svg';
 
   let staticConfetti: Array<{
     id: number;
@@ -116,25 +117,6 @@
   </div>
 
   <div class="content">
-    <!-- Webinar Banner Section -->
-    <div class="webinar-section py-4 text-center" style="width: 80%; margin-left: auto; margin-right: auto;">
-      <h1>The Official Schwa Day Celebration Kickoff</h1>
-      <a href="https://us06web.zoom.us/webinar/register/WN_BmDMcx59SlGQvKOHNEJANQ#/registration" target="_blank" rel="noopener">
-        <img src={webinarImage} alt="Webinar placeholder" class="mx-auto w-full" style="max-width: 95%;" />
-      </a>
-      <div class="mt-6 text-center text-lg font-semibold">
-        <h2>Tuesday, March 10 // 7 PM ET</h2>
-        <h3>Learn about National Schwa Day and how to celebrate it + WIN PRIZES!</h3>
-        <div class="flex w-full justify-center">
-          <a
-            href="https://us06web.zoom.us/webinar/register/WN_BmDMcx59SlGQvKOHNEJANQ#/registration"
-            target="_blank"
-            rel="noopener"
-            class="btn btn-green">Register Now</a>
-        </div>
-      </div>
-    </div>
-
     <!-- Hero Section -->
     <div class="header">
       <div class="side-by-side">
@@ -159,29 +141,7 @@
       </div>
     </div>
 
-    <!-- Demo Section -->
-    <div class="demo-section" id="demo">
-      <h2>How to Get Started</h2>
-      <p class="demo-subtitle">Watch a quick demo to learn how to access and start using the Schwa Day resources</p>
-      <div class="video-container mx-auto max-w-3xl">
-        <div class="relative aspect-video overflow-hidden rounded-xl shadow-md">
-          <iframe
-            class="absolute inset-0 h-full w-full"
-            src="https://www.youtube.com/embed/dujrxDwD1os?si=bLbXLkOWESuObh4h"
-            title="How to Get Started demo video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allowfullscreen></iframe>
-        </div>
-      </div>
-      <div class="mt-6 text-center">
-        <a href="https://www.youtube.com/watch?v=jKHS5_ObPYc&list=PL2TEs6eelwhfLxHTn2hyXDiYdKuh1Upv-" target="_blank" class="btn btn-blurple"
-          >More Blend Tutorials</a>
-      </div>
-    </div>
-
-    <!-- Resources Section -->
+    <!-- BLEND Resources Section -->
     <div class="resources" id="resources">
       <div class="resource-title">
         <h2>FREE Classroom Resources</h2>
@@ -213,6 +173,58 @@
             href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FWordMat%2FPlayWordMat.tscn&context=%7B%22wordMatId%22%3A%22schwa%22%7D"
             target="_blank"
             class="btn btn-blurple">Open in Blend</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Section -->
+    <div class="demo-section" id="demo">
+      <h2>How to Get Started</h2>
+      <p class="demo-subtitle">
+        Watch a quick demo or our live webinar recording below to learn about the Schwa Day resources and get ready for the celebration!
+      </p>
+      <div class="demo-grid">
+        <div class="demo-video-panel">
+          <div class="video-container">
+            <div class="relative aspect-video overflow-hidden rounded-xl shadow-md">
+              <iframe
+                class="absolute inset-0 h-full w-full"
+                src="https://www.youtube.com/embed/dujrxDwD1os?si=bLbXLkOWESuObh4h"
+                title="How to Get Started demo video"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="mt-6 text-center">
+            <a
+              href="https://www.youtube.com/watch?v=jKHS5_ObPYc&list=PL2TEs6eelwhfLxHTn2hyXDiYdKuh1Upv-"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-green">More Blend Tutorials <span class="material-symbols-rounded external-icon">open_in_new</span></a>
+          </div>
+        </div>
+        <div class="demo-links-panel">
+          <img src={schwaDayKickoff} alt="Schwa Day Official Kickoff Celebration" class="kickoff-svg" />
+          <p>
+            In March, we hosted a webinar together with Phonics Read-Alouds as the official kickoff of Schwa Day. Watch the recording and check out
+            the slides below for resource links and exclusive discounts!
+          </p>
+          <div class="demo-link-actions">
+            <a
+              href="https://us06web.zoom.us/webinar/register/WN_BmDMcx59SlGQvKOHNEJANQ#/registration"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-purple"
+              >Watch Webinar Recording
+              <span class="material-symbols-rounded external-icon">open_in_new</span></a>
+            <a
+              href="https://drive.google.com/file/d/1FtzC9Jt6686_n0bDbUMt4aBEiYpWu59Z/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-outlined">View Webinar Slides <span class="material-symbols-rounded external-icon">open_in_new</span></a>
+          </div>
         </div>
       </div>
     </div>
@@ -388,9 +400,47 @@
     margin: 0.5rem 0 2rem 0;
   }
 
+  .demo-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr);
+    gap: 1.5rem;
+    align-items: stretch;
+  }
+
+  .demo-video-panel,
+  .demo-links-panel {
+    background: white;
+    border-radius: 0.75rem;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    padding: 1.25rem;
+  }
+
+  .demo-links-panel {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .kickoff-svg {
+    width: 100%;
+    margin-bottom: 0.75rem;
+  }
+
+  .demo-links-panel p {
+    margin: 0.75rem 0 1rem 0;
+    color: #555;
+  }
+
+  .demo-link-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
   .video-container {
-    max-width: 48rem;
-    margin: 0 auto 1rem;
+    width: 100%;
+    margin: 0;
   }
 
   .resources {
@@ -563,6 +613,10 @@
 
     .description {
       width: 100%;
+    }
+
+    .demo-grid {
+      grid-template-columns: 1fr;
     }
 
     .resources-grid {
