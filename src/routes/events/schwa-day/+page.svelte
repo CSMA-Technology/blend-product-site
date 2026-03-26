@@ -212,6 +212,9 @@
             the slides below for resource links and exclusive discounts!
           </p>
           <div class="demo-link-actions">
+            <h2>
+              Passcode: <span class="font-mono">M.T5Qm$1</span>
+            </h2>
             <a
               href="https://us06web.zoom.us/webinar/register/WN_BmDMcx59SlGQvKOHNEJANQ#/registration"
               target="_blank"
