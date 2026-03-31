@@ -238,7 +238,37 @@
         <h2>Explore More</h2>
       </div>
       <div class="other-resources-list">
-        <!-- Phonics Read-Alouds -->
+        <!-- Phonics Read-Alouds Discount -->
+        <div class="item">
+          <div class="side-by-side">
+            <span class="material-symbols-rounded item-icon">local_offer</span>
+            <div class="item-text">
+              <h2>Save 15% on Phonics Read-Alouds</h2>
+              <p>Get 15% off everything in the Phonics Read-Alouds shop through April 15th with code <strong>BLENDFRIEND</strong>!</p>
+              <a href="https://phonicsreadalouds.com/discount/BLENDFRIEND" target="_blank" class="external-link">
+                Visit Phonics Read-Alouds Shop
+                <span class="material-symbols-rounded external-icon">open_in_new</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Save on Blend Pro -->
+        <div class="item">
+          <div class="side-by-side">
+            <span class="material-symbols-rounded item-icon">card_giftcard</span>
+            <div class="item-text">
+              <h2>Save on Blend Pro</h2>
+              <p>
+                You can get 20% off Blend Pro for life with this exclusive discount! Every subscription using the link below gives back to Phonics
+                Read-Alouds.
+              </p>
+              <a href="https://blendreading.com/partners/-OUfwTgMYAwAkveggMKq" class="external-link"> Get 20% Off Blend Pro </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Check Out The Not So Lazy Schwa -->
         <div class="item">
           <div class="side-by-side">
             <span class="material-symbols-rounded item-icon">auto_stories</span>
@@ -270,33 +300,6 @@
                 Visit National Schwa Day site
                 <span class="material-symbols-rounded external-icon">open_in_new</span>
               </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Blend Pricing -->
-        <div class="item">
-          <div class="side-by-side">
-            <span class="material-symbols-rounded item-icon">favorite</span>
-            <div class="item-text">
-              <h2>Blend Pricing</h2>
-              <p>Ready to unlock more features for your classroom? Learn about Blend's pricing plans and which one is right for you!</p>
-              <a href="/pricing" class="internal-link">View Blend Pricing</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Additional Resource -->
-        <div class="item">
-          <div class="side-by-side">
-            <span class="material-symbols-rounded item-icon">card_giftcard</span>
-            <div class="item-text">
-              <h2>Save on Blend Pro</h2>
-              <p>
-                You can get 20% off Blend Pro for life with this exclusive discount! Every subscription using the link below gives back to Phonics
-                Read-Alouds.
-              </p>
-              <a href="https://blendreading.com/partners/-OUfwTgMYAwAkveggMKq" class="external-link"> Get 20% Off Blend Pro </a>
             </div>
           </div>
         </div>
