@@ -2,7 +2,9 @@
   import schwaDay from '$lib/assets/events/schwa-day/national-schwa-day.png';
   import playlistThumbnail from '$lib/assets/events/schwa-day/schwa-playlist-thumbnail.png';
   import wordMatThumbnail from '$lib/assets/events/schwa-day/schwa-word-mat-thumbnail.png';
-  import webinarImage from '$lib/assets/events/schwa-day/webinar.png';
+  import aAsSchwa from '$lib/assets/events/schwa-day/a-as-schwa.png';
+  import eAsSchwa from '$lib/assets/events/schwa-day/e-as-schwa.png';
+  import oAsSchwa from '$lib/assets/events/schwa-day/o-as-schwa.png';
   import schwaDayKickoff from '$lib/assets/events/schwa-day/schwa-day-kickoff.svg';
 
   let staticConfetti: Array<{
@@ -15,6 +17,47 @@
     rotate: number;
   }> = [];
   let nextId = 0;
+
+  let carouselOffset = 0;
+  const itemWidth = 440; // 360px item + 80px margin
+  let visibleItems = 3;
+  const totalItems = 5;
+
+  function updateCarouselSettings() {
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 768) {
+        visibleItems = 1;
+      } else if (window.innerWidth < 1024) {
+        visibleItems = 2;
+      } else {
+        visibleItems = 3;
+      }
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    updateCarouselSettings();
+    window.addEventListener('resize', updateCarouselSettings);
+  }
+
+  $: atStart = carouselOffset === 0;
+  $: atEnd = carouselOffset <= itemWidth * (totalItems - visibleItems) * -1;
+
+  const moveCarousel = (direction: number) => {
+    if (direction > 0 && !atEnd) {
+      carouselOffset -= itemWidth;
+    } else if (direction < 0 && !atStart) {
+      carouselOffset += itemWidth;
+    }
+  };
+
+  const scrollToEnd = (direction: number) => {
+    if (direction > 0 && !atEnd) {
+      carouselOffset = itemWidth * (totalItems - visibleItems) * -1;
+    } else if (direction < 0 && !atStart) {
+      carouselOffset = 0;
+    }
+  };
 
   // Create static background confetti concentrated along the page border
   function createStaticConfetti() {
@@ -150,30 +193,83 @@
           <em>The Not So Lazy Schwa</em> Phonics Read-Alouds story.
         </p>
       </div>
-      <div class="resources-grid">
-        <div class="resource-item">
-          <h3>The Not So Lazy Schwa Playlist</h3>
-          <div class="resource-preview">
-            <img src={playlistThumbnail} alt="Blending Drills resource preview" class="h-full w-full rounded object-cover" />
-          </div>
-          <p>Premade word list featuring words with schwa sounds! No prep required - just click the link below and get started!</p>
-          <a
-            href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FPlaylist%2FPlayPlaylist.tscn&context=%7B%22playlistId%22%3A2562374201%7D"
-            target="_blank"
-            class="btn btn-blurple">Open in Blend</a>
-        </div>
 
-        <div class="resource-item">
-          <h3>The Not So Lazy Schwa Spelling Mat</h3>
-          <div class="resource-preview">
-            <img src={wordMatThumbnail} alt="Spelling Mat resource preview" class="h-full w-full rounded object-cover" />
+      <div class="carousel-container">
+        <div class="carousel" style="transform: translateX({carouselOffset}px);">
+          <div class="resource-item">
+            <h3>The Not So Lazy Schwa Spelling Mat</h3>
+            <div class="resource-preview">
+              <img src={wordMatThumbnail} alt="Spelling Mat resource preview" class="h-full w-full rounded object-cover" />
+            </div>
+            <p>Interactive spelling mat with Elkonin boxes. Mark schwa sounds using The Not So Lazy Schwa character!</p>
+            <a
+              href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FWordMat%2FPlayWordMat.tscn&context=%7B%22wordMatId%22%3A%22schwa%22%7D"
+              target="_blank"
+              class="btn btn-blurple">Open in Blend</a>
           </div>
-          <p>Interactive spelling mat with built-in Elkonin boxes. Mark schwa sounds using The Not So Lazy Schwa character!</p>
-          <a
-            href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FWordMat%2FPlayWordMat.tscn&context=%7B%22wordMatId%22%3A%22schwa%22%7D"
-            target="_blank"
-            class="btn btn-blurple">Open in Blend</a>
+          <div class="resource-item">
+            <h3>The Not So Lazy Schwa Playlist</h3>
+            <div class="resource-preview">
+              <img src={playlistThumbnail} alt="Blending Drills resource preview" class="h-full w-full rounded object-cover" />
+            </div>
+            <p>▶️ Grab and go resource! Premade word list featuring words with schwa sounds! No prep required!</p>
+            <a
+              href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FPlaylist%2FPlayPlaylist.tscn&context=%7B%22playlistId%22%3A2562374201%7D"
+              target="_blank"
+              class="btn btn-blurple">Open in Blend</a>
+          </div>
+
+          <div class="resource-item">
+            <h3><i>NEW!</i> The A as a Schwa Playlist</h3>
+            <div class="resource-preview">
+              <img src={aAsSchwa} alt="A as a Schwa resource preview" class="h-full w-full rounded object-cover" />
+            </div>
+            <p>▶️ Grab and go resource! Premade word list featuring words with the letter A pronounced as a schwa!</p>
+            <a
+              href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FPlaylist%2FPlayPlaylist.tscn&context=%7B%22playlistId%22%3A231959914%7D"
+              target="_blank"
+              class="btn btn-blurple">Open in Blend</a>
+          </div>
+
+          <div class="resource-item">
+            <h3><i>NEW!</i> The E as a Schwa Playlist</h3>
+            <div class="resource-preview">
+              <img src={eAsSchwa} alt="E as a Schwa resource preview" class="h-full w-full rounded object-cover" />
+            </div>
+            <p>▶️ Grab and go resource! Premade word list featuring words with the letter E pronounced as a schwa!</p>
+            <a
+              href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FPlaylist%2FPlayPlaylist.tscn&context=%7B%22playlistId%22%3A3355207273%7D"
+              target="_blank"
+              class="btn btn-blurple">Open in Blend</a>
+          </div>
+
+          <div class="resource-item">
+            <h3><i>NEW!</i> The O as a Schwa Playlist</h3>
+            <div class="resource-preview">
+              <img src={oAsSchwa} alt="O as a Schwa resource preview" class="h-full w-full rounded object-cover" />
+            </div>
+            <p>▶️ Grab and go resource! Premade word list featuring the schwa sound in words with the letter O!</p>
+            <a
+              href="https://app.blendreading.com?jumpScene=res%3A%2F%2FScenes%2FPlay%2FPlaylist%2FPlayPlaylist.tscn&context=%7B%22playlistId%22%3A3008488044%7D"
+              target="_blank"
+              class="btn btn-blurple">Open in Blend</a>
+          </div>
         </div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="btn btn-small" disabled={atStart} on:click={() => scrollToEnd(-1)}>
+          <span class="material-symbols-rounded">keyboard_double_arrow_left</span>
+        </button>
+        <button class="btn btn-small" disabled={atStart} on:click={() => moveCarousel(-1)}>
+          <span class="material-symbols-rounded">keyboard_arrow_left</span>
+        </button>
+        <button class="btn btn-small" disabled={atEnd} on:click={() => moveCarousel(1)}>
+          <span class="material-symbols-rounded">keyboard_arrow_right</span>
+        </button>
+        <button class="btn btn-small" disabled={atEnd} on:click={() => scrollToEnd(1)}>
+          <span class="material-symbols-rounded">keyboard_double_arrow_right</span>
+        </button>
       </div>
     </div>
 
@@ -474,23 +570,52 @@
     color: #555;
   }
 
-  .resources-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
+  .carousel-container {
     width: 100%;
+    max-width: 1200px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    padding: 0 2rem;
+  }
+
+  .carousel {
+    display: flex;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .carousel-controls {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .carousel-controls button {
+    background-color: #588dff !important;
+    color: white !important;
+    border: none !important;
+  }
+
+  .carousel-controls button:hover:not(:disabled) {
+    background-color: #4a7ae8 !important;
+  }
+
+  .carousel-controls button:disabled {
+    background-color: #ccc !important;
+    color: #888 !important;
   }
 
   .resource-item {
-    flex-basis: 20rem;
+    flex-basis: 360px;
+    flex-shrink: 0;
+    min-width: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 1.5rem;
+    margin: 0 1.25rem;
     background: white;
     border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   }
 
   .resource-item h3 {
@@ -581,20 +706,6 @@
     font-size: 1.2rem;
   }
 
-  .internal-link {
-    color: #1565c0;
-    text-decoration: underline;
-    font-weight: 600;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: opacity 0.2s;
-  }
-
-  .internal-link:hover {
-    opacity: 0.8;
-  }
-
   .btn:disabled {
     background: none !important;
     border: #666 1px solid;
@@ -625,12 +736,19 @@
       grid-template-columns: 1fr;
     }
 
-    .resources-grid {
-      flex-direction: column;
+    .carousel-container {
+      padding: 0 1rem;
     }
 
     .resource-item {
-      width: 100%;
+      min-width: 100%;
+      flex-basis: 100%;
+      padding: 1rem;
+      margin: 0;
+    }
+
+    .resource-item h3 {
+      font-size: 1.4rem;
     }
   }
 
@@ -660,6 +778,30 @@
 
     .side-by-side {
       flex-direction: column;
+    }
+
+    .carousel-container {
+      padding: 0;
+      max-width: 100%;
+    }
+
+    .resource-item {
+      min-width: 100%;
+      flex-basis: 100%;
+      padding: 0.75rem;
+      margin: 0;
+    }
+
+    .resource-item h3 {
+      font-size: 1.2rem;
+    }
+
+    .resource-item p {
+      font-size: 0.85rem;
+    }
+
+    .carousel-controls {
+      gap: 0.25rem;
     }
   }
 </style>
