@@ -19,9 +19,9 @@
   let nextId = 0;
 
   let carouselOffset = 0;
-  const itemWidth = 440; // 360px item + 80px margin
-  let visibleItems = 3;
+  const paginationFactor = 380; // 340px item + 40px margin
   const totalItems = 5;
+  let visibleItems = 3;
 
   function updateCarouselSettings() {
     if (typeof window !== 'undefined') {
@@ -41,19 +41,19 @@
   }
 
   $: atStart = carouselOffset === 0;
-  $: atEnd = carouselOffset <= itemWidth * (totalItems - visibleItems) * -1;
+  $: atEnd = carouselOffset <= paginationFactor * (totalItems - visibleItems) * -1;
 
   const moveCarousel = (direction: number) => {
     if (direction > 0 && !atEnd) {
-      carouselOffset -= itemWidth;
+      carouselOffset -= paginationFactor;
     } else if (direction < 0 && !atStart) {
-      carouselOffset += itemWidth;
+      carouselOffset += paginationFactor;
     }
   };
 
   const scrollToEnd = (direction: number) => {
     if (direction > 0 && !atEnd) {
-      carouselOffset = itemWidth * (totalItems - visibleItems) * -1;
+      carouselOffset = paginationFactor * (totalItems - visibleItems) * -1;
     } else if (direction < 0 && !atStart) {
       carouselOffset = 0;
     }
@@ -270,6 +270,10 @@
         <button class="btn btn-small" disabled={atEnd} on:click={() => scrollToEnd(1)}>
           <span class="material-symbols-rounded">keyboard_double_arrow_right</span>
         </button>
+      </div>
+
+      <div class="swipe-hint">
+        <p>Swipe to browse!</p>
       </div>
     </div>
 
@@ -572,15 +576,27 @@
 
   .carousel-container {
     width: 100%;
-    max-width: 1200px;
     overflow: hidden;
     margin-bottom: 1.5rem;
-    padding: 0 2rem;
   }
 
   .carousel {
     display: flex;
     transition: transform 0.4s ease-in-out;
+    transform: translateX(0px);
+  }
+
+  .resource-item {
+    box-sizing: content-box;
+    flex: 0 0 auto;
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    margin: 0 1.25rem;
+    background: white;
+    border-radius: 10px;
   }
 
   .carousel-controls {
@@ -605,17 +621,10 @@
     color: #888 !important;
   }
 
-  .resource-item {
-    flex-basis: 360px;
-    flex-shrink: 0;
-    min-width: 360px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
-    margin: 0 1.25rem;
-    background: white;
-    border-radius: 10px;
+  .swipe-hint {
+    display: none;
+    text-align: center;
+    margin-top: 1rem;
   }
 
   .resource-item h3 {
@@ -737,18 +746,43 @@
     }
 
     .carousel-container {
-      padding: 0 1rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+      overflow: visible;
+    }
+
+    .carousel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 1.5rem;
+      transition: none;
+      transform: none !important;
     }
 
     .resource-item {
-      min-width: 100%;
-      flex-basis: 100%;
-      padding: 1rem;
+      width: 100%;
+      max-width: 400px;
       margin: 0;
+      padding: 1rem;
+      flex: none;
     }
 
     .resource-item h3 {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
+    }
+
+    .carousel-controls {
+      display: none;
+    }
+
+    .swipe-hint {
+      display: none;
     }
   }
 
@@ -769,7 +803,7 @@
     .demo-section,
     .resources {
       margin: 0;
-      padding: 1.5rem 0;
+      padding: 1rem;
     }
 
     .resource-title h2 {
@@ -781,27 +815,48 @@
     }
 
     .carousel-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin: 0;
       padding: 0;
-      max-width: 100%;
+      overflow: visible;
+    }
+
+    .carousel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 1rem;
+      transition: none;
+      transform: none !important;
     }
 
     .resource-item {
-      min-width: 100%;
-      flex-basis: 100%;
-      padding: 0.75rem;
+      width: 100%;
+      max-width: 100%;
       margin: 0;
+      padding: 0.75rem;
+      flex: none;
     }
 
     .resource-item h3 {
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
 
     .resource-item p {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
     }
 
     .carousel-controls {
-      gap: 0.25rem;
+      display: none;
+    }
+
+    .swipe-hint {
+      display: none;
     }
   }
 </style>
