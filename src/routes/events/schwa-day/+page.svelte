@@ -576,8 +576,11 @@
 
   .carousel-container {
     width: 100%;
+    max-width: 1400px;
     overflow: hidden;
-    margin-bottom: 1.5rem;
+    margin: 0 auto 1.5rem auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
   }
 
   .carousel {
