@@ -79,9 +79,6 @@
         <a id="blog" href="/blog">blog</a>
       </li>
       <li>
-        <a id="schwa-day" href="/events/schwa-day">Schwa Day 2026</a>
-      </li>
-      <li>
         <a
           id="shop"
           href="https://the-blend-shop.square.site/"
@@ -204,20 +201,6 @@
 
   a#app:hover {
     background-color: #7f71d2;
-    color: white;
-  }
-
-  a#schwa-day {
-    padding: 0.2rem 0.8rem;
-    border: solid 2px #fb0093;
-    border-radius: 5px;
-    transition:
-      background-color 200ms,
-      color 200ms;
-  }
-
-  a#schwa-day:hover {
-    background-color: #fb0093;
     color: white;
   }
 
