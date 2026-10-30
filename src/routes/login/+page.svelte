@@ -10,12 +10,13 @@
   import Alert from '$lib/components/Alert.svelte';
   import { fly } from 'svelte/transition';
   import messages from '$lib/messages';
+  import { PUBLIC_APP_URL } from '$env/static/public';
 
   signOut(); // Make sure we're not logged in when we get here
 
   const ui = firebaseui.auth.AuthUI.getInstance() ?? new firebaseui.auth.AuthUI(auth);
 
-  const APP_URL = 'https://app.blendreading.com';
+  const APP_URL = PUBLIC_APP_URL;
   const PREVIEW_APP_URL = 'https://preview-app.blendreading.com';
 
   const searchParams = new URLSearchParams(decodeURIComponent($page.url.search));

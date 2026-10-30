@@ -20,6 +20,7 @@ import {
   createOrganization,
   addUserToOrganization,
 } from '$lib/server/firebaseUtils';
+import { PUBLIC_APP_URL } from '$env/static/public';
 
 export const load = (async ({ url, cookies }) => {
   const uid = (
@@ -61,7 +62,7 @@ export const load = (async ({ url, cookies }) => {
         let successUrl;
         if (redirectParam) {
           const token = await auth.createCustomToken(uid);
-          const appUrl = redirectParam === 'previewApp' ? 'https://preview-app.blendreading.com' : 'https://app.blendreading.com';
+          const appUrl = redirectParam === 'previewApp' ? 'https://preview-app.blendreading.com' : PUBLIC_APP_URL;
           successUrl = `${appUrl}?jumpScene=${encodeURIComponent(url.searchParams.get('jumpScene') || 'none')}${
             token ? `&loginToken=${encodeURIComponent(token)}` : ''
           }`;

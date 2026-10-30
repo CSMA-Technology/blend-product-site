@@ -3,11 +3,12 @@
   import { page } from '$app/stores';
   import { customLoginToken } from '$lib/firebase';
   import PricingPlan from './PricingPlan.svelte';
+  import { PUBLIC_APP_URL } from '$env/static/public';
 
   const redirectParam = $page.url.searchParams.get('successRedirect');
   const selectBasic = async () => {
     if (redirectParam && (redirectParam === 'app' || redirectParam === 'previewApp')) {
-      const appUrl = redirectParam === 'app' ? 'https://app.blendreading.com' : 'https://preview-app.blendreading.com';
+      const appUrl = redirectParam === 'app' ? PUBLIC_APP_URL : 'https://preview-app.blendreading.com';
       const url = `${appUrl}?jumpScene=${encodeURIComponent($page.url.searchParams.get('jumpScene') || 'none')}${
         $customLoginToken ? `&loginToken=${encodeURIComponent($customLoginToken)}` : ''
       }`;
